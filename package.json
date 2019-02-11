@@ -1,0 +1,11 @@
+{
+  "scripts":{
+    "watch":"tsc -w",
+    "build":"rm -rf lib && tsc",
+    "dev":"cd demo && npm run dev"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.2.6",
+    "typescript": "^3.3.1"
+  }
+}
