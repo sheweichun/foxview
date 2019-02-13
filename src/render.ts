@@ -1,9 +1,36 @@
 
 
-import {TemplateStringsArray} from './type';
-import {TemplateResult} from './templateResult';
-import {clone} from './dom';
+import {RenderOptions,ITemplateResult} from './type';
+import {NodePart} from './part';
+import {removeNodes,clone} from './dom';
+import templateProcessor from './template-processor';
 
-export function render(templateResult:TemplateResult,container: Element|DocumentFragment){
-    container.appendChild(clone(templateResult.getTemplateElement()));
+
+
+
+
+const parts = new WeakMap<Node, NodePart>();
+
+
+export function shadowRender(
+    result:ITemplateResult,
+    container: Element|DocumentFragment,
+    options?:Partial<RenderOptions>){
+    let part = parts.get(container);
+    if (part === undefined) {
+        removeNodes(container,container.firstChild);
+        parts.set(container,part = new NodePart({
+            templateProcessor,
+            templateClone:clone,
+            ...options
+        }))
+        part.appendInto(container);
+    }
+    part.setValue(result)
+    part.commit();
+}
+
+
+export function render(){
+    
 }

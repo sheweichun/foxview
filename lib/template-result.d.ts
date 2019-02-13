@@ -1,12 +1,13 @@
-import { TemplateStringsArray } from './type';
+import { TemplateStringsArray, ITemplateResult } from './type';
 /**
  * The return type of `html`, which holds a Template and the values from
  * interpolated expressions.
  */
-export declare class TemplateResult {
+export declare class TemplateResult implements ITemplateResult {
     strings: TemplateStringsArray;
     values: any[];
-    constructor(strings: TemplateStringsArray, values: any[]);
+    type: string;
+    constructor(strings: TemplateStringsArray, values: any[], type: string);
     /**
      * Returns a string of HTML used to create a `<template>` element.
      */
@@ -20,3 +21,7 @@ export declare class TemplateResult {
  * SVG namespace, then modifies the template to remove the `<svg>` tag so that
  * clones only container the original fragment.
  */
+export declare class SVGTemplateResult extends TemplateResult {
+    getHTML(): string;
+    getTemplateElement(): HTMLTemplateElement;
+}

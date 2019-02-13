@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
     <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script>
+        (function () {
+            if (       // No Reflect, no classes, no need for shim because native custom elements       // require ES2015 classes or Reflect.
+            window.Reflect === undefined || window.customElements === undefined
+                ||       // The webcomponentsjs custom elements polyfill doesn't require
+                // ES2015-compatible construction (`super()` or `Reflect.construct`).
+                window.customElements.hasOwnProperty('polyfillWrapFlushCallback')     ) {
+                return;
+            } const BuiltInHTMLElement = HTMLElement;
+            window.HTMLElement = /** @this {!Object} */ function HTMLElement() {
+                return Reflect.construct(BuiltInHTMLElement, [], /** @type
+{!Function} */ (this.constructor));
+            }; HTMLElement.prototype =
+                BuiltInHTMLElement.prototype; HTMLElement.prototype.constructor =
+                    HTMLElement; Object.setPrototypeOf(HTMLElement, BuiltInHTMLElement);
+        })();
+    </script>
 </head>
+
 <body>
-    <my-btn></my-btn>
+    <span style="color:var(--color);">test</span>
+    <my-btn>
+        <span>world</span>
+    </my-btn>
     <my-div content="abc"></my-div>
+    <my-clock style="width: 300px;"></my-clock>
+    <div id="container"></div>
 </body>
+
 </html>

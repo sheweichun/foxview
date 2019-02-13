@@ -1,11 +1,18 @@
 {
-  "scripts":{
-    "watch":"tsc -w",
-    "build":"rm -rf lib && tsc",
-    "dev":"cd demo && npm run dev"
+  "scripts": {
+    "watch": "tsc -w",
+    "compile":"rm -rf lib && tsc",
+    "build": "rm -rf lib && tsc && rollup -c",
+    "dev": "cd demo && npm run dev"
   },
   "devDependencies": {
     "@webcomponents/webcomponentsjs": "^2.2.6",
+    "rollup": "^1.1.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-filesize": "^6.0.1",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-uglify": "^6.0.2",
     "typescript": "^3.3.1"
   }
 }

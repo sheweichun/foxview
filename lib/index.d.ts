@@ -1,6 +1,6 @@
 import { TemplateStringsArray } from './type';
-import { TemplateResult } from './templateResult';
-export { defineComponent, Component } from './component';
-export { render } from './render';
+import { TemplateResult, SVGTemplateResult } from './template-result';
+export { defineWebComponent, WebComponent, property } from './webcomponent';
+export { defineComponent } from './component-registry';
 export declare function html(strings: TemplateStringsArray, ...values: any[]): TemplateResult;
-export declare function svg(strings: TemplateStringsArray, ...values: any[]): number;
+export declare function svg(strings: TemplateStringsArray, ...values: any[]): SVGTemplateResult;

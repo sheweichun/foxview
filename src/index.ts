@@ -1,22 +1,21 @@
 
 import {TemplateStringsArray} from './type';
-import {TemplateResult} from './templateResult'
-import {createElement} from './element'
-export {defineComponent,Component} from './component';
-export {render} from './render';
-
+import {TemplateResult,SVGTemplateResult} from './template-result'
+export {defineWebComponent,WebComponent,property} from './webcomponent';
+export {defineComponent} from './component-registry';
+// export {render} from './render'
 
 
 
 export function html(strings:TemplateStringsArray,...values:any[]){
-    return new TemplateResult(strings,values)
+    return new TemplateResult(strings,values,'html')
 }
 
 export function svg(strings:TemplateStringsArray,...values:any[]){
-    return 1234;
+    return new SVGTemplateResult(strings,values,'svg');
 }
 
+// export function render(){
 
-export default {
-    createElement
-}
+// }
+
