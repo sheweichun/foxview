@@ -39,7 +39,6 @@ export declare abstract class WebComponent extends HTMLElement {
     static readonly observedAttributes: any[];
     private static _finalize;
     private _reflectingProperties;
-    private _instanceProperties;
     private _changedProperties;
     private _updatePromise;
     static createProperty(name: PropertyKey, options?: PropertyDeclaration): void;

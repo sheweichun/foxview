@@ -27,15 +27,19 @@ export type ComponentSlotSchema = {
 }
 
 export interface IComponent{
+    id:string
     _commit():void
     props:ComponentProp
+    state?:ComponentProp
     part:Peon
     _slots?:ComponentSlotSchema;
     componentWillReceiveProps(nextProps:ComponentProp):void
     componentDidMount():void
     componentDidUpdate():void
     componentWillUnmount():void
+    componentShouldUpdate(nextProps:ComponentProp):boolean
     render() : ITemplateResult
+    setState(partialState?:Partial<ComponentProp>,callback?:()=>void,isForce?:boolean)
     fragment:DocumentFragment
     renderOption:RenderOptions
 }
@@ -104,6 +108,7 @@ export interface ComponentPrototype{
 export interface RenderOptions {
     eventContext?: any;
     slots?:ComponentSlotSchema;
+    notInWebComponent?:boolean;
     templateProcessor:TemplateProcessor;
     templateClone:(template:HTMLTemplateElement)=>DocumentFragment
   }

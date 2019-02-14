@@ -177,7 +177,7 @@ export abstract class WebComponent extends HTMLElement {
         }
       }
     private _reflectingProperties: Map<PropertyKey, PropertyDeclaration>|undefined = undefined;
-    private _instanceProperties : PropertyValues | undefined = undefined;
+    // private _instanceProperties : PropertyValues | undefined = undefined; //存储实例属性值 待完善
     private _changedProperties: PropertyValues = new Map();
     private _updatePromise: Promise<unknown> = Promise.resolve(true);
     static createProperty(name : PropertyKey, options : PropertyDeclaration = defaultPropertyDeclaration) {
@@ -257,13 +257,13 @@ export abstract class WebComponent extends HTMLElement {
         return true;
     }
     protected performUpdate(): void|Promise<unknown> {
-        if (this._instanceProperties) {
-            //@ts-ignore
-            for (const [p, v] of this._instanceProperties!) {
-                (this as any)[p] = v;
-              }
-              this._instanceProperties = undefined;
-        }
+        // if (this._instanceProperties) {
+        //     //@ts-ignore
+        //     for (const [p, v] of this._instanceProperties!) {
+        //         (this as any)[p] = v;
+        //       }
+        //       this._instanceProperties = undefined;
+        // }
         if (this.shouldUpdate(this._changedProperties)) {
           const changedProperties = this._changedProperties;
           this.update(changedProperties);

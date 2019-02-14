@@ -1,4 +1,5 @@
 import {Peon} from './type';
+import Updater from './updater';
 export enum PeonType {
   Attribute,
   Property,
@@ -12,6 +13,7 @@ export type PeonConstruct = {
   startIndex: number 
   name?: string 
   node: Element | Node 
+  notInWebComponent:boolean
   eventContext?: EventTarget 
   strings: Array < string > | string
 }
@@ -101,6 +103,7 @@ class EventPeon implements Peon {
   node : Element;
   name : string;
   startIndex:number;
+  notInWebComponent:boolean;
   eventContext?: EventTarget;
   value : any = undefined;
   _options?: AddEventListenerOptions;
@@ -110,6 +113,7 @@ class EventPeon implements Peon {
   constructor(option : PeonConstruct) {
     this.node = option.node as Element;
     this.name = option.name;
+    this.notInWebComponent = option.notInWebComponent;
     this.startIndex = option.startIndex;
     this.eventContext = option.eventContext;
     this._boundHandleEvent = (e) => this.handleEvent(e);
@@ -149,7 +153,10 @@ class EventPeon implements Peon {
     // this._pendingValue = noChange;
   }
 
-  handleEvent(event : Event) {
+  handleEvent(event : Event) { //批量处理
+    if(this.notInWebComponent){
+      Updater.isInBatchUpdating = true
+    }
     if (typeof this.value === 'function') {
       this
         .value
@@ -158,6 +165,9 @@ class EventPeon implements Peon {
       this
         .value
         .handleEvent(event);
+    }
+    if(this.notInWebComponent){
+      Updater.closeBatchUpdating();
     }
   }
 }

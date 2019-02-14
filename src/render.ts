@@ -22,7 +22,7 @@ export function shadowRender(
         parts.set(container,part = new NodePart({
             templateProcessor,
             templateClone:clone,
-            ...options
+            ...options,
         }))
         part.appendInto(container);
     }
@@ -32,6 +32,11 @@ export function shadowRender(
 }
 
 
-export function render(){
-    
+export function render( result:ITemplateResult,
+    container: Element|DocumentFragment,
+    options?:Partial<RenderOptions>){
+    return shadowRender(result,container,{
+        ...options,
+        notInWebComponent:true
+    })
 }

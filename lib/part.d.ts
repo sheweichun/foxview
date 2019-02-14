@@ -3,6 +3,7 @@ export declare class ComponentPart implements Peon {
     fragment: DocumentFragment;
     endNode: Node;
     _moutFlag: boolean;
+    _updateFlag: boolean;
     value: any;
     options: RenderOptions;
     _slots: ComponentSlotSchema;

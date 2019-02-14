@@ -57,12 +57,14 @@ function _prepareNodeComment(node:Element,partIndex:number,peons: Array<Peon>,ex
         nodesToRemove
     };
 }
-function _prepareNodeContent(node:Element,partIndex:number,peons: Array<Peon>){
+function _prepareNodeContent(node:Element,partIndex:number,peons: Array<Peon>,extra:HandlerExtra){
+    const {renderOption} = extra;
     const nodeValue = node.nodeValue!;
     if (nodeValue && nodeValue.indexOf(marker) >= 0) {
         const strings = nodeValue.split(markerRegex);
         peons.push(createPeon(PeonType.Content,{
             startIndex:partIndex,
+            notInWebComponent:renderOption.notInWebComponent,
             strings,
             node
         }))
@@ -198,11 +200,12 @@ function _prepareNode(node:Element,partIndex:number,peons: Array<Peon>,extra:Han
 
 
 function _prepareNodeAttribute(node:Element,partIndex:number,peons: Array<Peon>,extra:HandlerExtra){
-    const {templateResult} = extra;
+    const {templateResult,renderOption} = extra;
     partIndex = forEach_node_attribute(node,partIndex,templateResult,function(name,target,curPartIndex,strings){
         peons.push(createPeon(target.type,{
             startIndex:curPartIndex,
             strings,
+            notInWebComponent:renderOption.notInWebComponent,
             name:target.getName(name),
             eventContext:extra.renderOption ? extra.renderOption.eventContext : null,
             node

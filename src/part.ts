@@ -13,6 +13,7 @@ export class ComponentPart implements Peon{
   // startNode!: Node;
   endNode!: Node;
   _moutFlag:boolean = false;
+  _updateFlag:boolean = false;
   value: any;
   options: RenderOptions;
   _slots:ComponentSlotSchema;
@@ -47,8 +48,10 @@ export class ComponentPart implements Peon{
       instance.renderOption = this.options;
       instance._slots = this._slots;
       this._componentInstance = instance;
+      this._updateFlag = true;
     }else{
       instance.componentWillReceiveProps(newProps)
+      this._updateFlag = instance.componentShouldUpdate(newProps);
       instance.props = newProps;
     }
   }
@@ -67,13 +70,16 @@ export class ComponentPart implements Peon{
   }
   commit(){
     const instance = this._componentInstance;
-    instance._commit()
+    if(!this._updateFlag) return;
     if(!this._moutFlag){
+      instance._commit()
       this._insert(this.fragment);
       this._moutFlag = true;
       instance.componentDidMount();
     }else{
-      this._componentInstance.componentDidUpdate();
+      instance.setState(null,()=>{
+        this._componentInstance.componentDidUpdate();
+      })
     }
   }
 }

@@ -10,6 +10,7 @@ export declare type PeonConstruct = {
     startIndex: number;
     name?: string;
     node: Element | Node;
+    notInWebComponent: boolean;
     eventContext?: EventTarget;
     strings: Array<string> | string;
 };
@@ -40,6 +41,7 @@ declare class EventPeon implements Peon {
     node: Element;
     name: string;
     startIndex: number;
+    notInWebComponent: boolean;
     eventContext?: EventTarget;
     value: any;
     _options?: AddEventListenerOptions;
