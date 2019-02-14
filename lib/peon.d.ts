@@ -23,6 +23,7 @@ declare class AttributePeon implements Peon {
     constructor(option: PeonConstruct);
     setValue(values: any): void;
     commit(): void;
+    destroy(): void;
 }
 declare class ContentPeon implements Peon {
     startIndex: number;
@@ -32,6 +33,7 @@ declare class ContentPeon implements Peon {
     node: Node;
     constructor(option: PeonConstruct);
     setValue(values: any): void;
+    destroy(): void;
     commit(): void;
 }
 declare class EventPeon implements Peon {
@@ -46,6 +48,7 @@ declare class EventPeon implements Peon {
     constructor(option: PeonConstruct);
     static getOptions(o: any): any;
     setValue(values: any): void;
+    destroy(): void;
     commit(): void;
     handleEvent(event: Event): void;
 }

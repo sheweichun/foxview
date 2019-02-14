@@ -10,8 +10,34 @@ export interface ComponentProp{
     [key:string]:any
 }
 
+export interface ComponentPropSchema{
+    name:string,
+    index?:number,
+    value?:any
+}
+
+
+
+// export type ComponentSlotSchema = {
+//     name?:string,
+//     node:Element | DocumentFragment
+// }
+export type ComponentSlotSchema = {
+    [name:string]:Array<Element>
+}
+
 export interface IComponent{
+    _commit():void
+    props:ComponentProp
+    part:Peon
+    _slots?:ComponentSlotSchema;
+    componentWillReceiveProps(nextProps:ComponentProp):void
+    componentDidMount():void
+    componentDidUpdate():void
+    componentWillUnmount():void
     render() : ITemplateResult
+    fragment:DocumentFragment
+    renderOption:RenderOptions
 }
 
 export interface IComponentConstructor{
@@ -30,11 +56,14 @@ export interface Peon{
      */
     commit(): void;
 
+    destroy():void;
+
 }
 // export type TemplateFactory = (result: TemplateResult) => Template;
 
 export type ProcessResult = {
     fragment:DocumentFragment,
+    partIndex:number,
     peons: Array<Peon>
 }
 
@@ -73,7 +102,8 @@ export interface ComponentPrototype{
 
 
 export interface RenderOptions {
-    eventContext?: EventTarget;
+    eventContext?: any;
+    slots?:ComponentSlotSchema;
     templateProcessor:TemplateProcessor;
     templateClone:(template:HTMLTemplateElement)=>DocumentFragment
   }

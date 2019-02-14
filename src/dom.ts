@@ -26,13 +26,34 @@ export const reparentNodes =
  * Removes nodes, starting from `startNode` (inclusive) to `endNode`
  * (exclusive), from `container`.
  */
-export const removeNodes =
-    (container: Node, startNode: Node|null, endNode: Node|null = null):
-        void => {
-          let node = startNode;
-          while (node !== endNode) {
-            const n = node!.nextSibling;
-            container.removeChild(node!);
-            node = n;
-          }
-        };
+export function removeNode(node:Node){
+  const parentNode = node.parentNode;
+  if(parentNode){
+    parentNode.removeChild(node);
+  }
+}
+
+export const removeAllNodes = (container: Node, startNode: Node|null, endNode: Node|null = null):void =>{
+  let node = startNode;
+  while (node !== endNode) {
+    const n = node!.nextSibling;
+    container.removeChild(node!);
+    node = n;
+  }
+  endNode && container.removeChild(endNode!);
+}
+
+export const removeNodes = (container: Node, startNode: Node|null, endNode: Node|null = null):void => {
+  let node = startNode;
+  while (node !== endNode) {
+    const n = node!.nextSibling;
+    container.removeChild(node!);
+    node = n;
+  }
+};
+
+export function removeAttributes(node:Element,toRemoveAttributes:string[]){
+  for(let i = 0;i < toRemoveAttributes.length; i++){
+    node.removeAttribute(toRemoveAttributes[i])
+  }
+}

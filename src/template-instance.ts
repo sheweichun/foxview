@@ -37,6 +37,12 @@ export class TemplateInstance {
             _peon.commit && _peon.commit();
         })
     }
+    _destroy(){
+        this._peons.forEach((_peon)=>{
+            _peon.destroy && _peon.destroy();
+        })
+        this._peons = null;
+    }
     isSameTemplate(newTemplate:ITemplateResult){
         if(this.template.type !== newTemplate.type) return false;
         const oldStrings = this.template.strings;

@@ -54,6 +54,7 @@ class AttributePeon implements Peon {
       .setAttribute(this.name, this._pendingValue);
     this._shouldUpdate = false;
   }
+  destroy(){}
 }
 
 class ContentPeon implements Peon {
@@ -74,6 +75,7 @@ class ContentPeon implements Peon {
     }
     this._pendingValue = injectValue2Strings(this.startIndex, this.strings, values);
   }
+  destroy(){}
   commit() {
     if (!this._shouldUpdate) 
       return;
@@ -124,7 +126,9 @@ class EventPeon implements Peon {
   setValue(values : any) : void {
     this._pendingValue = values[this.startIndex];
   }
-
+  destroy(){
+    this.node && this.node.removeEventListener(this.name, this._boundHandleEvent, this._options);
+  }
   commit() {
     const newListener = this._pendingValue;
     const oldListener = this.value;

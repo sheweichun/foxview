@@ -28,6 +28,7 @@ export function shadowRender(
     }
     part.setValue(result)
     part.commit();
+    return part;
 }
 
 

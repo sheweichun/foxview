@@ -9,5 +9,6 @@ export declare class TemplateInstance {
     private _prepareFrament;
     setValue(newTemplate: ITemplateResult): void;
     commit(): void;
+    _destroy(): void;
     isSameTemplate(newTemplate: ITemplateResult): boolean;
 }

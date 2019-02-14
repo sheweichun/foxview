@@ -1,27 +1,42 @@
-import { RenderOptions, Peon } from './type';
+import { RenderOptions, Peon, IComponentConstructor, ComponentPropSchema, IComponent, ComponentSlotSchema } from './type';
 export declare class ComponentPart implements Peon {
-    startNode: Node;
+    fragment: DocumentFragment;
     endNode: Node;
-    _node: Node;
+    _moutFlag: boolean;
     value: any;
     options: RenderOptions;
+    _slots: ComponentSlotSchema;
+    _componentClass: IComponentConstructor;
+    _propsSchemas: Array<ComponentPropSchema>;
+    _componentInstance: IComponent;
     _pendingValue: any;
     _valueIndex: number;
-    _markCleared: boolean;
-    constructor(options: RenderOptions);
-    appendInto(container: Node): void;
-    setValue(value: any): void;
+    constructor(componentClass: IComponentConstructor, propsSchemas: Array<ComponentPropSchema>, slots: ComponentSlotSchema, options: RenderOptions);
+    insertBeforeNode(container: Node): void;
+    setValue(values: any): void;
+    private _insert;
+    destroy(): void;
     commit(): void;
+}
+declare enum NodePartValueType {
+    TemplateResult = 0,
+    ArrayResult = 1,
+    NodeValue = 2,
+    Node = 3,
+    None = 4
 }
 export declare class NodePart implements Peon {
     startNode: Node;
     endNode: Node;
-    _node: Node;
     value: any;
     options: RenderOptions;
+    _valueType: NodePartValueType;
     _pendingValue: any;
     _valueIndex: number;
-    _markCleared: boolean;
+    _valueHandleMap: {
+        [NodePartValueType.TemplateResult]: any;
+        [NodePartValueType.ArrayResult]: any;
+    };
     _textValue: any;
     constructor(options: RenderOptions);
     appendInto(container: Node): void;
@@ -40,13 +55,16 @@ export declare class NodePart implements Peon {
      */
     insertAfterPart(ref: NodePart): void;
     setValue(value: any): void;
-    private _insert;
+    destroy(): void;
+    private _clearDOM;
     private _clear;
-    private _clearAllMarker;
+    private _insert;
     private _setTemplateResultValue;
     private _commitTemplateResult;
     private _setIterableValue;
     private _commitIterable;
+    private _commitNode;
     private _commitText;
     commit(): void;
 }
+export {};
