@@ -1,4 +1,4 @@
-<% var isIndex = /index.html$/.test(page.path) %>
+<% var isIndex = page.path === 'index.html' %>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -94,7 +94,7 @@
     <% if (!isIndex) { %> 
       <div id="main" class="fix-sidebar">
         <% if (page.blog_index) { %>
-          <%- partial('partials/blog') %>
+          <%- partial('_news/blog') %>
         <% } else { %>
           <%- body %>
         <% } %>
@@ -104,9 +104,6 @@
       <%- body %>
     <% } %>
 
-    <!-- main custom script for sidebars, version selects etc. -->
-    // <script src="<%- url_for("/js/css.escape.js") %>"></script>
-    <!-- <script src="<%- url_for("/js/common.js") %>"></script> -->
 
     // <script>
     // [
