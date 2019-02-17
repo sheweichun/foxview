@@ -1,9 +1,10 @@
 
 import {IComponent,ComponentProp} from './type'
+import WMap from './util/map';
 
 type SetStateMapItem = {
     partialState:Partial<ComponentProp>
-    flushed:boolean,
+    flushed?:boolean,
     instance:IComponent
 }
 
@@ -11,17 +12,43 @@ let callbackList:Array<()=>void> = [];
 
 interface IUpdater {
     isInBatchUpdating:boolean
-    enqueueSetState:(instance:IComponent,partialState:Partial<ComponentProp>,callback:()=>void,isForce:boolean)=>void,
+    isInClosingUpdating:boolean
+    enqueueSetState:(instance:IComponent,partialState:Partial<ComponentProp>,callback:()=>void,isForce:boolean)=>void
     closeBatchUpdating:()=>void
+    performUpdate:(item:SetStateMapItem)=>void
+    // performUpdate:(instance:IComponent,partialState:Partial<ComponentProp>)=>void
+    // performUpdate:(instance:IComponent,partialState:Partial<ComponentProp>)=>void
 }
-let setStateMap:{
-    [key:string]:SetStateMapItem
-} = {};
+let setStateMap:WMap<SetStateMapItem> = new WMap();
+
 const Updater:IUpdater = {
     isInBatchUpdating:false,
+    isInClosingUpdating:false,
+    performUpdate:function(item:SetStateMapItem):void{
+        const {instance} = item
+        if(!instance._mountFlag){
+            instance.componentWillMount();
+            /** 
+             * 如果在componentWillUnmount调用了setState,此处会更新state,但不会触发二次渲染
+             * 即便在componentWillMount中setState,此处item.partialState拿到也是最新的partialState
+             * **/
+            instance.state = Object.assign({},instance.state || {},item.partialState); 
+            instance._firstCommit();
+            return;
+        }
+        const newState = Object.assign({},instance.state || {},item.partialState);
+        if(instance.componentShouldUpdate(instance._pendProps,newState)){
+            instance.props = instance._pendProps;
+            instance.state = newState
+            instance._commit();
+        }else{
+            instance.props = instance._pendProps;
+            instance.state = newState
+        }
+    },
     enqueueSetState:function(instance:IComponent,partialState:Partial<ComponentProp>,callback:()=>void,isForce:boolean){
         if(Updater.isInBatchUpdating && !isForce){
-            const item = setStateMap[instance.id];
+            const item = setStateMap.get(instance.id);
             if(item){
                 /** 
                  * flushed表示已经更新过了 直接忽略
@@ -32,32 +59,42 @@ const Updater:IUpdater = {
                 item.partialState = Object.assign({},item.partialState,partialState);
                 callback && callbackList.push(callback)
             }else{
-                setStateMap[instance.id] = {
+                const newItem = {
                     partialState,
                     instance,
                     flushed:false
                 }
+                if(Updater.isInClosingUpdating){
+                    Updater.performUpdate(newItem);
+                    callback && callback();
+                    return
+                }
+                setStateMap.set(instance.id,newItem)
                 callback && callbackList.push(callback)
             }
             return
         }
-        instance.state = Object.assign({},this.state || {},partialState);
+        Updater.performUpdate({
+            instance,
+            partialState
+        });
         callback && callback();
     },
     closeBatchUpdating(){
-        Object.keys(setStateMap).forEach((id)=>{
-            const item= setStateMap[id];
-            const {instance,partialState} = item;
-            instance.state = Object.assign({},instance.state,partialState);
-            instance._commit()
+        Updater.isInClosingUpdating = true;
+        setStateMap._each((id,item)=>{
+            // const {instance,partialState} = item;
+            Updater.performUpdate(item);
             item.flushed = true;
         })
+        // Object.keys(setStateMap).forEach()
         // for(let [instance,item] of setStateMap){
         //     instance.state = Object.assign({},item.partialState,item.partialState);
         //     instance._commit()
         //     item.flushed = true;
         // }
-        setStateMap = {};
+        setStateMap.clear();
+        Updater.isInClosingUpdating = false;
         Updater.isInBatchUpdating = false;
         const callbackLen = callbackList.length;
         for(let i = 0; i < callbackLen ; i++){

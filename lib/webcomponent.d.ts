@@ -1,4 +1,5 @@
-import { ITemplateResult } from './type';
+import { ITemplateResult, IComponentLifeCycle, ComponentProp } from './type';
+import WMap from './util/map';
 export interface ComplexAttributeConverter<Type = any, TypeHint = any> {
     /**
      * Function called to convert an attribute value to a property
@@ -23,12 +24,12 @@ export interface PropertyDeclaration<Type = any, TypeHint = any> {
 export interface PropertyDeclarations {
     [key: string]: PropertyDeclaration;
 }
-declare type PropertyValues = Map<PropertyKey, unknown>;
+declare type PropertyValues = WMap<unknown>;
 export interface HasChanged {
     (value: unknown, old: unknown): boolean;
 }
 export declare const notEqual: HasChanged;
-export declare abstract class WebComponent extends HTMLElement {
+export declare abstract class WebComponent extends HTMLElement implements IComponentLifeCycle {
     private static _attributeToPropertyMap;
     private static _classProperties;
     private static _finalized;
@@ -41,11 +42,17 @@ export declare abstract class WebComponent extends HTMLElement {
     private _reflectingProperties;
     private _changedProperties;
     private _updatePromise;
-    static createProperty(name: PropertyKey, options?: PropertyDeclaration): void;
+    private _stateFlags;
+    private _alternalState;
+    state?: ComponentProp;
+    props: ComponentProp;
+    static createProperty(name: string, options?: PropertyDeclaration): void;
     constructor();
+    private _markFlag;
+    private _clearFlag;
+    private _hasFlag;
     initialize(): void;
-    requestUpdate(name?: PropertyKey, oldValue?: any): void;
-    protected shouldUpdate(_changedProperties: PropertyValues): boolean;
+    requestUpdate(name?: string, oldValue?: any, callback?: () => void): void;
     protected performUpdate(): void | Promise<unknown>;
     private _markUpdated;
     private _enqueueUpdate;
@@ -54,9 +61,16 @@ export declare abstract class WebComponent extends HTMLElement {
     private _propertyToAttribute;
     private _attributeToProperty;
     protected attributeChangedCallback(name: string, old: string | null, value: string | null): void;
-    protected updated(_changedProperties: PropertyValues): void;
-    protected firstUpdated(_changedProperties: PropertyValues): void;
+    disconnectedCallback(): void;
+    componentWillReceiveProps(nextProps: ComponentProp): void;
+    componentDidMount(): void;
+    componentDidUpdate(): void;
+    componentWillUnmount(): void;
+    componentWillMount(): void;
+    componentShouldUpdate(_changedProperties: PropertyValues, nextState: ComponentProp): boolean;
+    forceUpdate(callback?: () => void): void;
+    setState(partialState?: Partial<ComponentProp>, callback?: () => void): void;
 }
 export declare function defineWebComponent(name: string, componentClz: typeof WebComponent): void;
-export declare const property: (options?: PropertyDeclaration<any, any>) => (proto: Object, name: string | number | symbol) => void;
+export declare const property: (options?: PropertyDeclaration<any, any>) => (proto: Object, name: string) => void;
 export {};

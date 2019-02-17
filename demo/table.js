@@ -1,3 +1,4 @@
+// import {html,defineWebComponent as defineComponent,WebComponent as Component,render} from 'illidan';
 import {html,defineComponent,Component,render} from 'illidan';
 import getData from './getData'
 
@@ -117,7 +118,7 @@ class Database extends Component{
         `;
     };
 };
-defineComponent('database',Database)
+defineComponent('my-database',Database)
 
 
 class Table extends Component{
@@ -128,7 +129,7 @@ class Table extends Component{
         }
     }
     loadData(){
-        var newData = getData(this.props.rows);
+        var newData = getData(this.props.rows || this.rows);
         Object.keys(newData.databases).forEach(function(dbname) {
         var sampleInfo = newData.databases[dbname];
         if (!this.state.databases[dbname]) {
@@ -162,9 +163,9 @@ class Table extends Component{
         var databases = [];
         Object.keys(this.state.databases).forEach(function(dbname) {
         databases.push(html`
-            <database key=${dbname}
+            <my-database key=${dbname}
             dbname=${dbname}
-            samples=${this.state.databases[dbname].samples} />
+            .samples=${this.state.databases[dbname].samples} />
         `);
         }.bind(this));
         return html`<div>

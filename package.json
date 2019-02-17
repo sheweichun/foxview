@@ -1,7 +1,7 @@
 {
   "scripts": {
     "watch": "tsc -w",
-    "compile":"rm -rf lib && tsc",
+    "compile": "rm -rf lib && tsc",
     "build": "rm -rf lib && tsc && rollup -c",
     "dev": "cd demo && npm run dev"
   },

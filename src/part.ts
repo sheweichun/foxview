@@ -12,8 +12,8 @@ export class ComponentPart implements Peon{
   fragment:DocumentFragment;
   // startNode!: Node;
   endNode!: Node;
-  _moutFlag:boolean = false;
-  _updateFlag:boolean = false;
+  // _moutFlag:boolean = false;
+  // _updateFlag:boolean = false;
   value: any;
   options: RenderOptions;
   _slots:ComponentSlotSchema;
@@ -43,24 +43,28 @@ export class ComponentPart implements Peon{
     let instance = this._componentInstance;
     if(!instance){
       instance = new this._componentClass(newProps)
+      // instance._parentPart = this;
+      instance._mount = this._insert.bind(this);
       instance.props = newProps;
+      instance._pendProps = newProps;
       instance.fragment = this.fragment;
       instance.renderOption = this.options;
       instance._slots = this._slots;
       this._componentInstance = instance;
-      this._updateFlag = true;
+      // this._updateFlag = true;
     }else{
       instance.componentWillReceiveProps(newProps)
-      this._updateFlag = instance.componentShouldUpdate(newProps);
-      instance.props = newProps;
+      // this._updateFlag = instance.componentShouldUpdate(newProps,instance.state);
+      instance._pendProps = newProps;
     }
   }
-  private _insert(node: Node) {
+  _insert(node: Node|DocumentFragment) {
     this.endNode.parentNode!.insertBefore(node, this.endNode);
   }
   destroy(){
     const instance = this._componentInstance;
     instance.componentWillUnmount();
+    instance._mount = null;
     if(instance.part){
       instance.part.destroy();
     }
@@ -69,18 +73,16 @@ export class ComponentPart implements Peon{
     this.fragment = null;
   }
   commit(){
-    const instance = this._componentInstance;
-    if(!this._updateFlag) return;
-    if(!this._moutFlag){
-      instance._commit()
-      this._insert(this.fragment);
-      this._moutFlag = true;
-      instance.componentDidMount();
-    }else{
-      instance.setState(null,()=>{
-        this._componentInstance.componentDidUpdate();
-      })
-    }
+    // const instance = this._componentInstance;
+    // console.log('_componentInstance :',this._componentInstance);
+    this._componentInstance.setState();
+    // if(!instance._mountFlag){
+    //   instance._commit()
+    // }else{
+    //   instance.setState(null,()=>{
+    //     this._componentInstance.componentDidUpdate();
+    //   })
+    // }
   }
 }
 

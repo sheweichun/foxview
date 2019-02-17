@@ -1,4 +1,5 @@
-import {html,defineComponent,Component,render} from 'illidan';
+import {html,defineWebComponent as defineComponent,WebComponent as Component,render} from 'illidan';
+// import {html,defineComponent,Component,render} from 'illidan';
 
 
 class Demo extends Component{
@@ -12,14 +13,20 @@ class Demo extends Component{
         this.setState({
             flag : !this.state.flag
         })
+        this.setState({
+            flag : !this.state.flag
+        })
+        this.setState({
+            flag : !this.state.flag
+        })
     }
     renderCom(){
         if(this.state.flag){
-            return html`<rect color=${{
+            return html`<my-rect .color=${{
                 value:'blue'
-            }}></rect>`
+            }}></my-rect>`
         }
-        return html`<counter></counter>`
+        return html`<my-counter></my-counter>`
     }
     render(){
         
@@ -31,7 +38,7 @@ class Demo extends Component{
         </div>`
     }
 }
-defineComponent('demo',Demo)
+defineComponent('my-demo',Demo)
 
 class Counter extends Component{
     constructor(props) {
@@ -50,7 +57,7 @@ class Counter extends Component{
         </div>`
     }
 }
-defineComponent('counter',Counter)
+defineComponent('my-counter',Counter)
 
 class Rect extends Component{
     constructor(props) {
@@ -63,13 +70,14 @@ class Rect extends Component{
         console.log('click');
     }
     render(){
-        const {color} = this.props;
+        const color = this.props ? this.props.color : this.color
+        // const {color} = this.props;
         return html`<div  style="width:100px;height:200px;background:${color ? color.value : 'yellow'};" @click=${this.onClick}>
             <span>${this.state.couter}</span>
         </div>`
     }
 }
-defineComponent('rect',Rect)
+defineComponent('my-rect',Rect)
 
 
 class App extends Component{
@@ -87,13 +95,13 @@ class App extends Component{
     }
     render(){
         const {counter} = this.state;
-        return html`<demo>
+        return html`<my-demo>
             <div slot="swc">
                 <button @click=${this.onClick}>slot click</button>
             </div>
             <div>I am a slot!!!${counter}</div>
-        </demo>`
+        </my-demo>`
     }
 }
-defineComponent('app',App)
-render(html`<app></app>`,document.getElementById('container'))
+defineComponent('my-app',App)
+render(html`<my-app></my-app>`,document.getElementById('container'))

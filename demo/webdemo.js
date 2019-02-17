@@ -227,7 +227,9 @@ window.addEventListener('load',function(){
     
     setTimeout(()=>{
       // btn.setAttribute('message','click me!!!');
-      btn.message = 'click me!!!!!!'
+      btn.setAttribute('message','clickme!!!')
+      btn.setAttribute('counter','5')
+      // btn.message = 'click me!!!!!!'
       document.getElementById('after').innerHTML = 'change after'
       // document.body.style.setProperty('--color','yellow');
     },1000)

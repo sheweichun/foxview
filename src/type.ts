@@ -26,22 +26,43 @@ export type ComponentSlotSchema = {
     [name:string]:Array<Element>
 }
 
-export interface IComponent{
-    id:string
-    _commit():void
-    props:ComponentProp
-    state?:ComponentProp
-    part:Peon
-    _slots?:ComponentSlotSchema;
+export interface IComponentLifeCycle{
     componentWillReceiveProps(nextProps:ComponentProp):void
+    componentWillMount():void
     componentDidMount():void
     componentDidUpdate():void
     componentWillUnmount():void
-    componentShouldUpdate(nextProps:ComponentProp):boolean
+    componentShouldUpdate(nextProps:ComponentProp,nextState:ComponentProp):boolean
+    state?:ComponentProp
+    forceUpdate(callback?:()=>void)
     render() : ITemplateResult
-    setState(partialState?:Partial<ComponentProp>,callback?:()=>void,isForce?:boolean)
+    setState(partialState?:Partial<ComponentProp>,callback?:()=>void)
+}
+
+
+export interface IComponent{
+    id:string
+    _firstCommit():void
+    _commit():void
+    props:ComponentProp
+    _pendProps:ComponentProp
+    part:Peon
+    _mountFlag:boolean
+    // _parentPart:Peon
+    _slots?:ComponentSlotSchema;
     fragment:DocumentFragment
     renderOption:RenderOptions
+    _mount:(node:Element | DocumentFragment)=>void
+    componentWillReceiveProps(nextProps:ComponentProp):void
+    componentWillMount():void
+    componentDidMount():void
+    componentDidUpdate():void
+    componentWillUnmount():void
+    componentShouldUpdate(nextProps:ComponentProp,nextState:ComponentProp):boolean
+    state?:ComponentProp
+    forceUpdate(callback?:()=>void)
+    render() : ITemplateResult
+    setState(partialState?:Partial<ComponentProp>,callback?:()=>void)
 }
 
 export interface IComponentConstructor{

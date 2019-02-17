@@ -179,6 +179,7 @@ function _prepareComponent(ComponentProto:IComponentConstructor,node:Element,par
     const component = new ComponentPart(ComponentProto,propsSchemas,slots,extra.renderOption);
     component.insertBeforeNode(node);
     peons.push(component)
+    // console.log('localName :',node.localName,component);
     return {
         partIndex,
         nodesToRemove:[node]

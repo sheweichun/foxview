@@ -2,8 +2,6 @@ import { RenderOptions, Peon, IComponentConstructor, ComponentPropSchema, ICompo
 export declare class ComponentPart implements Peon {
     fragment: DocumentFragment;
     endNode: Node;
-    _moutFlag: boolean;
-    _updateFlag: boolean;
     value: any;
     options: RenderOptions;
     _slots: ComponentSlotSchema;
@@ -15,7 +13,7 @@ export declare class ComponentPart implements Peon {
     constructor(componentClass: IComponentConstructor, propsSchemas: Array<ComponentPropSchema>, slots: ComponentSlotSchema, options: RenderOptions);
     insertBeforeNode(container: Node): void;
     setValue(values: any): void;
-    private _insert;
+    _insert(node: Node | DocumentFragment): void;
     destroy(): void;
     commit(): void;
 }
