@@ -105,7 +105,7 @@ defineComponent('my-clock',class LitClock extends WebComponent {
       super();
       setInterval(() => {
         this.date = new Date();
-        // this.requestUpdate()
+        this.requestUpdate()
       }, 1000);
     }
   
