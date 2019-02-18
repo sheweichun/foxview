@@ -8,13 +8,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/index.html">
-    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/index.html">
-    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/index.html">
-    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/index.html">
-    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/index.html">
-    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/index.html">
-    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/index.html"> -->
+    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/es/index.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/es/index.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/es/index.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/es/index.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/es/index.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/es/index.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/es/index.html"> -->
 
     <meta property="og:type" content="article">
     <meta property="og:title" content="Vue.js">
@@ -80,15 +80,15 @@
       }
     </style>
     <!-- main page styles -->
-    <link rel="stylesheet" href="/build/css/index.css">
+    <link rel="stylesheet" href="/build/css/page.css">
 
     <!-- this needs to be loaded before guide's inline scripts -->
     <script>
         window.PAGE_TYPE = "{{type}}"
     </script>
   </head>
-  <body class="">
-    <div id="mobile-bar" class="top">
+  <body class="docs">
+    <div id="mobile-bar">
       <a class="menu-button"></a>
       <a class="logo" href="/"></a>
     </div>
@@ -100,10 +100,10 @@
     <ul id="nav">
       
 <li>
-  <a href="/build/guide/index.html" class="nav-link">教程</a>
+  <a href="/build/guide/index.html" class="nav-link">tutorial</a>
 </li>
 <li>
-  <a href="/build/deo/index.html" class="nav-link">示例</a>
+  <a href="/build/deo/index.html" class="nav-link">demo</a>
 </li>
 <!-- <li>
   <form id="search-form">
@@ -133,8 +133,10 @@
     </ul>
   </div>
   
-    
-      
+     
+      <div id="main" class="fix-sidebar">
+        
+          
 <div class="sidebar">
     <div class="sidebar-inner-index">
       <ul class="main-menu">
@@ -248,6 +250,9 @@
   })()
   </script> -->
   
+        
+      </div>
+      <script src="/build/js/smooth-scroll.min.js"></script>
     
 
     <script src="/build/js/common.js"></script>
