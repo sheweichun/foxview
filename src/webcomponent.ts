@@ -190,6 +190,7 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
     private _reflectingProperties: WMap<PropertyDeclaration>|undefined = undefined;
     // private _instanceProperties : PropertyValues | undefined = undefined; //存储实例属性值 待完善
     private _changedProperties: PropertyValues = new WMap();
+    // private _pendProps:ComponentProp;
     private _updatePromise: Promise<unknown> = Promise.resolve(true);
     private _stateFlags:UpdateState = 0
     private _alternalState:ComponentProp
