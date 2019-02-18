@@ -3,6 +3,7 @@ export declare abstract class Component implements IComponent {
     _mountFlag: boolean;
     state: ComponentProp;
     id: string;
+    getSnapshotBeforeUpdate?(prevProps: ComponentProp, prevState: ComponentProp): any;
     _mount: (node: Element | DocumentFragment) => void;
     _parentPart: Peon;
     _pendProps: ComponentProp;
@@ -12,16 +13,20 @@ export declare abstract class Component implements IComponent {
     _slots: ComponentSlotSchema;
     renderOption: RenderOptions;
     constructor(props: any);
+    /**
+     * state的最新值取getDerivedStateFromProps的返回值
+     * **/
+    componentDidCatch?: (e: Error) => void;
     componentWillReceiveProps(nextProps: ComponentProp): void;
-    componentShouldUpdate(nextProps: ComponentProp, nextState: ComponentProp): boolean;
+    shouldComponentUpdate(nextProps: ComponentProp, nextState: ComponentProp): boolean;
     abstract render(): ITemplateResult;
     componentDidMount(): void;
-    componentDidUpdate(): void;
+    componentDidUpdate(prevProps: ComponentProp, prevState: ComponentProp, snapshot?: any): void;
     componentWillUnmount(): void;
     componentWillMount(): void;
     private _doRender;
     _firstCommit(): void;
-    _commit(): void;
+    _commit(prevProps: ComponentProp, prevState: ComponentProp, snapshot?: any): void;
     forceUpdate(callback?: () => void): void;
     setState(partialState?: Partial<ComponentProp>, callback?: () => void): void;
 }

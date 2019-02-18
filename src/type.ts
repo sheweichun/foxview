@@ -27,12 +27,12 @@ export type ComponentSlotSchema = {
 }
 
 export interface IComponentLifeCycle{
-    componentWillReceiveProps(nextProps:ComponentProp):void
-    componentWillMount():void
     componentDidMount():void
-    componentDidUpdate():void
+    componentDidUpdate(prevProps:ComponentProp, prevState:ComponentProp,snapshot?:any):void
     componentWillUnmount():void
-    componentShouldUpdate(nextProps:ComponentProp,nextState:ComponentProp):boolean
+    componentDidCatch?(e:Error):void
+    shouldComponentUpdate(nextProps:ComponentProp,nextState:ComponentProp):boolean
+    getSnapshotBeforeUpdate?(prevProps:ComponentProp, prevState:ComponentProp):any
     state?:ComponentProp
     forceUpdate(callback?:()=>void)
     render() : ITemplateResult
@@ -43,7 +43,7 @@ export interface IComponentLifeCycle{
 export interface IComponent{
     id:string
     _firstCommit():void
-    _commit():void
+    _commit(prevProps:ComponentProp, prevState:ComponentProp,snapshot?:any):void
     props:ComponentProp
     _pendProps:ComponentProp
     part:Peon
@@ -53,12 +53,16 @@ export interface IComponent{
     fragment:DocumentFragment
     renderOption:RenderOptions
     _mount:(node:Element | DocumentFragment)=>void
-    componentWillReceiveProps(nextProps:ComponentProp):void
-    componentWillMount():void
     componentDidMount():void
-    componentDidUpdate():void
+    componentDidUpdate(prevProps:ComponentProp, prevState:ComponentProp,snapshot?:any):void
     componentWillUnmount():void
-    componentShouldUpdate(nextProps:ComponentProp,nextState:ComponentProp):boolean
+    componentDidCatch?(e:Error):void
+    /** 
+     * 此刻this.state,this.props已经是最新值 
+     * prevProps,prevState引用更新前的值
+     * **/
+    getSnapshotBeforeUpdate?(prevProps:ComponentProp, prevState:ComponentProp):any
+    shouldComponentUpdate(nextProps:ComponentProp,nextState:ComponentProp):boolean
     state?:ComponentProp
     forceUpdate(callback?:()=>void)
     render() : ITemplateResult

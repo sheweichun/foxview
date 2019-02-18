@@ -1,4 +1,5 @@
 {
+  "name":"foxview",
   "scripts": {
     "watch": "tsc -w",
     "compile": "rm -rf lib && tsc",

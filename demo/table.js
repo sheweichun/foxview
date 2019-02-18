@@ -1,7 +1,15 @@
-// import {html,defineWebComponent as defineComponent,WebComponent as Component,render} from 'illidan';
+// import {html,defineWebComponent as defineComponent,WebComponent as Component,render,property} from 'illidan';
 import {html,defineComponent,Component,render} from 'illidan';
+function property(){}
+
 import getData from './getData'
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+  else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 
 
 const Columns = [
@@ -62,7 +70,16 @@ class Query extends Component{
           </div>
         </td>`
     };
-  }
+}
+__decorate([
+  property()
+], Query.prototype, "elapsed", void 0);
+__decorate([
+  property()
+], Query.prototype, "query", void 0);
+__decorate([
+  property()
+], Query.prototype, "key", void 0);
 defineComponent('my-query',Query)
 
 class Database extends Component{
@@ -118,7 +135,21 @@ class Database extends Component{
         `;
     };
 };
+
+__decorate([
+  property()
+], Database.prototype, "key", void 0);
+__decorate([
+  property()
+], Database.prototype, "dbname", void 0);
+__decorate([
+  property()
+], Database.prototype, "samples", void 0);
 defineComponent('my-database',Database)
+
+
+
+
 
 
 class Table extends Component{
@@ -191,6 +222,9 @@ class Table extends Component{
         // </table>`
     }
 }
+__decorate([
+  property()
+], Table.prototype, "rows", void 0);
 defineComponent('my-table',Table)
 
 const rows = 100;

@@ -25,7 +25,7 @@ class MyButton extends WebComponent{
     this.counter--;
   }
   renderPart(){
-    if(this.counter % 2 === 0){
+    if(this.props.counter % 2 === 0){
       return html`<div a>偶数</div>`
     }else{
       return html`<div b>奇数</div>`
@@ -40,6 +40,7 @@ class MyButton extends WebComponent{
     return ret;
   }
   render(){
+    const {message,counter} = this.props;
       return html`
       <style>
           :host{
@@ -47,11 +48,11 @@ class MyButton extends WebComponent{
               color:var(--color);
           }
       </style>
-      <button @click=${this.add}>${this.message || 'hello'}</button>
+      <button @click=${this.add}>${message || 'hello'}</button>
       <button @click=${this.minus}>${'minus'}</button>
       <slot name="abc"></slot>
       <slot name="default" @click=${this.clickHandler}></slot>
-      <div>计数器:${this.counter}</div>
+      <div>计数器:${counter}</div>
       ${this.renderPart()}
       <ul>
           ${this.renderList()}
@@ -104,7 +105,7 @@ defineComponent('my-clock',class LitClock extends WebComponent {
       super();
       setInterval(() => {
         this.date = new Date();
-        this.requestUpdate()
+        // this.requestUpdate()
       }, 1000);
     }
   
@@ -232,6 +233,9 @@ window.addEventListener('load',function(){
       // btn.message = 'click me!!!!!!'
       document.getElementById('after').innerHTML = 'change after'
       // document.body.style.setProperty('--color','yellow');
+      // setTimeout(()=>{
+      //   document.body.removeChild(btn)
+      // },1000)
     },1000)
     // render(html`<div>${'test'}</div>`,document.getElementById('container'))
     // render(html`<div>${'demo'}</div>`,document.getElementById('container'))

@@ -8,6 +8,7 @@ export abstract class Component implements IComponent{
     _mountFlag:boolean = false;
     state:ComponentProp
     id:string
+    getSnapshotBeforeUpdate?(prevProps:ComponentProp, prevState:ComponentProp):any
     _mount:(node:Element | DocumentFragment)=>void
     _parentPart:Peon
     // private _pendingState:Partial<ComponentProp>
@@ -21,14 +22,18 @@ export abstract class Component implements IComponent{
         this.props = props;
         this.id = `${componentId++}`;
     }
-    
+    /** 
+     * state的最新值取getDerivedStateFromProps的返回值
+     * **/
+    // static getDerivedStateFromProps(props, state):void
+    componentDidCatch?:(e:Error)=>void
     componentWillReceiveProps(nextProps:ComponentProp):void{}
-    componentShouldUpdate(nextProps:ComponentProp,nextState:ComponentProp):boolean{
+    shouldComponentUpdate(nextProps:ComponentProp,nextState:ComponentProp):boolean{
         return true;
     }
     abstract render():ITemplateResult
     componentDidMount():void{}
-    componentDidUpdate():void{}
+    componentDidUpdate(prevProps:ComponentProp, prevState:ComponentProp,snapshot?:any):void{}
     componentWillUnmount():void{}
     componentWillMount():void{}
     // private _updatePromise: Promise<unknown> = Promise.resolve(true);
@@ -37,11 +42,20 @@ export abstract class Component implements IComponent{
     // }
     private _doRender(){
         //eventContext 和 slots覆盖传入的eventContext和slots
-        this.part = render(this.render(),this.fragment,{
-            ...this.renderOption,
-            eventContext:this, 
-            slots:this._slots,
-        });
+        try{
+            this.part = render(this.render(),this.fragment,{
+                ...this.renderOption,
+                eventContext:this, 
+                slots:this._slots,
+            });
+        }catch(e){
+            if(this.componentDidCatch){
+                this.componentDidCatch(e);
+            }else{
+                throw new Error(e)
+            }
+        }
+        
     }
     _firstCommit(){
         // this.componentWillMount();
@@ -50,15 +64,9 @@ export abstract class Component implements IComponent{
         this._mountFlag = true;
         this.componentDidMount();
     }
-    _commit(){
+    _commit(prevProps:ComponentProp, prevState:ComponentProp,snapshot?:any){
         this._doRender();
-        this.componentDidUpdate()
-        // if(!this._mountFlag){
-        //     this._firstCommit();
-        // }else{
-        //     this._doRender();
-        //     this.componentDidUpdate();
-        // }
+        this.componentDidUpdate(prevProps,prevState,snapshot)
     }
     forceUpdate(callback?:()=>void){
         // this.setState(null,callback,true)

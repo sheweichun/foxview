@@ -26,21 +26,35 @@ const Updater:IUpdater = {
     isInClosingUpdating:false,
     performUpdate:function(item:SetStateMapItem):void{
         const {instance} = item
+        let newState = Object.assign({},instance.state || {},item.partialState);
+        //@ts-ignore
+        const getDerivedStateFromProps = (instance.constructor).getDerivedStateFromProps;
+        if(getDerivedStateFromProps){
+            const result = getDerivedStateFromProps.call(instance.constructor,instance._pendProps,newState);
+            if(result){
+                newState = Object.assign({},newState,result)
+            }
+        }
         if(!instance._mountFlag){
-            instance.componentWillMount();
+            // instance.componentWillMount();
             /** 
-             * 如果在componentWillUnmount调用了setState,此处会更新state,但不会触发二次渲染
+             * 如果在componentWillUnmount调用了setState,此处会更新state,但不会触发二次渲染  (注:已取消componentWillMount)
              * 即便在componentWillMount中setState,此处item.partialState拿到也是最新的partialState
              * **/
-            instance.state = Object.assign({},instance.state || {},item.partialState); 
+            instance.state = newState; 
             instance._firstCommit();
             return;
         }
-        const newState = Object.assign({},instance.state || {},item.partialState);
-        if(instance.componentShouldUpdate(instance._pendProps,newState)){
+        if(instance.shouldComponentUpdate(instance._pendProps,newState)){
+            const prevProps = instance.props;
+            const prevState = instance.state;
             instance.props = instance._pendProps;
             instance.state = newState
-            instance._commit();
+            let snapShot;
+            if(instance.getSnapshotBeforeUpdate){
+                snapShot = instance.getSnapshotBeforeUpdate(prevProps,prevState)
+            }
+            instance._commit(prevProps,prevState,snapShot);
         }else{
             instance.props = instance._pendProps;
             instance.state = newState

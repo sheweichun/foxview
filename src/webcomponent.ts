@@ -1,5 +1,5 @@
 import {shadowRender} from './render';
-import {ITemplateResult,IComponentLifeCycle,ComponentProp} from './type';
+import {ITemplateResult,IComponentLifeCycle,ComponentProp, Peon} from './type';
 import WMap from './util/map';
 
 export interface ComplexAttributeConverter < Type = any,TypeHint = any > {
@@ -116,7 +116,7 @@ const INNER_STATE_CHANGED = 1 << 5;
 type UpdateState = typeof STATE_IN_UPDATING | typeof MOUNTED | typeof STATE_IS_REFLECTING_TO_ATTRIBUTE | typeof STATE_IS_REFLECTING_TO_PROPERTY | typeof INNER_STATE_CHANGED
 
 export abstract class WebComponent extends HTMLElement implements IComponentLifeCycle{
-
+    getSnapshotBeforeUpdate?(prevProps:ComponentProp, prevState:ComponentProp):any
     private static _attributeToPropertyMap : AttributeMap;
     private static _classProperties : PropertyDeclarationMap;
     private static _finalized = true;
@@ -189,14 +189,19 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
       }
     private _reflectingProperties: WMap<PropertyDeclaration>|undefined = undefined;
     // private _instanceProperties : PropertyValues | undefined = undefined; //存储实例属性值 待完善
-    private _changedProperties: PropertyValues = new WMap();
-    // private _pendProps:ComponentProp;
+    // private _changedProperties: PropertyValues = new WMap();
+    private _pendProps:ComponentProp = {};
     private _updatePromise: Promise<unknown> = Promise.resolve(true);
     private _stateFlags:UpdateState = 0
     private _alternalState:ComponentProp
+    private __part:Peon
+    componentDidCatch?(e:Error):void
     state?:ComponentProp
-    props:ComponentProp={}
-   
+    __props:ComponentProp={}
+    get props(){
+      return this.__props;
+    }
+    set props(val){}
     static createProperty(name : string, options : PropertyDeclaration = defaultPropertyDeclaration) {
         if (!this.hasOwnProperty('_classProperties')) {
             this._classProperties = new WMap();
@@ -213,7 +218,8 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
                     return this[key];
                 },
                 set(value : any) {
-                    const oldValue = this[name];
+                    // this._pendProps[name] = value;
+                    const oldValue = this[key];
                     this[key] = value;
                     this.requestUpdate(name, oldValue);
                 },
@@ -237,9 +243,9 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
       return this._stateFlags & flag;
     }
     initialize() {
-        this.attachShadow({mode: 'open'});
-        // this._saveInstanceProperties();
-        this.requestUpdate();
+      this.attachShadow({mode: 'open'});
+      // this._saveInstanceProperties();
+      this.requestUpdate();
     }
     // private _saveInstanceProperties() {
     //     for (const [p] of (this.constructor as typeof WebComponent)._classProperties) {
@@ -256,13 +262,15 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
     requestUpdate(name?: string, oldValue?: any,callback?:()=>void) {
         let shouldRequestUpdate = true;
         // if we have a property key, perform property update steps.
-        if (name !== undefined && !this._changedProperties.has(name)) {
+        // if (name !== undefined && !this._changedProperties.has(name)) {
+        if (name !== undefined && !this._pendProps.hasOwnProperty(name)) {
           const ctor = this.constructor as typeof WebComponent;
           const options =
               ctor._classProperties.get(name) || defaultPropertyDeclaration;
           if ((options.hasChanged || notEqual)(this[name as keyof this], oldValue)) {
             // track old value when changing.
-            this._changedProperties.set(name, oldValue);
+            this._pendProps[name] = this[name];
+            // this._changedProperties.set(name, oldValue);
             // add to reflecting properties set
             if (options.reflect === true && !this._hasFlag(STATE_IS_REFLECTING_TO_PROPERTY)) {
               if (this._reflectingProperties === undefined) {
@@ -282,6 +290,12 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
         }
         // return this.updateComplete;
     }
+    private __updateThisProps(){
+      this.__props = Object.assign({},this.props,this._pendProps);
+      // console.log('__props :',this._pendProps);
+      Object.freeze(this.__props);
+      
+    }
     protected performUpdate(): void|Promise<unknown> {
         // if (this._instanceProperties) {
         //     //@ts-ignore
@@ -290,32 +304,55 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
         //       }
         //       this._instanceProperties = undefined;
         // }
-        const changedProperties = this._changedProperties;
+        // const changedProperties = this._changedProperties;
+        let  newState = Object.assign({},this.state || {},this._alternalState || {})
+        //@ts-ignore
+        const getDerivedStateFromProps = (this.constructor).getDerivedStateFromProps;
+        if(getDerivedStateFromProps){
+            const result = getDerivedStateFromProps.call(this.constructor,this._pendProps,newState);
+            if(result){
+                newState = Object.assign({},newState,result)
+            }
+        }
+        //getDerivedStateFromProps
         if(!this._hasFlag(MOUNTED)){
+          this.__updateThisProps();
+          // if(this._hasFlag(INNER_STATE_CHANGED)){
+          //   this.state = Object.assign({},this.state || {},this._alternalState)
+          // }
+          this.state = newState;
           this.componentWillMount();
-          this.update(changedProperties);
+          this.update();
           // this._mountFlag = true;
           this._markFlag(MOUNTED);
           this.componentDidMount();
         }else{
-          let newState = this.state;
-          if(this._hasFlag(INNER_STATE_CHANGED)){
-            newState = Object.assign({},this.state || {},this._alternalState)
-          }
-          if (this.componentShouldUpdate(this._changedProperties,newState)) {
+          // if(this._hasFlag(INNER_STATE_CHANGED)){
+          //   newState = Object.assign({},this.state || {},this._alternalState)
+          // }
+          if (this.shouldComponentUpdate(this._pendProps,newState)) {
+            const prevProps = this.props;
+            const prevState = this.state;
+            this.__updateThisProps();
             this.state = newState;
-            this.update(changedProperties);
-            this.componentDidUpdate();
+            let snapShot:any;
+            if(this.getSnapshotBeforeUpdate){
+              snapShot = this.getSnapshotBeforeUpdate(prevProps,prevState);
+            }
+            this.update();
+            this.componentDidUpdate(prevProps,prevState,snapShot);
           }else{
+            this.__updateThisProps();
             this.state = newState;
           }
         }
         this._markUpdated();
     }
     private _markUpdated() {
-        this._changedProperties = new WMap();
+        // this._changedProperties = new WMap();
+        this._pendProps = {}; 
         this._clearFlag(STATE_IN_UPDATING);
-        this._clearFlag(INNER_STATE_CHANGED)
+        // this._clearFlag(INNER_STATE_CHANGED)
         this._alternalState = null;
       }
     private async _enqueueUpdate(callback?:()=>void) {
@@ -340,17 +377,25 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
         callback && callback();
         resolve!(true);
     }
-    protected update(changedProperties: PropertyValues) {
-        if (this._reflectingProperties !== undefined &&
-            this._reflectingProperties.size > 0) {
-          // this._reflectingProperties.
-          this._reflectingProperties._each((k,v)=>{
-            this._propertyToAttribute(k, this[k as keyof this], v);
-          })
-          this._reflectingProperties = undefined;
+    protected update() {
+        try{
+          if (this._reflectingProperties !== undefined &&
+              this._reflectingProperties.size > 0) {
+            // this._reflectingProperties.
+            this._reflectingProperties._each((k,v)=>{
+              this._propertyToAttribute(k, this[k as keyof this], v);
+            })
+            this._reflectingProperties = undefined;
+          }
+          this.__part = shadowRender(this.render(), this.shadowRoot, {eventContext: this})
+        }catch(e){
+          if(this.componentDidCatch){
+              this.componentDidCatch(e);
+          }else{
+              throw new Error(e)
+          }
         }
-        shadowRender(this.render(), this.shadowRoot, {eventContext: this})
-      }
+    }
     abstract render() : ITemplateResult
     // connectedCallback(){ }
     private _propertyToAttribute(
@@ -400,13 +445,16 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
     }
     disconnectedCallback(){
       this.componentWillUnmount();
+      if(this.__part){
+        this.__part.destroy();
+      }
     }
     componentWillReceiveProps(nextProps:ComponentProp):void{}
     componentDidMount():void{}
-    componentDidUpdate():void{}
+    componentDidUpdate(prevProps:ComponentProp, prevState:ComponentProp,snapshot?:any):void{}
     componentWillUnmount():void{}
     componentWillMount():void{}
-    componentShouldUpdate(_changedProperties: PropertyValues,nextState:ComponentProp):boolean{
+    shouldComponentUpdate(nextProps: ComponentProp,nextState:ComponentProp):boolean{
       return true;
     }
     forceUpdate(callback?:()=>void){
@@ -414,7 +462,7 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
     }
     setState(partialState?:Partial<ComponentProp>,callback?:()=>void){
       if(partialState){
-        this._markFlag(INNER_STATE_CHANGED)
+        // this._markFlag(INNER_STATE_CHANGED)
         this._alternalState = Object.assign({},this._alternalState,partialState);
       }
       this.requestUpdate(undefined,undefined,callback);
@@ -425,7 +473,13 @@ export function defineWebComponent(name : string, componentClz : typeof WebCompo
     customElements.define(name, componentClz)
 }
 
+const INVALID_PROPS_NAME = {
+  props:true,
+  state:true
+};
+
 export const property = (options?: PropertyDeclaration) => (
     proto: Object, name: string) => {
+  if(INVALID_PROPS_NAME[name]) return;
   (proto.constructor as typeof WebComponent).createProperty(name, options);
 };

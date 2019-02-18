@@ -40,6 +40,7 @@ export class ComponentPart implements Peon{
       ret[item.name] = item.index != null ? values[item.index] : item.value;
       return ret;
     },{})
+    Object.freeze(newProps);
     let instance = this._componentInstance;
     if(!instance){
       instance = new this._componentClass(newProps)
@@ -53,8 +54,8 @@ export class ComponentPart implements Peon{
       this._componentInstance = instance;
       // this._updateFlag = true;
     }else{
-      instance.componentWillReceiveProps(newProps)
-      // this._updateFlag = instance.componentShouldUpdate(newProps,instance.state);
+      // instance.componentWillReceiveProps(newProps)
+      // this._updateFlag = instance.shouldComponentUpdate(newProps,instance.state);
       instance._pendProps = newProps;
     }
   }

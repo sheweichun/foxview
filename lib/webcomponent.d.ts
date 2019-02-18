@@ -1,5 +1,4 @@
 import { ITemplateResult, IComponentLifeCycle, ComponentProp } from './type';
-import WMap from './util/map';
 export interface ComplexAttributeConverter<Type = any, TypeHint = any> {
     /**
      * Function called to convert an attribute value to a property
@@ -24,12 +23,12 @@ export interface PropertyDeclaration<Type = any, TypeHint = any> {
 export interface PropertyDeclarations {
     [key: string]: PropertyDeclaration;
 }
-declare type PropertyValues = WMap<unknown>;
 export interface HasChanged {
     (value: unknown, old: unknown): boolean;
 }
 export declare const notEqual: HasChanged;
 export declare abstract class WebComponent extends HTMLElement implements IComponentLifeCycle {
+    getSnapshotBeforeUpdate?(prevProps: ComponentProp, prevState: ComponentProp): any;
     private static _attributeToPropertyMap;
     private static _classProperties;
     private static _finalized;
@@ -40,11 +39,14 @@ export declare abstract class WebComponent extends HTMLElement implements ICompo
     static readonly observedAttributes: any[];
     private static _finalize;
     private _reflectingProperties;
-    private _changedProperties;
+    private _pendProps;
     private _updatePromise;
     private _stateFlags;
     private _alternalState;
+    private __part;
+    componentDidCatch?(e: Error): void;
     state?: ComponentProp;
+    __props: ComponentProp;
     props: ComponentProp;
     static createProperty(name: string, options?: PropertyDeclaration): void;
     constructor();
@@ -53,10 +55,11 @@ export declare abstract class WebComponent extends HTMLElement implements ICompo
     private _hasFlag;
     initialize(): void;
     requestUpdate(name?: string, oldValue?: any, callback?: () => void): void;
+    private __updateThisProps;
     protected performUpdate(): void | Promise<unknown>;
     private _markUpdated;
     private _enqueueUpdate;
-    protected update(changedProperties: PropertyValues): void;
+    protected update(): void;
     abstract render(): ITemplateResult;
     private _propertyToAttribute;
     private _attributeToProperty;
@@ -64,10 +67,10 @@ export declare abstract class WebComponent extends HTMLElement implements ICompo
     disconnectedCallback(): void;
     componentWillReceiveProps(nextProps: ComponentProp): void;
     componentDidMount(): void;
-    componentDidUpdate(): void;
+    componentDidUpdate(prevProps: ComponentProp, prevState: ComponentProp, snapshot?: any): void;
     componentWillUnmount(): void;
     componentWillMount(): void;
-    componentShouldUpdate(_changedProperties: PropertyValues, nextState: ComponentProp): boolean;
+    shouldComponentUpdate(nextProps: ComponentProp, nextState: ComponentProp): boolean;
     forceUpdate(callback?: () => void): void;
     setState(partialState?: Partial<ComponentProp>, callback?: () => void): void;
 }
