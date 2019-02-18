@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <title>安装 — </title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/guide/install.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/guide/install.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/guide/install.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/guide/install.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/guide/install.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/guide/install.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/guide/install.html"> -->
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="安装 — Vue.js">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https:////images/logo.png">
+
+    <!-- <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="安装 — Vue.js">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="https:///images/logo.png"> -->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
+
+    <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <style>
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro"), url(/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf);
+      }
+      
+
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Light"), url(/fonts/Source_Sans_Pro/SourceSansPro-Light.ttf);
+        font-weight: 300;
+      }
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Semibold"), url(/fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf);
+        font-weight: 600;
+      }
+      @font-face{
+        font-family: "Roboto Mono";
+        src: local("Roboto Mono"), url(/fonts/Roboto_Mono/RobotoMono-Regular.ttf);
+      }
+      @font-face{
+        font-family: "Dosis";
+        src: local("Dosis Medium"), url(/fonts/Dosis/Dosis-Medium.ttf);
+        font-weight: 500;
+      }
+    </style>
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>
+        window.PAGE_TYPE = "{{type}}"
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+    <a id="logo" href="/">
+      <img src="/images/logo.png" alt="vue logo">
+      <span>Medivh</span>
+    </a>
+    <ul id="nav">
+      
+<li>
+  <a href="/guide/index.html" class="nav-link">教程</a>
+</li>
+<li>
+  <a href="/deo/index.html" class="nav-link">示例</a>
+</li>
+<!-- <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li class="nav-dropdown-container learn">
+  <a class="nav-link">学习</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a href="/v0.x/guide/" class="nav-link">教程</a></li>
+      <li><a href="/v2/api/" class="nav-link">API</a></li>
+      <li><a href="/v2/style-guide/" class="nav-link">风格指南</a></li>
+      <li><a href="/v2/examples/" class="nav-link">示例</a></li>
+      <li><a href="/v2/cookbook/" class="nav-link">Cookbook</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+<li>
+  <a href="/v2/guide/team.html" class="nav-link team">团队</a>
+</li>
+
+
+<li><a href="https://github.com/vuejs/cn.vuejs.org/" target="_blank" class="nav-link contribute">参与翻译</a></li> -->
+
+    </ul>
+  </div>
+  
+     
+      <div id="main" class="fix-sidebar">
+        
+          
+    <div class="sidebar">
+    <div class="sidebar-inner">
+      <div class="list">
+        
+          <h2>
+            
+            教程
+            
+              <select class="version-select">
+                <option value="SELF" selected>0.x</option>
+              </select>
+            
+          </h2>
+          <ul class="menu-root">
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/guide/install.html" class="sidebar-link current">安装</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/guide/index.html" class="sidebar-link">介绍</a>
+          </li>
+        
+      </ul>
+      
+        
+      </div>
+    </div>
+  </div>
+  
+  <!--
+  
+  -->
+  
+  
+  <div class="content guide with-sidebar install-guide">
+    
+      
+    
+    
+      <h1>安装</h1>
+    
+    
+      <h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p>Vue <strong>不支持</strong> IE8 及以下版本，因为 Vue 使用了 IE8 无法模拟的 ECMAScript 5 特性。但它支持所有<a href="https://caniuse.com/#feat=es5" target="_blank" rel="noopener">兼容 ECMAScript 5 的浏览器</a>。</p>
+<h3 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h3><p>最新稳定版本：</p>
+<p>每个版本的更新日志见 <a href="https://github.com/vuejs/vue/releases" target="_blank" rel="noopener">GitHub</a>。</p>
+<h2 id="Vue-Devtools"><a href="#Vue-Devtools" class="headerlink" title="Vue Devtools"></a>Vue Devtools</h2><p>在使用 Vue 时，我们推荐在你的浏览器上安装 <a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">Vue Devtools</a>。它允许你在一个更友好的界面中审查和调试 Vue 应用。</p>
+<h2 id="直接用-lt-script-gt-引入"><a href="#直接用-lt-script-gt-引入" class="headerlink" title="直接用 &lt;script&gt; 引入"></a>直接用 <code>&lt;script&gt;</code> 引入</h2><p>直接下载并用 <code>&lt;script&gt;</code> 标签引入，<code>Vue</code> 会被注册为一个全局变量。</p>
+<p class="tip">在开发环境下不要使用压缩版本，不然你就失去了所有常见错误相关的警告!</p>
+
+<div id="downloads"><br><a class="button" href="https://vuejs.org/js/vue.js" download="" target="_blank" rel="noopener">开发版本</a><span class="light info">包含完整的警告和调试模式</span><br><br><a class="button" href="https://vuejs.org/js/vue.min.js" download="" target="_blank" rel="noopener">生产版本</a><span class="light info">删除了警告，30.90KB min+gzip</span><br></div>
+
+<h3 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h3><p>我们推荐链接到一个你可以手动更新的指定版本号：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>你可以在 <a href="https://cdn.jsdelivr.net/npm/vue/" target="_blank" rel="noopener">cdn.jsdelivr.net/npm/vue</a> 浏览 NPM 包的源代码。</p>
+<p>Vue 也可以在 <a href="https://unpkg.com/vue@/dist/vue.js" target="_blank" rel="noopener">unpkg</a> 和 <a href="https://cdnjs.cloudflare.com/ajax/libs/vue//vue.js" target="_blank" rel="noopener">cdnjs</a> 上获取 (cdnjs 的版本更新可能略滞后)。</p>
+<p>请确认了解<a href="#对不同构建版本的解释">不同构建版本</a>并在你发布的站点中使用<strong>生产环境版本</strong>，把 <code>vue.js</code> 换成 <code>vue.min.js</code>。这是一个更小的构建，可以带来比开发环境下更快的速度体验。</p>
+<h2 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h2><p>在用 Vue 构建大型应用时推荐使用 NPM 安装<sup><a href="#footnote-1">[1]</a></sup>。NPM 能很好地和诸如 <a href="https://webpack.js.org/" target="_blank" rel="noopener">webpack</a> 或 <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify</a> 模块打包器配合使用。同时 Vue 也提供配套工具来开发<a href="single-file-components.html">单文件组件</a>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 最新稳定版</span></span><br><span class="line">$ npm install vue</span><br></pre></td></tr></table></figure>
+<h2 id="命令行工具-CLI"><a href="#命令行工具-CLI" class="headerlink" title="命令行工具 (CLI)"></a>命令行工具 (CLI)</h2><p>Vue 提供了一个<a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">官方的 CLI</a>，为单页面应用 (SPA) 快速搭建繁杂的脚手架。它为现代前端工作流提供了 batteries-included 的构建设置。只需要几分钟的时间就可以运行起来并带有热重载、保存时 lint 校验，以及生产环境可用的构建版本。更多详情可查阅 <a href="https://cli.vuejs.org" target="_blank" rel="noopener">Vue CLI 的文档</a>。</p>
+<p class="tip">CLI 工具假定用户对 Node.js 和相关构建工具有一定程度的了解。如果你是新手，我们强烈建议先在不用构建工具的情况下通读<a href="./">指南</a>，在熟悉 Vue 本身之后再使用 CLI。</p>
+
+<h2 id="对不同构建版本的解释"><a href="#对不同构建版本的解释" class="headerlink" title="对不同构建版本的解释"></a>对不同构建版本的解释</h2><p>在 <a href="https://cdn.jsdelivr.net/npm/vue/dist/" target="_blank" rel="noopener">NPM 包的 <code>dist/</code> 目录</a>你将会找到很多不同的 Vue.js 构建版本。这里列出了它们之间的差别：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>UMD</th>
+<th>CommonJS</th>
+<th>ES Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>完整版</strong></td>
+<td>vue.js</td>
+<td>vue.common.js</td>
+<td>vue.esm.js</td>
+</tr>
+<tr>
+<td><strong>只包含运行时版</strong></td>
+<td>vue.runtime.js</td>
+<td>vue.runtime.common.js</td>
+<td>vue.runtime.esm.js</td>
+</tr>
+<tr>
+<td><strong>完整版 (生产环境)</strong></td>
+<td>vue.min.js</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>只包含运行时版 (生产环境)</strong></td>
+<td>vue.runtime.min.js</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><ul>
+<li><p><strong>完整版</strong>：同时包含编译器和运行时的版本。</p>
+</li>
+<li><p><strong>编译器</strong>：用来将模板字符串编译成为 JavaScript 渲染函数的代码。</p>
+</li>
+<li><p><strong>运行时</strong>：用来创建 Vue 实例、渲染并处理虚拟 DOM 等的代码。基本上就是除去编译器的其它一切。</p>
+</li>
+<li><p><strong><a href="https://github.com/umdjs/umd" target="_blank" rel="noopener">UMD</a></strong>：UMD 版本可以通过 <code>&lt;script&gt;</code> 标签直接用在浏览器中。jsDelivr CDN 的 <a href="https://cdn.jsdelivr.net/npm/vue" target="_blank" rel="noopener">https://cdn.jsdelivr.net/npm/vue</a> 默认文件就是运行时 + 编译器的 UMD 版本 (<code>vue.js</code>)。</p>
+</li>
+<li><p><strong><a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a></strong>：CommonJS 版本用来配合老的打包工具比如 <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify</a> 或 <a href="https://webpack.github.io" target="_blank" rel="noopener">webpack 1</a>。这些打包工具的默认文件 (<code>pkg.main</code>) 是只包含运行时的 CommonJS 版本 (<code>vue.runtime.common.js</code>)。</p>
+</li>
+<li><p><strong><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">ES Module</a></strong>：ES module 版本用来配合现代打包工具比如 <a href="https://webpack.js.org" target="_blank" rel="noopener">webpack 2</a> 或 <a href="https://rollupjs.org/" target="_blank" rel="noopener">Rollup</a>。这些打包工具的默认文件 (<code>pkg.module</code>) 是只包含运行时的 ES Module 版本 (<code>vue.runtime.esm.js</code>)。</p>
+</li>
+</ul>
+<h3 id="运行时-编译器-vs-只包含运行时"><a href="#运行时-编译器-vs-只包含运行时" class="headerlink" title="运行时 + 编译器 vs. 只包含运行时"></a>运行时 + 编译器 vs. 只包含运行时</h3><p>如果你需要在客户端编译模板 (比如传入一个字符串给 <code>template</code> 选项，或挂载到一个元素上并以其 DOM 内部的 HTML 作为模板)，就将需要加上编译器，即完整版：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要编译器</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  template: <span class="string">'&lt;div&gt;&#123;&#123; hi &#125;&#125;&lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不需要编译器</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  render (h) &#123;</span><br><span class="line">    <span class="keyword">return</span> h(<span class="string">'div'</span>, <span class="keyword">this</span>.hi)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>当使用 <code>vue-loader</code> 或 <code>vueify</code> 的时候，<code>*.vue</code> 文件内部的模板会在构建时预编译成 JavaScript。你在最终打好的包里实际上是不需要编译器的，所以只用运行时版本即可。</p>
+<p>因为运行时版本相比完整版体积要小大约 30%，所以应该尽可能使用这个版本。如果你仍然希望使用完整版，则需要在打包工具里配置一个别名：</p>
+<h4 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      <span class="string">'vue$'</span>: <span class="string">'vue/dist/vue.esm.js'</span> <span class="comment">// 用 webpack 1 时需用 'vue/dist/vue.common.js'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Rollup"><a href="#Rollup" class="headerlink" title="Rollup"></a>Rollup</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> alias = <span class="built_in">require</span>(<span class="string">'rollup-plugin-alias'</span>)</span><br><span class="line"></span><br><span class="line">rollup(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  plugins: [</span><br><span class="line">    alias(&#123;</span><br><span class="line">      <span class="string">'vue'</span>: <span class="string">'vue/dist/vue.esm.js'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="Browserify"><a href="#Browserify" class="headerlink" title="Browserify"></a>Browserify</h4><p>添加到你项目的 <code>package.json</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"browser"</span>: &#123;</span><br><span class="line">    <span class="string">"vue"</span>: <span class="string">"vue/dist/vue.common.js"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Parcel"><a href="#Parcel" class="headerlink" title="Parcel"></a>Parcel</h4><p>在你项目的 <code>package.json</code> 中添加：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"alias"</span>: &#123;</span><br><span class="line">    <span class="string">"vue"</span> : <span class="string">"./node_modules/vue/dist/vue.common.js"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="开发环境-vs-生产环境模式"><a href="#开发环境-vs-生产环境模式" class="headerlink" title="开发环境 vs. 生产环境模式"></a>开发环境 vs. 生产环境模式</h3><p>对于 UMD 版本来说，开发环境/生产环境模式是硬编码好的：开发环境下用未压缩的代码，生产环境下使用压缩后的代码。</p>
+<p>CommonJS 和 ES Module 版本是用于打包工具的，因此我们不提供压缩后的版本。你需要自行将最终的包进行压缩。</p>
+<p>CommonJS 和 ES Module 版本同时保留原始的 <code>process.env.NODE_ENV</code> 检测，以决定它们应该运行在什么模式下。你应该使用适当的打包工具配置来替换这些环境变量以便控制 Vue 所运行的模式。把 <code>process.env.NODE_ENV</code> 替换为字符串字面量同时可以让 UglifyJS 之类的压缩工具完全丢掉仅供开发环境的代码块，以减少最终的文件尺寸。</p>
+<h4 id="webpack-1"><a href="#webpack-1" class="headerlink" title="webpack"></a>webpack</h4><p>在 webpack 4+ 中，你可以使用 <code>mode</code> 选项：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  mode: <span class="string">'production'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是在 webpack 3 及其更低版本中，你需要使用 <a href="https://webpack.js.org/plugins/define-plugin/" target="_blank" rel="noopener">DefinePlugin</a>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">new</span> webpack.DefinePlugin(&#123;</span><br><span class="line">      <span class="string">'process.env'</span>: &#123;</span><br><span class="line">        NODE_ENV: <span class="built_in">JSON</span>.stringify(<span class="string">'production'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Rollup-1"><a href="#Rollup-1" class="headerlink" title="Rollup"></a>Rollup</h4><p>使用 <a href="https://github.com/rollup/rollup-plugin-replace" target="_blank" rel="noopener">rollup-plugin-replace</a>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> replace = <span class="built_in">require</span>(<span class="string">'rollup-plugin-replace'</span>)</span><br><span class="line"></span><br><span class="line">rollup(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  plugins: [</span><br><span class="line">    replace(&#123;</span><br><span class="line">      <span class="string">'process.env.NODE_ENV'</span>: <span class="built_in">JSON</span>.stringify(<span class="string">'production'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;).then(...)</span><br></pre></td></tr></table></figure>
+<h4 id="Browserify-1"><a href="#Browserify-1" class="headerlink" title="Browserify"></a>Browserify</h4><p>为你的包应用一次全局的 <a href="https://github.com/hughsk/envify" target="_blank" rel="noopener">envify</a> 转换。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m &gt; build.js</span><br></pre></td></tr></table></figure>
+<p>也可以移步<a href="deployment.html">生产环境部署</a>。</p>
+<h3 id="CSP-环境"><a href="#CSP-环境" class="headerlink" title="CSP 环境"></a>CSP 环境</h3><p>有些环境，如 Google Chrome Apps，会强制应用内容安全策略 (CSP)，不能使用 <code>new Function()</code> 对表达式求值。这时可以用 CSP 兼容版本。完整版本依赖于该功能来编译模板，所以无法在这些环境下使用。</p>
+<p>另一方面，运行时版本则是完全兼容 CSP 的。当通过 <a href="https://github.com/vuejs-templates/webpack-simple" target="_blank" rel="noopener">webpack + vue-loader</a> 或者 <a href="https://github.com/vuejs-templates/browserify-simple" target="_blank" rel="noopener">Browserify + vueify</a> 构建时，模板将被预编译为 <code>render</code> 函数，可以在 CSP 环境中完美运行。</p>
+<h2 id="开发版本"><a href="#开发版本" class="headerlink" title="开发版本"></a>开发版本</h2><p><strong>重要</strong>: GitHub 仓库的 <code>/dist</code> 文件夹只有在新版本发布时才会提交。如果想要使用 GitHub 上 Vue 最新的源码，你需要自己构建！</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/vuejs/vue.git node_modules/vue</span><br><span class="line"><span class="built_in">cd</span> node_modules/vue</span><br><span class="line">npm install</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<h2 id="Bower"><a href="#Bower" class="headerlink" title="Bower"></a>Bower</h2><p>Bower 只提供 UMD 版本。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 最新稳定版本</span></span><br><span class="line">$ bower install vue</span><br></pre></td></tr></table></figure>
+<h2 id="AMD-模块加载器"><a href="#AMD-模块加载器" class="headerlink" title="AMD 模块加载器"></a>AMD 模块加载器</h2><p>所有 UMD 版本都可以直接用作 AMD 模块。</p>
+<p><small><br><strong>译者注</strong><br><a id="footnote-1"></a>[1] 对于中国大陆用户，建议将 NPM 源设置为<a href="https://npm.taobao.org/" target="_blank" rel="noopener">国内的镜像</a>，可以大幅提升安装速度。<br></small></p>
+
+    
+    
+      <div class="guide-links">
+        
+        
+        
+        
+          <span style="float: right;"><a href="/guide/index.html">介绍</a> →</span>
+        
+      </div>
+    
+    <div class="footer">
+        
+      发现错误？想参与编辑？
+      <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/guide/install.md" target="_blank">
+        在 GitHub 上编辑此页！
+      </a>
+    </div>
+  </div>
+  
+        
+      </div>
+      <script src="/js/smooth-scroll.min.js"></script>
+    
+
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>
