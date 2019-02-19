@@ -6,6 +6,8 @@
   "main": "lib/index.js",
   "module": "esm/index.js",
   "types": "lib/index.d.ts",
+  "unpkg": "dist/foxview.js",
+  "jsdelivr": "dist/foxview.js",
   "scripts": {
     "watch": "tsc -w",
     "compile": "rm -rf lib esm && tsc && tsc  -p tsconfig.es.json",
