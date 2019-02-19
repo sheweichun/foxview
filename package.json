@@ -1,6 +1,6 @@
 {
   "name": "foxview",
-  "version": "0.0.2-beta.0",
+  "version": "0.0.2",
   "description": "A declarative and efficient JavaScript library for building WebComponent and page",
   "author": "weichun.swc@alibaba-inc.com",
   "main": "lib/index.js",
