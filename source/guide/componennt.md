@@ -54,4 +54,39 @@ render(myTemplate('primary'),document.body)
 ### componentDidUpdate(prevProps,prevState,snapshot)
 
 
-## state
+## state和setState
+
+```js
+import {render,Component,defineComponent} from 'foxview'
+class MyComponennt extends Component {
+  constuctor(props){
+    super(props);
+    this.state = {
+      count : 0
+    }
+  }
+  onAdd(){
+    this.setState({
+      count:this.state.count
+    })
+  }
+  onMinus(){
+    this.setState({
+      count:this.state.count
+    })
+  }
+  render(){
+    const {count} = this.state;
+    return html`
+      <h1>MyComponent</h1>
+      <!-- 事件回调默认会绑定this -->
+      <button @click="${this.onAdd}">add</button>
+      <button @click="${this.onMinus}">minus</button>
+      <span>count is ${count}</span>
+    `;
+  }
+}
+defineComponent('my-component', MyComponennt);
+
+render(html`<my-component ></my-component>`,document.body)
+```

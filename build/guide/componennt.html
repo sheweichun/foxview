@@ -26,7 +26,7 @@
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="https:///images/logo.png"> -->
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/foxview/build/images/icons/apple-icon-57x57.png">
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="/foxview/build/images/icons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/foxview/build/images/icons/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/foxview/build/images/icons/apple-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="76x76" href="/foxview/build/images/icons/apple-icon-76x76.png">
@@ -35,12 +35,12 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/foxview/build/images/icons/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/foxview/build/images/icons/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/foxview/build/images/icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/foxview/build/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/foxview/build/images/icons/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/foxview/build/images/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/foxview/build/images/icons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/foxview/build/images/icons/favicon-16x16.png">
     <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
-    <link rel="icon" href="/foxview/build/images/logo.png" type="image/png">
+    <link rel="icon" href="/foxview/build/images/logo.png" type="image/png"> -->
 
     <meta name="msapplication-TileColor" content="#4fc08d">
     <meta name="theme-color" content="#4fc08d">
@@ -53,7 +53,7 @@
 
     <link href="/foxview/build/css/font-awesome.css" rel="stylesheet" type="text/css">
     <style>
-      @font-face{
+      /* @font-face{
         font-family: "Source Sans Pro";
         src: local("Source Sans Pro"), url(/foxview/build/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf);
       }
@@ -77,6 +77,10 @@
         font-family: "Dosis";
         src: local("Dosis Medium"), url(/foxview/build/fonts/Dosis/Dosis-Medium.ttf);
         font-weight: 500;
+      } */
+      body{
+        font-family: Hiragino, 'Microsoft Yahei', Arial, Helvetica, sans-serif !important;
+        -webkit-font-smoothing: antialiased!important;
       }
     </style>
     <!-- main page styles -->
@@ -94,7 +98,7 @@
           <path fill="white" d="M128 298.666667h768a42.666667 42.666667 0 0 0 0-85.333334H128a42.666667 42.666667 0 0 0 0 85.333334z m768 170.666666H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z m0 256H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2864"/>
         </svg>
       
-      <a class="logo" href="/"></a>
+      <a class="logoText" href="/">FoxView</a>
       <ul id="nav">
           
       </ul>
@@ -247,7 +251,7 @@
     
       <h2 id="组件注册"><a href="#组件注册" class="headerlink" title="组件注册"></a>组件注册</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponennt</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;div&gt;Hello World&lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'my-component'</span>, MyComponennt);</span><br></pre></td></tr></table></figure>
 <h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponennt</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;type&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;MyComponent&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;my type is : <span class="subst">$&#123;type&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'my-component'</span>, MyComponennt);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myTemplate = </span><br><span class="line">(type) =&gt; html<span class="string">`&lt;my-component type=<span class="subst">$&#123;type&#125;</span>&gt;&lt;/my-component&gt;`</span></span><br><span class="line"></span><br><span class="line">render(myTemplate(<span class="string">'primary'</span>),<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
-<h2 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h2><h3 id="shouldComponentUpdate-nextProps-nextState"><a href="#shouldComponentUpdate-nextProps-nextState" class="headerlink" title="shouldComponentUpdate(nextProps,nextState)"></a>shouldComponentUpdate(nextProps,nextState)</h3><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount()"></a>componentDidMount()</h3><h3 id="getSnapshotBeforeUpdate-prevProps-prevState"><a href="#getSnapshotBeforeUpdate-prevProps-prevState" class="headerlink" title="getSnapshotBeforeUpdate(prevProps,prevState)"></a>getSnapshotBeforeUpdate(prevProps,prevState)</h3><h3 id="componentDidUpdate-prevProps-prevState-snapshot"><a href="#componentDidUpdate-prevProps-prevState-snapshot" class="headerlink" title="componentDidUpdate(prevProps,prevState,snapshot)"></a>componentDidUpdate(prevProps,prevState,snapshot)</h3><h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2>
+<h2 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h2><h3 id="shouldComponentUpdate-nextProps-nextState"><a href="#shouldComponentUpdate-nextProps-nextState" class="headerlink" title="shouldComponentUpdate(nextProps,nextState)"></a>shouldComponentUpdate(nextProps,nextState)</h3><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount()"></a>componentDidMount()</h3><h3 id="getSnapshotBeforeUpdate-prevProps-prevState"><a href="#getSnapshotBeforeUpdate-prevProps-prevState" class="headerlink" title="getSnapshotBeforeUpdate(prevProps,prevState)"></a>getSnapshotBeforeUpdate(prevProps,prevState)</h3><h3 id="componentDidUpdate-prevProps-prevState-snapshot"><a href="#componentDidUpdate-prevProps-prevState-snapshot" class="headerlink" title="componentDidUpdate(prevProps,prevState,snapshot)"></a>componentDidUpdate(prevProps,prevState,snapshot)</h3><h2 id="state和setState"><a href="#state和setState" class="headerlink" title="state和setState"></a>state和setState</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponennt</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  constuctor(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      count : <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  onAdd()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      count:<span class="keyword">this</span>.state.count</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  onMinus()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      count:<span class="keyword">this</span>.state.count</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;count&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;MyComponent&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;!-- 事件回调默认会绑定this --&gt;</span></span><br><span class="line"><span class="string">      &lt;button @click="<span class="subst">$&#123;<span class="keyword">this</span>.onAdd&#125;</span>"&gt;add&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;button @click="<span class="subst">$&#123;<span class="keyword">this</span>.onMinus&#125;</span>"&gt;minus&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;count is <span class="subst">$&#123;count&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'my-component'</span>, MyComponennt);</span><br><span class="line"></span><br><span class="line">render(html<span class="string">`&lt;my-component &gt;&lt;/my-component&gt;`</span>,<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
     
     
       <div class="guide-links">
