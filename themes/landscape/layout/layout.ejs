@@ -89,10 +89,17 @@
   </head>
   <body class="<%- isIndex ? '' : 'docs' -%>">
     <div id="mobile-bar" <%- isIndex ? 'class="top"' : '' %>>
-      <a class="menu-button"></a>
+      <% if(!isIndex){%>
+        <svg class="menu-button" t="1550550341179"  style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2863" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+          <path fill="white" d="M128 298.666667h768a42.666667 42.666667 0 0 0 0-85.333334H128a42.666667 42.666667 0 0 0 0 85.333334z m768 170.666666H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z m0 256H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2864"></path>
+        </svg>
+      <% }%>
       <a class="logo" href="/"></a>
+      <ul id="nav">
+          <%- isIndex ? partial('_news/main_menu', { context: 'sidebar' }) : '' %>
+      </ul>
     </div>
-    <%- partial('_news/header') %>
+    <%- partial('_news/header',{isIndex:isIndex}) %>
     <% if (!isIndex) { %> 
       <div id="main" class="fix-sidebar">
         <% if (page.blog_index) { %>

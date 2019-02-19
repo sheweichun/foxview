@@ -2,7 +2,7 @@
 <div class="sidebar">
     <div class="sidebar-inner-index">
       <ul class="main-menu">
-        <%- partial('partials/head', { context: 'sidebar' }) %>
+        <%- partial('_news/main_menu', { context: 'sidebar' }) %>
       </ul>
     </div>
   </div>
@@ -13,10 +13,10 @@
         <img class="hero-logo" src="<%- url_for("/images/logo.png") %>" alt="vue logo">
       </div> -->
       <div class="right">
-        <h2 class="vue">Vue.js</h2>
-        <h1>
-          渐进式JavaScript 框架
-        </h1>
+        <h1 style="font-weight:bold;margin-bottom:0.3em;">FoxView</h1>
+        <h2>
+          <%=__('framwork_desc')%>
+        </h2>
         <p>
           <!-- <a id="modal-player" class="button has-icon" href="javascript:;">
             <%- partial('icons/play') %>

@@ -4,9 +4,10 @@ type: guide
 order: 1
 ---
 
-## Medivh 是什么
+## FoxView 是什么
 
-Medivh，中文意思就是麦迪文， 看过魔兽世界电影的都知道他是人族的大法师，大法师有一个技能是开传送门，而Medivh的作用就是把在[webworker](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers)里创建的vdom传送到页面中去渲染，同时也把页面响应的事件传送回[webworker](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers)处理
+foxView用于构建[webComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)和用户界面的声明式框架，在渲染[webComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)和用户界面的时候共享同一套渲染引擎技术，统一开发模式
+
 
 
 ## 起步

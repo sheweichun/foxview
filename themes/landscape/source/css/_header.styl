@@ -10,8 +10,7 @@ $header-height = 40px
   padding: $heading-padding-vertical 60px
   position: relative
   z-index: 100
-  a
-    color:rgba(255,255,255,0.7)
+  
 
 body.docs
   #header
@@ -37,7 +36,8 @@ body.docs
     display: inline-block
     position: relative
     margin: 0 .6em
-
+  a
+    color:rgba(255,255,255,0.7)
   .nav-dropdown
     .nav-link
       &:hover, &.current
@@ -100,6 +100,7 @@ body.docs
   line-height: $header-height
   font-family: $logo-font
   font-weight: 500
+  color:white
   img
     vertical-align: middle
     margin-right: 6px
@@ -111,15 +112,15 @@ body.docs
   top: 0
   left: 0
   width: 100%
-  height: 40px
-  background-color: #fff
+  height: 50px
+  background-color: $indexBg
   z-index: 9
   display: none
   box-shadow: 0 0 2px rgba(0,0,0,.25)
   .menu-button
     position: absolute
-    width: 24px
-    height: 24px
+    width: 2.4em
+    height: 2.4em
     top: 8px
     left: 12px
     background: url(../images/menu.png) center center no-repeat
@@ -129,7 +130,7 @@ body.docs
     width: 30px
     height: 30px
     background: url(../images/logo.png) center center no-repeat
-    top: 5px
+    top: 10px
     left: 50%
     margin-left: -15px
     background-size: 30px
