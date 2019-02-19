@@ -3,13 +3,23 @@
   "version": "0.0.1-alpha.0",
   "description": "A declarative and efficient JavaScript library for building WebComponent and page",
   "author": "weichun.swc@alibaba-inc.com",
-  "main": "./lib/index.js",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "watch": "tsc -w",
-    "compile": "rm -rf lib && tsc",
-    "build": "rm -rf lib && tsc && rollup -c",
+    "compile": "rm -rf lib esm && tsc && tsc  -p tsconfig.es.json",
+    "build": "npm run compile && rm -rf dist && rollup -c",
     "dev": "cd demo && npm run dev"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sheweichun/foxview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sheweichun/foxview/issues"
+  },
+  "homepage": "https://github.com/sheweichun/foxview#readme",
   "devDependencies": {
     "@webcomponents/webcomponentsjs": "^2.2.6",
     "rollup": "^1.1.2",

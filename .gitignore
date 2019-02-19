@@ -1,5 +1,7 @@
 node_modules
 db.json
 public/
+lib/
+esm/
 source
 build/
