@@ -4,9 +4,9 @@ type: guide
 order: 1
 ---
 
-## FoxView 是什么
+## FoxView
 
-foxView用于构建[webComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)和用户界面的声明式框架，在渲染[webComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)和用户界面的时候共享同一套渲染引擎技术，统一开发模式
+foxView用于构建[自定义元素](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)(webcomponent)和用户界面的声明式框架，在渲染[自定义元素](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)(webcomponent)和用户界面的时候共享同一套渲染引擎技术，统一开发模式
 
 
 
@@ -18,7 +18,7 @@ foxView用于构建[webComponent](https://developer.mozilla.org/zh-CN/docs/Web/W
 [安装教程](/guide/installation.html)给出了更多安装 FoxView 的方式
 
 
-## 声明式渲染
+## 声明式模板渲染
 
 
 
@@ -97,7 +97,7 @@ render(
 ```
 
 
-## 处理用户输入
+## 事件响应
 
 
 我们的应用需要响应用户的操作，FoxView通过在事件属性前加上@来添加事件监听器
@@ -120,7 +120,7 @@ render(
 
 
 
-## 组件化应用构建
+## 组件化应用构建以及自定义元素
 
 FoxView还提供了组件化和定义自定义元素([webComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components))的能力(组件化是我们开发大型应用最基础的能力)
 
@@ -130,7 +130,7 @@ FoxView还提供了组件化和定义自定义元素([webComponent](https://deve
 ### 组件化
 
 
-[JSFiddle 上的 计数器 例子](https://jsfiddle.net/luodan/zmk6u480/3/)。
+[JSFiddle 上的 计数器组件 例子](https://jsfiddle.net/luodan/zmk6u480/3/)。
 
 定义一个组件很简单：
 
@@ -191,16 +191,81 @@ render(
 
 
 
-### 与自定义元素的关系
+### 自定义元素
 
-你可能已经注意到 Vue 组件非常类似于**自定义元素**——它是 [Web 组件规范](https://www.w3.org/wiki/WebComponents/)的一部分，这是因为 Vue 的组件语法部分参考了该规范。例如 Vue 组件实现了 [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) 与 `is` 特性。但是，还是有几个关键差别：
+[JSFiddle 上的 计数器自定义元素 例子](https://jsfiddle.net/luodan/L6fxuk83/15/)。
 
-1. Web 组件规范仍然处于草案阶段，并且未被所有浏览器原生实现。相比之下，Vue 组件不需要任何 polyfill，并且在所有支持的浏览器 (IE9 及更高版本) 之下表现一致。必要时，Vue 组件也可以包装于原生自定义元素之内。
 
-2. Vue 组件提供了纯自定义元素所不具备的一些重要功能，最突出的是跨组件数据流、自定义事件通信以及构建工具集成。
+``` js
+const {
+  render,
+  html,
+  WebComponent : Component,
+  defineWebComponent : defineComponent,
+  property} = FoxView
+// 定义名为 counter 的计数器组件
+class Counter extends Component{
+  @property initValue
+  constructor(){
+    super();
+    this.state = {
+      count:null
+    }
+  }
+  static getDerivedStateFromProps(props,state){
+  	if(state.count == null){
+    	return {
+      	count:props.initValue
+      }
+    }
+  }
+  add(){
+    this.setState({
+      count:this.state.count + 1
+    })
+  }
+  minus(){
+    this.setState({
+      count:this.state.count - 1
+    })
+  }
+  render(){
+    return html`
+    	<style>
+      	button{
+        	background-color:black;
+          color:white;
+        }
+      </style>
+    	<div>
+        <button @click=${this.add}>add</button>
+        <button @click=${this.minus}>minus</button>
+        <div>
+          result:${this.state.count}
+        </div>
+      </div>`
+  }
+}
+defineComponent('custom-counter', Counter)
+```
 
-## 准备好了吗？
+现在你可以用它构建另一个模板：
 
-我们刚才简单介绍了 Vue 核心最基本的功能——本教程的其余部分将涵盖这些功能以及其它高级功能更详细的细节，所以请务必读完整个教程！
 
-<div id="video-modal" class="modal"><div class="video-space" style="padding: 56.25% 0 0 0; position: relative;"></div></div>
+``` html
+<div id="app-5">
+</div>
+```
+
+``` js
+//加载定义custom-counter的js内容,此处省略
+const {render,html} = FoxView
+
+render(
+  html`<div>
+    <custom-counter .initValue="${5}"></custom-counter>
+  </div>`,
+  document.getElementById('app-5')
+)
+)
+```

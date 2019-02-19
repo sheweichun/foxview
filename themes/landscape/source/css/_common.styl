@@ -3,7 +3,16 @@
 @import "_syntax"
 @import "_header"
 @import "_sidebar"
-
+::-webkit-scrollbar{
+    width: 4px;
+    height: 4px;
+}
+::-webkit-scrollbar-thumb{
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+    background-clip: padding-box;
+    background-color: #E4E3E3;
+    min-height: 28px;
+}
 body
   font-family: $body-font
   font-size: $body-font-size

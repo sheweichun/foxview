@@ -3,26 +3,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
-    <title>安装 — </title>
+    <title>组件 — </title>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/guide/install.html">
-    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/guide/install.html">
-    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/guide/install.html">
-    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/guide/install.html">
-    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/guide/install.html">
-    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/guide/install.html">
-    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/guide/install.html"> -->
+    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/guide/componennt.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/guide/componennt.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/guide/componennt.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/guide/componennt.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/guide/componennt.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/guide/componennt.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/guide/componennt.html"> -->
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="安装 — Vue.js">
+    <meta property="og:title" content="组件 — Vue.js">
     <meta property="og:description" content="">
     <meta property="og:image" content="https:////foxview/build/images/logo.png">
 
     <!-- <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="安装 — Vue.js">
+    <meta name="twitter:title" content="组件 — Vue.js">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="https:///images/logo.png"> -->
 
@@ -174,7 +174,7 @@
             
           
           <li>
-            <a href="/foxview/build/guide/install.html" class="sidebar-link current">安装</a>
+            <a href="/foxview/build/guide/install.html" class="sidebar-link">安装</a>
           </li>
         
           
@@ -222,7 +222,7 @@
             
           
           <li>
-            <a href="/foxview/build/guide/componennt.html" class="sidebar-link">组件</a>
+            <a href="/foxview/build/guide/componennt.html" class="sidebar-link current">组件</a>
           </li>
         
       </ul>
@@ -237,36 +237,32 @@
   -->
   
   
-  <div class="content guide with-sidebar install-guide">
+  <div class="content guide with-sidebar componennt-guide">
     
       
     
     
-      <h1>安装</h1>
+      <h1>组件</h1>
     
     
-      <h3 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h3><p>我们推荐链接到一个你可以手动更新的指定版本号：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> </span></span><br><span class="line"><span class="tag"><span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/foxview@0.0.2/dist/foxview.js"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>你可以在 <a href="https://cdn.jsdelivr.net/npm/foxview/" target="_blank" rel="noopener">cdn.jsdelivr.net/npm/foxview</a> 浏览 NPM 包的源代码。</p>
-<p>FoxView 也可以在 <a href="https://unpkg.com/foxview@0.0.2/dist/foxview.js" target="_blank" rel="noopener">unpkg</a> 和 <a href="https://cdnjs.cloudflare.com/ajax/libs/foxview/0.0.2/dist/foxview.js" target="_blank" rel="noopener">cdnjs</a> 上获取 (cdnjs 的版本更新可能略滞后)。</p>
-<h3 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 最新稳定版</span></span><br><span class="line">$ npm install foxview</span><br></pre></td></tr></table></figure>
-<p><small><br><strong>注</strong><br><a id="footnote-1"></a>[1] 对于中国大陆用户，建议将 NPM 源设置为<a href="https://npm.taobao.org/" target="_blank" rel="noopener">国内的镜像</a>，可以大幅提升安装速度。<br></small></p>
-
+      <h2 id="组件注册"><a href="#组件注册" class="headerlink" title="组件注册"></a>组件注册</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponennt</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;div&gt;Hello World&lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'my-component'</span>, MyComponennt);</span><br></pre></td></tr></table></figure>
+<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponennt</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;type&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;MyComponent&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;my type is : <span class="subst">$&#123;type&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'my-component'</span>, MyComponennt);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myTemplate = </span><br><span class="line">(type) =&gt; html<span class="string">`&lt;my-component type=<span class="subst">$&#123;type&#125;</span>&gt;&lt;/my-component&gt;`</span></span><br><span class="line"></span><br><span class="line">render(myTemplate(<span class="string">'primary'</span>),<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
+<h2 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h2><h3 id="shouldComponentUpdate-nextProps-nextState"><a href="#shouldComponentUpdate-nextProps-nextState" class="headerlink" title="shouldComponentUpdate(nextProps,nextState)"></a>shouldComponentUpdate(nextProps,nextState)</h3><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount()"></a>componentDidMount()</h3><h3 id="getSnapshotBeforeUpdate-prevProps-prevState"><a href="#getSnapshotBeforeUpdate-prevProps-prevState" class="headerlink" title="getSnapshotBeforeUpdate(prevProps,prevState)"></a>getSnapshotBeforeUpdate(prevProps,prevState)</h3><h3 id="componentDidUpdate-prevProps-prevState-snapshot"><a href="#componentDidUpdate-prevProps-prevState-snapshot" class="headerlink" title="componentDidUpdate(prevProps,prevState,snapshot)"></a>componentDidUpdate(prevProps,prevState,snapshot)</h3><h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2>
     
     
       <div class="guide-links">
         
         
+          <span>← <a href="/foxview/build/guide/syntax.html">模板语法</a></span>
         
         
-          <span style="float: right;"><a href="/foxview/build/guide/index.html">介绍</a> →</span>
         
       </div>
     
     <div class="footer">
         
       发现错误？想参与编辑？
-      <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/guide/install.md" target="_blank">
+      <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/guide/componennt.md" target="_blank">
         在 GitHub 上编辑此页！
       </a>
     </div>
