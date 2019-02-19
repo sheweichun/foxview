@@ -3,7 +3,7 @@ title: 安装
 type: guide
 order: 0
 gz_size: "30.90"
-foxview_version : "0.0.1"
+foxview_version : "0.0.2"
 ---
 
 
@@ -16,13 +16,13 @@ foxview_version : "0.0.1"
 
 ``` html
 <script 
-src="https://cdn.jsdelivr.net/npm/foxview@0.0.1/dist/foxview.js">
+src="https://cdn.jsdelivr.net/npm/foxview@0.0.2/dist/foxview.js">
 </script>
 ```
 
 你可以在 [cdn.jsdelivr.net/npm/foxview](https://cdn.jsdelivr.net/npm/foxview/) 浏览 NPM 包的源代码。
 
-FoxView 也可以在 [unpkg](https://unpkg.com/foxview@{{foxview_version}}/dist/foxview.js) 上获取 (cdnjs 的版本更新可能略滞后)。
+FoxView 也可以在 [unpkg](https://unpkg.com/foxview@{{foxview_version}}/dist/foxview.js) 和 [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/foxview/{{foxview_version}}/dist/foxview.js) 上获取 (cdnjs 的版本更新可能略滞后)。
 
 
 
