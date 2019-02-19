@@ -1,6 +1,6 @@
 
 
-import {html,svg,defineWebComponent as defineComponent,WebComponent,property} from 'illidan';
+import {html,svg,defineWebComponent as defineComponent,WebComponent,property} from 'foxview';
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

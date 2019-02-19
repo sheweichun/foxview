@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"target":"es5",
-		"outDir": "lib",
+		"module": "es2015",
+		"target":"es2017",
+		"outDir": "esm",
 		"rootDir": "src",
 		"lib": ["es2017","dom"],
 		"sourceMap": false,

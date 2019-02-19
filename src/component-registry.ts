@@ -7,6 +7,6 @@ export function defineComponent(name:string,ComponentProto:IComponentConstructor
 }
 
 
-export function getComponentByName(name:string):IComponentConstructor{
+export function getCom(name:string):IComponentConstructor{
     return ComponentCenter.get(name);
 }

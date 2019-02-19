@@ -3,7 +3,7 @@ import {Peon,ITemplateResult,ProcessResult, RenderOptions,IComponentConstructor,
 import {PeonType,createPeon} from './peon';
 import {NodePart,ComponentPart} from './part';
 import {removeAttributes} from './dom';
-import {getComponentByName} from './component-registry';
+import {getCom} from './component-registry';
 import {marker,matchLastAttributeName,boundAttributeSuffix, markerRegex} from './template';
 import {DEFAULT_SLOT_NAME} from './util/constant'
 
@@ -188,7 +188,7 @@ function _prepareComponent(ComponentProto:IComponentConstructor,node:Element,par
 
 function _prepareNode(node:Element,partIndex:number,peons: Array<Peon>,extra:HandlerExtra){
     const {localName} = node;
-    const DefinedComponent = getComponentByName(localName);
+    const DefinedComponent = getCom(localName);
     if(DefinedComponent){
         return _prepareComponent(DefinedComponent,node,partIndex,peons,extra);
     }else if(extra.renderOption.slots && localName === 'slot'){ //无slot无需解析slot
