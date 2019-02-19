@@ -217,12 +217,13 @@ body.docs #nav {
   background: url("../images/menu.png") center center no-repeat;
   background-size: 24px;
 }
-#mobile-bar .logo {
+#mobile-bar .logoText {
   position: absolute;
+  font-size: 1.5em;
   width: 30px;
   height: 30px;
-  background: url("../images/logo.png") center center no-repeat;
   top: 10px;
+  color: #fff;
   left: 50%;
   margin-left: -15px;
   background-size: 30px;
@@ -631,7 +632,7 @@ body {
   background-color: transparent;
   box-shadow: none;
 }
-#mobile-bar.top .logo {
+#mobile-bar.top .logoText {
   display: none;
 }
 #hero {
