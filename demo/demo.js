@@ -1,4 +1,4 @@
-import {html,defineWebComponent as defineComponent,WebComponent as Component,render} from 'illidan';
+import {html,defineWebComponent as defineComponent,WebComponent as Component,render} from 'foxview';
 // import {html,defineComponent,Component,render} from 'illidan';
 
 

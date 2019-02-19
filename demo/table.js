@@ -1,5 +1,5 @@
 // import {html,defineWebComponent as defineComponent,WebComponent as Component,render,property} from 'illidan';
-import {html,defineComponent,Component,render} from 'illidan';
+import {html,defineComponent,Component,render} from 'foxview';
 function property(){}
 
 import getData from './getData'

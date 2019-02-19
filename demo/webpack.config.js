@@ -13,7 +13,7 @@ module.exports = {
     },
     resolve:{
         alias:{
-            illidan:path.resolve(__dirname,'../lib/index.js')
+            foxview:path.resolve(__dirname,'../lib/index.js')
         }
     },
     plugins: [
