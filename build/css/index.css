@@ -28,7 +28,7 @@ pre .tex .special {
   color: #2973b7;
 }
 pre .class .title {
-  color: #fff;
+  color: #3769e4;
 }
 pre .symbol,
 pre .symbol .string,
@@ -37,7 +37,7 @@ pre .regexp {
   color: #ff7100;
 }
 pre .title {
-  color: #a6e22e;
+  color: #25b90f;
 }
 pre .tag .value,
 pre .string,
@@ -94,9 +94,6 @@ pre .xml .cdata {
   position: relative;
   z-index: 100;
 }
-#header a {
-  color: rgba(255,255,255,0.7);
-}
 body.docs #header {
   position: fixed;
   width: 100%;
@@ -122,6 +119,9 @@ body.docs #nav {
   display: inline-block;
   position: relative;
   margin: 0 0.6em;
+}
+#nav a {
+  color: rgba(255,255,255,0.7);
 }
 #nav .nav-dropdown .nav-link:hover,
 #nav .nav-dropdown .nav-link.current {
@@ -189,6 +189,7 @@ body.docs #nav {
   line-height: 40px;
   font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
   font-weight: 500;
+  color: #fff;
 }
 #logo img {
   vertical-align: middle;
@@ -201,16 +202,16 @@ body.docs #nav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 40px;
-  background-color: #fff;
+  height: 50px;
+  background-color: #171f26;
   z-index: 9;
   display: none;
   box-shadow: 0 0 2px rgba(0,0,0,0.25);
 }
 #mobile-bar .menu-button {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 2.4em;
+  height: 2.4em;
   top: 8px;
   left: 12px;
   background: url("../images/menu.png") center center no-repeat;
@@ -221,7 +222,7 @@ body.docs #nav {
   width: 30px;
   height: 30px;
   background: url("../images/logo.png") center center no-repeat;
-  top: 5px;
+  top: 10px;
   left: 50%;
   margin-left: -15px;
   background-size: 30px;
@@ -230,6 +231,128 @@ body.docs #nav {
   #header {
     display: none;
   }
+}
+.sidebar {
+  position: absolute;
+  z-index: 10;
+  top: 81px;
+  left: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+}
+.sidebar h2 {
+  margin-top: 0.2em;
+}
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  line-height: 1.5em;
+  padding-left: 1em;
+}
+.sidebar li {
+  margin-top: 0.5em;
+}
+.sidebar .sidebar-inner {
+  width: 260px;
+  padding: 40px 20px 60px 60px;
+}
+.sidebar .version-select {
+  vertical-align: middle;
+  margin-left: 5px;
+}
+.sidebar .menu-root {
+  padding-left: 0;
+}
+.sidebar .menu-sub {
+  font-size: 0.85em;
+}
+.sidebar .sidebar-link {
+  color: #7f8c8d;
+}
+.sidebar .sidebar-link.current {
+  font-weight: 600;
+  color: #ff7100;
+}
+.sidebar .sidebar-link.new:after {
+  content: "NEW";
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #ff7100;
+  line-height: 14px;
+  padding: 0 4px;
+  border-radius: 3px;
+  margin-left: 5px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.sidebar .sidebar-link:hover {
+  border-bottom: 2px solid #ff7100;
+}
+.sidebar .section-link.active {
+  font-weight: bold;
+  color: #ff7100;
+}
+.sidebar .main-menu {
+  margin-bottom: 20px;
+  display: none;
+  padding-left: 0;
+}
+.sidebar .nav-dropdown h4 {
+  font-weight: normal;
+  margin: 0;
+}
+@media screen and (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    z-index: 10;
+    background-color: #f9f9f9;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+    -webkit-transform: translate(-280px, 0);
+    transform: translate(-280px, 0);
+  }
+  .sidebar .sidebar-inner {
+    padding: 50px 10px 10px 20px;
+    box-sizing: border-box;
+  }
+  .sidebar .sidebar-inner-index {
+    padding: 10px 10px 10px 20px;
+  }
+  .sidebar .search-query {
+    width: 200px;
+    margin-bottom: 10px;
+  }
+  .sidebar .main-menu {
+    display: block;
+  }
+  .sidebar.open {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+}
+@media print {
+  .sidebar {
+    display: none;
+  }
+}
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.07);
+  background-clip: padding-box;
+  background-color: #e4e3e3;
+  min-height: 28px;
 }
 body {
   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
@@ -241,7 +364,7 @@ body {
   margin: 0;
 }
 body.docs {
-  padding-top: 60px;
+  padding-top: 101px;
 }
 @media screen and (max-width: 900px) {
   body.docs {
@@ -395,7 +518,7 @@ a.button.primary {
 #nav .nav-dropdown {
   display: none;
   box-sizing: border-box;
-  max-height: calc(100vh - 40px);
+  max-height: calc(100vh - 81px);
   overflow-y: auto;
   position: absolute;
   top: 100%;
@@ -540,15 +663,15 @@ body {
 #hero h1 {
   font-weight: 300;
   margin: 0;
-  font-size: 3.2em;
-  color: rgba(255,255,255,0.8);
+  font-size: 3.6em;
+  color: #fff;
 }
 #hero h2 {
   font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
   font-weight: 500;
-  font-size: 2.4em;
+  font-size: 2em;
   margin: 0 0 10px;
-  display: none;
+  color: rgba(255,255,255,0.7);
 }
 #hero .button {
   margin: 1em 0;
@@ -659,9 +782,6 @@ body {
   #hero .right {
     text-align: center;
     width: 100%;
-  }
-  #hero h1 {
-    font-size: 2em;
   }
   #hero h2 {
     display: block;

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "hexo server",
     "watch": "hexo generate --watch",
-    "build": "hexo generate"
+    "build": "rm -rf build & hexo generate"
   },
   "hexo": {
     "version": "3.8.0"
