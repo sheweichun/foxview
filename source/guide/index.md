@@ -20,350 +20,176 @@ foxView用于构建[webComponent](https://developer.mozilla.org/zh-CN/docs/Web/W
 
 ## 声明式渲染
 
-<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cQ3QVcr" target="_blank">在 Scrimba 上尝试这节课</a></div>
 
-Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统：
+
+Foxview采用模板语法来声明式地将数据渲染：
 
 ``` html
 <div id="app">
-  {{ message }}
 </div>
 ```
 ``` js
-var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
+const {render,html} = FoxView
+const message = "Hello,FoxView"
+
+render(
+  html`<div>${message}</div>`,
+  document.getElementById('app')
+)
 ```
-{% raw %}
-<div id="app" class="demo">
-  {{ message }}
-</div>
-<script>
-var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
-</script>
-{% endraw %}
 
-我们已经成功创建了第一个 Vue 应用！看起来这跟渲染一个字符串模板非常类似，但是 Vue 在背后做了大量工作。现在数据和 DOM 已经被建立了关联，所有东西都是**响应式的**。我们要怎么确认呢？打开你的浏览器的 JavaScript 控制台 (就在这个页面打开)，并修改 `app.message` 的值，你将看到上例相应地更新。
 
-除了文本插值，我们还可以像这样来绑定元素特性：
 
-``` html
-<div id="app-2">
-  <span v-bind:title="message">
-    鼠标悬停几秒钟查看此处动态绑定的提示信息！
-  </span>
-</div>
-```
-``` js
-var app2 = new Vue({
-  el: '#app-2',
-  data: {
-    message: '页面加载于 ' + new Date().toLocaleString()
-  }
-})
-```
-{% raw %}
-<div id="app-2" class="demo">
-  <span v-bind:title="message">
-    鼠标悬停几秒钟查看此处动态绑定的提示信息！
-  </span>
-</div>
-<script>
-var app2 = new Vue({
-  el: '#app-2',
-  data: {
-    message: '页面加载于 ' + new Date().toLocaleString()
-  }
-})
-</script>
-{% endraw %}
-
-这里我们遇到了一点新东西。你看到的 `v-bind` 特性被称为**指令**。指令带有前缀 `v-`，以表示它们是 Vue 提供的特殊特性。可能你已经猜到了，它们会在渲染的 DOM 上应用特殊的响应式行为。在这里，该指令的意思是：“将这个元素节点的 `title` 特性和 Vue 实例的 `message` 属性保持一致”。
-
-如果你再次打开浏览器的 JavaScript 控制台，输入 `app2.message = '新消息'`，就会再一次看到这个绑定了 `title` 特性的 HTML 已经进行了更新。
 
 ## 条件与循环
 
-<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cEQe4SJ" target="_blank">在 Scrimba 上尝试这节课</a></div>
 
-控制切换一个元素是否显示也相当简单：
+
+通过条件判断一个元素是否显示：
 
 ``` html
-<div id="app-3">
-  <p v-if="seen">现在你看到我了</p>
+<div id="app-1">
 </div>
 ```
 ``` js
-var app3 = new Vue({
-  el: '#app-3',
-  data: {
-    seen: true
-  }
-})
+const {render,html} = FoxView
+let show = true
+
+function renderCondition(flag){
+  return  flag ? 
+    html`<span style="color:red;">您看到我了</span>`:
+    html`<span>你看不到我</span>`
+}
+
+render(
+  html`<div>${renderCondition(show)}</div>`,
+  document.getElementById('app-1')
+)
 ```
-{% raw %}
-<div id="app-3" class="demo">
-  <span v-if="seen">现在你看到我了</span>
-</div>
-<script>
-var app3 = new Vue({
-  el: '#app-3',
-  data: {
-    seen: true
-  }
-})
-</script>
-{% endraw %}
 
-继续在控制台输入 `app3.seen = false`，你会发现之前显示的消息消失了。
 
-这个例子演示了我们不仅可以把数据绑定到 DOM 文本或特性，还可以绑定到 DOM **结构**。此外，Vue 也提供一个强大的过渡效果系统，可以在 Vue 插入/更新/移除元素时自动应用[过渡效果](transitions.html)。
-
-还有其它很多指令，每个都有特殊的功能。例如，`v-for` 指令可以绑定数组的数据来渲染一个项目列表：
+通过循环来渲染一个项目列表：
 
 ``` html
-<div id="app-4">
-  <ol>
-    <li v-for="todo in todos">
-      {{ todo.text }}
-    </li>
-  </ol>
+<div id="app-2">
 </div>
 ```
 ``` js
-var app4 = new Vue({
-  el: '#app-4',
-  data: {
-    todos: [
-      { text: '学习 JavaScript' },
-      { text: '学习 Vue' },
-      { text: '整个牛项目' }
-    ]
-  }
-})
-```
-{% raw %}
-<div id="app-4" class="demo">
-  <ol>
-    <li v-for="todo in todos">
-      {{ todo.text }}
-    </li>
-  </ol>
-</div>
-<script>
-var app4 = new Vue({
-  el: '#app-4',
-  data: {
-    todos: [
-      { text: '学习 JavaScript' },
-      { text: '学习 Vue' },
-      { text: '整个牛项目' }
-    ]
-  }
-})
-</script>
-{% endraw %}
+const {render,html} = FoxView
 
-在控制台里，输入 `app4.todos.push({ text: '新项目' })`，你会发现列表最后添加了一个新项目。
+function renderList(data){
+  return  data.map((text)=>{
+    return html`<li>
+      <span>${text}</span>
+    </li>`
+  })
+}
+render(
+  html`<ol>
+    ${renderList([
+      '第一项',
+      '第二项',
+      '第三项'
+    ])}
+  </ol>`,
+  document.getElementById('app-2')
+)
+```
+
 
 ## 处理用户输入
 
-<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/czPNaUr" target="_blank">在 Scrimba 上尝试这节课</a></div>
 
-为了让用户和你的应用进行交互，我们可以用 `v-on` 指令添加一个事件监听器，通过它调用在 Vue 实例中定义的方法：
+我们的应用需要响应用户的操作，FoxView通过在事件属性前加上@来添加事件监听器
 
 ``` html
-<div id="app-5">
-  <p>{{ message }}</p>
-  <button v-on:click="reverseMessage">逆转消息</button>
+<div id="app-3">
 </div>
 ```
 ``` js
-var app5 = new Vue({
-  el: '#app-5',
-  data: {
-    message: 'Hello Vue.js!'
-  },
-  methods: {
-    reverseMessage: function () {
-      this.message = this.message.split('').reverse().join('')
-    }
-  }
-})
-```
-{% raw %}
-<div id="app-5" class="demo">
-  <p>{{ message }}</p>
-  <button v-on:click="reverseMessage">逆转消息</button>
-</div>
-<script>
-var app5 = new Vue({
-  el: '#app-5',
-  data: {
-    message: 'Hello Vue.js!'
-  },
-  methods: {
-    reverseMessage: function () {
-      this.message = this.message.split('').reverse().join('')
-    }
-  }
-})
-</script>
-{% endraw %}
+const {render,html} = FoxView
 
-注意在 `reverseMessage` 方法中，我们更新了应用的状态，但没有触碰 DOM——所有的 DOM 操作都由 Vue 来处理，你编写的代码只需要关注逻辑层面即可。
-
-Vue 还提供了 `v-model` 指令，它能轻松实现表单输入和应用状态之间的双向绑定。
-
-``` html
-<div id="app-6">
-  <p>{{ message }}</p>
-  <input v-model="message">
-</div>
+function clickMe(e){
+  alert('clicked:',e)
+}
+render(
+  html`<button @click=${clickMe}>click me</button>`,
+  document.getElementById('app-3')
+)
 ```
-``` js
-var app6 = new Vue({
-  el: '#app-6',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
-```
-{% raw %}
-<div id="app-6" class="demo">
-  <p>{{ message }}</p>
-  <input v-model="message">
-</div>
-<script>
-var app6 = new Vue({
-  el: '#app-6',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
-</script>
-{% endraw %}
+
+
 
 ## 组件化应用构建
 
-<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cEQVkA3" target="_blank">在 Scrimba 上尝试这节课</a></div>
+FoxView还提供了组件化和定义自定义元素([webComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components))的能力(组件化是我们开发大型应用最基础的能力)
 
-组件系统是 Vue 的另一个重要概念，因为它是一种抽象，允许我们使用小型、独立和通常可复用的组件构建大型应用。仔细想想，几乎任意类型的应用界面都可以抽象为一个组件树：
 
-![Component Tree](/images/components.png)
 
-在 Vue 里，一个组件本质上是一个拥有预定义选项的一个 Vue 实例。在 Vue 中注册组件很简单：
 
-``` js
-// 定义名为 todo-item 的新组件
-Vue.component('todo-item', {
-  template: '<li>这是个待办项</li>'
-})
-```
+### 组件化
 
-现在你可以用它构建另一个组件模板：
 
-``` html
-<ol>
-  <!-- 创建一个 todo-item 组件的实例 -->
-  <todo-item></todo-item>
-</ol>
-```
+[JSFiddle 上的 计数器 例子](https://jsfiddle.net/luodan/zmk6u480/3/)。
 
-但是这样会为每个待办项渲染同样的文本，这看起来并不炫酷。我们应该能从父作用域将数据传到子组件才对。让我们来修改一下组件的定义，使之能够接受一个 [prop](components.html#Props)：
+定义一个组件很简单：
 
 ``` js
-Vue.component('todo-item', {
-  // todo-item 组件现在接受一个
-  // "prop"，类似于一个自定义特性。
-  // 这个 prop 名为 todo。
-  props: ['todo'],
-  template: '<li>{{ todo.text }}</li>'
-})
-```
-
-现在，我们可以使用 `v-bind` 指令将待办项传到循环输出的每个组件中：
-
-``` html
-<div id="app-7">
-  <ol>
-    <!--
-      现在我们为每个 todo-item 提供 todo 对象
-      todo 对象是变量，即其内容可以是动态的。
-      我们也需要为每个组件提供一个“key”，稍后再
-      作详细解释。
-    -->
-    <todo-item
-      v-for="item in groceryList"
-      v-bind:todo="item"
-      v-bind:key="item.id">
-    </todo-item>
-  </ol>
-</div>
-```
-
-``` js
-Vue.component('todo-item', {
-  props: ['todo'],
-  template: '<li>{{ todo.text }}</li>'
-})
-
-var app7 = new Vue({
-  el: '#app-7',
-  data: {
-    groceryList: [
-      { id: 0, text: '蔬菜' },
-      { id: 1, text: '奶酪' },
-      { id: 2, text: '随便其它什么人吃的东西' }
-    ]
+const {render,html,Component,defineComponent} = FoxView
+// 定义名为 counter 的计数器组件
+class Counter extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      count:props.initValue
+    }
   }
-})
-```
-{% raw %}
-<div id="app-7" class="demo">
-  <ol>
-    <todo-item v-for="item in groceryList" v-bind:todo="item" :key="item.id"></todo-item>
-  </ol>
-</div>
-<script>
-Vue.component('todo-item', {
-  props: ['todo'],
-  template: '<li>{{ todo.text }}</li>'
-})
-var app7 = new Vue({
-  el: '#app-7',
-  data: {
-    groceryList: [
-      { id: 0, text: '蔬菜' },
-      { id: 1, text: '奶酪' },
-      { id: 2, text: '随便其它什么人吃的东西' }
-    ]
+  add(){
+    this.setState({
+      count:this.state.count + 1
+    })
   }
-})
-</script>
-{% endraw %}
+  minus(){
+    this.setState({
+      count:this.state.count - 1
+    })
+  }
+  render(){
+    return html`<div>
+      <button @click=${this.add}>add</button>
+      <button @click=${this.minus}>minus</button>
+      <div>
+        result:${this.state.count}
+      </div>
+    </div>`
+  }
+}
+defineComponent('counter', Counter)
+```
 
-尽管这只是一个刻意设计的例子，但是我们已经设法将应用分割成了两个更小的单元。子单元通过 prop 接口与父单元进行了良好的解耦。我们现在可以进一步改进 `<todo-item>` 组件，提供更为复杂的模板和逻辑，而不会影响到父单元。
+现在你可以用它构建另一个模板：
 
-在一个大型应用中，有必要将整个应用程序划分为组件，以使开发更易管理。在[后续教程](components.html)中我们将详述组件，不过这里有一个 (假想的) 例子，以展示使用了组件的应用模板是什么样的：
 
 ``` html
-<div id="app">
-  <app-nav></app-nav>
-  <app-view>
-    <app-sidebar></app-sidebar>
-    <app-content></app-content>
-  </app-view>
+<div id="app-4">
 </div>
 ```
+
+``` js
+//加载定义Counter的js内容,此处省略
+const {render,html} = FoxView
+
+
+render(
+  html`<div>
+    <counter initValue="${5}"></counter>
+  </div>`,
+  document.getElementById('app-4')
+)
+```
+
+
+
 
 ### 与自定义元素的关系
 
