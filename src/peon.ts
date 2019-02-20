@@ -1,4 +1,4 @@
-import {Peon} from './type';
+import {Peon,IRef} from './type';
 import Updater from './updater';
 export enum PeonType {
   Attribute,
@@ -32,16 +32,26 @@ class AttributePeon implements Peon {
   startIndex : number
   name : string
   node : Element
+  _isRef: boolean = false
+  // _refIns?:IRef
   _shouldUpdate : boolean = false
   _pendingValue : string
   strings : Array <string> 
   constructor(option : PeonConstruct) {
     this.startIndex = option.startIndex;
     this.name = option.name;
+    this._isRef = this.name === 'ref';
     this.node = option.node as Element;
     this.strings = option.strings as Array < string >;
   }
-  setValue(values) {
+  setValue(values:any) {
+    if(this._isRef){
+      const item = values[this.startIndex];
+      if(item){
+        // this._refIns = item;
+        item.current = this.node
+      }
+    }
     const newValue = injectValue2Strings(this.startIndex, this.strings, values);
     if (newValue !== this._pendingValue) {
       this._shouldUpdate = true
@@ -49,14 +59,16 @@ class AttributePeon implements Peon {
     this._pendingValue = newValue;
   }
   commit() {
-    if (!this._shouldUpdate) 
+    if (!this._shouldUpdate || this._isRef) 
       return;
     this
       .node
       .setAttribute(this.name, this._pendingValue);
     this._shouldUpdate = false;
   }
-  destroy(){}
+  destroy(){
+    // this._refIns = null;
+  }
 }
 
 class ContentPeon implements Peon {

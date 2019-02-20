@@ -1,3 +1,4 @@
+import { TemplateResult } from "./template-result";
 
 
 
@@ -17,7 +18,12 @@ export interface ComponentPropSchema{
 }
 
 
-
+export type Constructor<T> = {
+    new (...args: unknown[]): T
+};
+export interface IComponentConstructor{
+    new(props:ComponentProp) : IComponent
+}
 // export type ComponentSlotSchema = {
 //     name?:string,
 //     node:Element | DocumentFragment
@@ -69,9 +75,9 @@ export interface IComponent{
     setState(partialState?:Partial<ComponentProp>,callback?:()=>void)
 }
 
-export interface IComponentConstructor{
-    new(props:ComponentProp) : IComponent
-}
+
+export type IComponentFunc = (props?:ComponentProp)=>TemplateResult
+
 
 export interface Peon{
     // startIndex:number
@@ -136,4 +142,7 @@ export interface RenderOptions {
     notInWebComponent?:boolean;
     templateProcessor:TemplateProcessor;
     templateClone:(template:HTMLTemplateElement)=>DocumentFragment
-  }
+}
+export type IRef = {
+    current:Node | null
+}

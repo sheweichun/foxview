@@ -33,23 +33,24 @@ export function removeNode(node:Node){
   }
 }
 
-export const removeAllNodes = (container: Node, startNode: Node|null, endNode: Node|null = null):void =>{
-  let node = startNode;
-  while (node !== endNode) {
-    const n = node!.nextSibling;
-    container.removeChild(node!);
-    node = n;
-  }
-  endNode && container.removeChild(endNode!);
-}
+// export const removeAllNodes = (container: Node, startNode: Node|null, endNode: Node|null = null):void =>{
+//   let node = startNode;
+//   while (node !== endNode) {
+//     const n = node!.nextSibling;
+//     container.removeChild(node!);
+//     node = n;
+//   }
+//   endNode && container.removeChild(endNode!);
+// }
 
-export const removeNodes = (container: Node, startNode: Node|null, endNode: Node|null = null):void => {
+export const removeNodes = (container: Node, startNode: Node|null, endNode: Node|null = null,removeAll:boolean=false):void => {
   let node = startNode;
   while (node !== endNode) {
     const n = node!.nextSibling;
     container.removeChild(node!);
     node = n;
   }
+  (removeAll && endNode) && container.removeChild(endNode!);
 };
 
 export function removeAttributes(node:Element,toRemoveAttributes:string[]){

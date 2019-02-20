@@ -16,6 +16,14 @@ module.exports = {
             foxview:path.resolve(__dirname,'../lib/index.js')
         }
     },
+    module:{
+        rules:[
+            {
+                test:/\.js$/,
+                use:'babel-loader',
+            }
+        ]
+    },
     plugins: [
         //   new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({

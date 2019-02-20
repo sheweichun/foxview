@@ -1,5 +1,5 @@
 
-import {TemplateStringsArray} from './type';
+import {TemplateStringsArray,IRef} from './type';
 import {TemplateResult,SVGTemplateResult} from './template-result'
 export {defineWebComponent,WebComponent,property} from './webcomponent';
 export {Component} from './component';
@@ -16,6 +16,11 @@ export function svg(strings:TemplateStringsArray,...values:any[]){
     return new SVGTemplateResult(strings,values,'svg');
 }
 
+export function createRef():IRef{
+    return {
+        current:null
+    }
+}
 // export function render(){
 
 // }

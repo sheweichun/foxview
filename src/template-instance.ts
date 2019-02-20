@@ -8,6 +8,7 @@ type PrepareMap = {
 }
 
 
+
 export class TemplateInstance {
     private _peons: Array<Peon> = [];
     template: ITemplateResult;
@@ -23,21 +24,29 @@ export class TemplateInstance {
         this.fragment = fragment;
         this._peons = peons;
     }
+    // _forEachPeons(name:string,values?:any){
+    //     this._peons.forEach((_peon)=>{
+    //         _peon[name](values);
+    //     })
+    // }
     setValue(newTemplate:ITemplateResult){
         if(!this.fragment){
             this._prepareFrament(newTemplate);
         }
         this.template = newTemplate;
+        // this._forEachPeons('setValue',this.template.values)
         this._peons.forEach((_peon)=>{
             _peon.setValue(this.template.values);
         })
     }
     commit(){
+        // this._forEachPeons('commit')
         this._peons.forEach((_peon)=>{
             _peon.commit && _peon.commit();
         })
     }
     _destroy(){
+        // this._forEachPeons('destroy')
         this._peons.forEach((_peon)=>{
             _peon.destroy && _peon.destroy();
         })

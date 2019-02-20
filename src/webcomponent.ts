@@ -1,5 +1,5 @@
 import {shadowRender} from './render';
-import {ITemplateResult,IComponentLifeCycle,ComponentProp, Peon} from './type';
+import {ITemplateResult,IComponentLifeCycle,ComponentProp, Peon,Constructor} from './type';
 import WMap from './util/map';
 
 export interface ComplexAttributeConverter < Type = any,TypeHint = any > {
@@ -202,7 +202,8 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
       return this.__props;
     }
     set props(val){}
-    static createProperty(name : string, options : PropertyDeclaration = defaultPropertyDeclaration) {
+    //todo 会污染HTMLElement里
+    static createProperty(name : PropertyKey, options : PropertyDeclaration = defaultPropertyDeclaration) {
         if (!this.hasOwnProperty('_classProperties')) {
             this._classProperties = new WMap();
             const superProperties = Object.getPrototypeOf(this)._classProperties;
@@ -210,7 +211,10 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
                 superProperties.forEach((v : any, k : string) => this._classProperties.set(k, v));
             }
         }
-        this._classProperties.set(name, options);
+        this._classProperties.set(name as string, options);
+        if (options.noAccessor || this.prototype.hasOwnProperty(name)) {
+          return;
+        }
         if (!options.noAccessor) {
             const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
             Object.defineProperty(this.prototype, name, {
@@ -483,8 +487,83 @@ const INVALID_PROPS_NAME = {
   state:true
 };
 
-export const property = (options?: PropertyDeclaration) => (
-    proto: Object, name: string) => {
-  if(INVALID_PROPS_NAME[name]) return;
-  (proto.constructor as typeof WebComponent).createProperty(name, options);
-};
+interface ClassElement {
+  kind: 'field'|'method';
+  key: PropertyKey;
+  placement: 'static'|'prototype'|'own';
+  initializer?: Function;
+  extras?: ClassElement[];
+  finisher?: <T>(clazz: Constructor<T>) => undefined | Constructor<T>;
+  descriptor?: PropertyDescriptor;
+}
+
+const standardProperty =
+    (options: PropertyDeclaration, element: ClassElement) => {
+      // When decorating an accessor, pass it through and add property metadata.
+      // Note, the `hasOwnProperty` check in `createProperty` ensures we don't
+      // stomp over the user's accessor.
+      if (element.kind === 'method' && element.descriptor &&
+          !('value' in element.descriptor)) {
+        return {
+          ...element,
+          finisher(clazz: typeof WebComponent) {
+            clazz.createProperty(element.key, options);
+          }
+        };
+      } else {
+        // createProperty() takes care of defining the property, but we still
+        // must return some kind of descriptor, so return a descriptor for an
+        // unused prototype field. The finisher calls createProperty().
+        return {
+          kind: 'field',
+          key: Symbol(),
+          placement: 'own',
+          descriptor: {},
+          // When @babel/plugin-proposal-decorators implements initializers,
+          // do this instead of the initializer below. See:
+          // https://github.com/babel/babel/issues/9260 extras: [
+          //   {
+          //     kind: 'initializer',
+          //     placement: 'own',
+          //     initializer: descriptor.initializer,
+          //   }
+          // ],
+          // tslint:disable-next-line:no-any decorator
+          initializer(this: any) {
+            if (typeof element.initializer === 'function') {
+              this[element.key] = element.initializer!.call(this);
+            }
+          },
+          finisher(clazz: typeof WebComponent) {
+            clazz.createProperty(element.key, options);
+          }
+        };
+      }
+    };
+
+const legacyProperty =
+    (options: PropertyDeclaration, proto: Object, name: PropertyKey) => {
+      (proto.constructor as typeof WebComponent)
+          .createProperty(name!, options);
+    };
+
+/**
+ * A property decorator which creates a LitElement property which reflects a
+ * corresponding attribute value. A `PropertyDeclaration` may optionally be
+ * supplied to configure property features.
+ *
+ * @ExportDecoratedItems
+ */
+export function property(options?: PropertyDeclaration) {
+  // tslint:disable-next-line:no-any decorator
+  return (protoOrDescriptor: Object|ClassElement, name?: PropertyKey): any =>
+             (name !== undefined) ?
+      legacyProperty(options!, protoOrDescriptor as Object, name) :
+      standardProperty(options!, protoOrDescriptor as ClassElement);
+}
+
+// export const property = (options?: PropertyDeclaration) => (
+//     proto: Object, name: string) => {
+//   if(INVALID_PROPS_NAME[name]) return;
+//   (proto.constructor as typeof WebComponent).createProperty(name, options);
+// };

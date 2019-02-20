@@ -2,7 +2,7 @@ import {RenderOptions,Peon,IComponentConstructor,ComponentPropSchema,IComponent,
 import {TemplateResult} from './template-result';
 import {TemplateInstance} from './template-instance';
 import {createMarker} from './template';
-import {removeNodes,removeAllNodes} from './dom';
+import {removeNodes} from './dom';
 // import {isPrimitive} from './util/is'
 
 
@@ -19,7 +19,7 @@ export class ComponentPart implements Peon{
   _slots:ComponentSlotSchema;
   _componentClass:IComponentConstructor;
   _propsSchemas:Array<ComponentPropSchema>;
-  _componentInstance:IComponent;
+  _comIns:IComponent;
   _pendingValue: any = undefined;
   _valueIndex:number = undefined;
   // _markCleared:boolean = false;
@@ -32,7 +32,6 @@ export class ComponentPart implements Peon{
   insertBeforeNode(container:Node){
     const parentNode = container.parentNode;
     this.fragment = document.createDocumentFragment();
-    // this.startNode = parentNode.insertBefore(createMarker(),container);
     this.endNode = parentNode.insertBefore(createMarker(),container);
   }
   setValue(values:any){
@@ -41,7 +40,7 @@ export class ComponentPart implements Peon{
       return ret;
     },{})
     Object.freeze(newProps);
-    let instance = this._componentInstance;
+    let instance = this._comIns;
     if(!instance){
       instance = new this._componentClass(newProps)
       // instance._parentPart = this;
@@ -51,7 +50,7 @@ export class ComponentPart implements Peon{
       instance.fragment = this.fragment;
       instance.renderOption = this.options;
       instance._slots = this._slots;
-      this._componentInstance = instance;
+      this._comIns = instance;
       // this._updateFlag = true;
     }else{
       // instance.componentWillReceiveProps(newProps)
@@ -63,7 +62,7 @@ export class ComponentPart implements Peon{
     this.endNode.parentNode!.insertBefore(node, this.endNode);
   }
   destroy(){
-    const instance = this._componentInstance;
+    const instance = this._comIns;
     instance.componentWillUnmount();
     instance._mount = null;
     if(instance.part){
@@ -74,14 +73,14 @@ export class ComponentPart implements Peon{
     this.fragment = null;
   }
   commit(){
-    // const instance = this._componentInstance;
-    // console.log('_componentInstance :',this._componentInstance);
-    this._componentInstance.setState();
+    // const instance = this._comIns;
+    // console.log('_comIns :',this._comIns);
+    this._comIns.setState();
     // if(!instance._mountFlag){
     //   instance._commit()
     // }else{
     //   instance.setState(null,()=>{
-    //     this._componentInstance.componentDidUpdate();
+    //     this._comIns.componentDidUpdate();
     //   })
     // }
   }
@@ -192,8 +191,8 @@ export class NodePart implements Peon {
           break;
       }
       this.value = null;
-      removeAllNodes(
-        this.startNode.parentNode!, this.startNode, this.endNode);
+      removeNodes(
+        this.startNode.parentNode!, this.startNode, this.endNode,true);
       this.startNode = null;
       this.endNode = null;
       // this._node = null;

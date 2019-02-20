@@ -1,23 +1,33 @@
 
 
-import {html,svg,defineWebComponent as defineComponent,WebComponent,property} from 'foxview';
+import {html,svg,defineWebComponent as defineComponent,WebComponent,createRef,property} from 'foxview';
 
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-  else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
+
 
 class MyButton extends WebComponent{
+  @property({type:String}) message = "message_test"
+  @property({type:Number}) counter = 3
+  static get properties(){
+    return {
+      message:{
+        type:String
+      },
+      counter:{
+        type:String
+      }
+    }
+  }
   constructor(props) {
     super(props);
-    this.message = 'message_test';
-    this.counter = 0;
   }
-  
-  add(){
+  componentDidMount(){
+    this.shadowRoot.addEventListener('click',()=>{
+      console.log('click shadow dom');
+    })
+  }
+  add(e){
+    e.stopPropagation();
     this.counter++;
     // this.requestUpdate();
   }
@@ -60,12 +70,6 @@ class MyButton extends WebComponent{
       `;
   }
 }
-__decorate([
-  property()
-], MyButton.prototype, "message", void 0);
-__decorate([
-  property()
-], MyButton.prototype, "counter", void 0);
 defineComponent('my-btn',MyButton)
 
 defineComponent('my-div',class MyDiv extends WebComponent{
@@ -103,12 +107,16 @@ defineComponent('my-clock',class LitClock extends WebComponent {
   
     constructor() {
       super();
+      this.inputRef = createRef();
       setInterval(() => {
         this.date = new Date();
         this.requestUpdate()
       }, 1000);
     }
-  
+    componentDidMount() {
+      console.log('inputRef :',this.inputRef);
+    }
+    
     render() {
     const minuteTicks = (() => {
     const lines = [];
@@ -189,7 +197,7 @@ defineComponent('my-clock',class LitClock extends WebComponent {
         </style>
         <div class='square'> <!-- so the SVG keeps its aspect ratio -->
         <div .class='${'abc'}abc${'123'}'>swc</div>
-        <input ?disabled="${true}"/> 
+        <input ref="${this.inputRef}" ?disabled="${true}"/> 
           <svg viewBox='0 0 100 100'>
             <!-- first create a group and move it to 50,50 so
                 all co-ords are relative to the center -->
@@ -218,8 +226,8 @@ defineComponent('my-clock',class LitClock extends WebComponent {
     }
   }  
 )
-
-
+console.dir(MyButton);
+console.dir(WebComponent);
 window.addEventListener('load',function(){
     const div = document.querySelector('my-div')
     // div.content = 'world';

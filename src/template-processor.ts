@@ -188,9 +188,11 @@ function _prepareComponent(ComponentProto:IComponentConstructor,node:Element,par
 
 function _prepareNode(node:Element,partIndex:number,peons: Array<Peon>,extra:HandlerExtra){
     const {localName} = node;
-    const DefinedComponent = getCom(localName);
+    const DefinedComponent = getCom(localName); 
+
+    //todo 处理function组件
     if(DefinedComponent){
-        return _prepareComponent(DefinedComponent,node,partIndex,peons,extra);
+        return _prepareComponent(DefinedComponent as IComponentConstructor,node,partIndex,peons,extra);
     }else if(extra.renderOption.slots && localName === 'slot'){ //无slot无需解析slot
         return _prepareSlot(node,partIndex,peons,extra);
     }else{

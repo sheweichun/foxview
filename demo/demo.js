@@ -1,4 +1,4 @@
-import {html,defineWebComponent as defineComponent,WebComponent as Component,render} from 'foxview';
+import {html,defineWebComponent as defineComponent,WebComponent as Component,render,createRef} from 'foxview';
 // import {html,defineComponent,Component,render} from 'illidan';
 
 
@@ -86,6 +86,10 @@ class App extends Component{
         this.state = {
             counter:1
         }
+        this.btnRef = createRef();
+    }
+    componentDidMount() {
+        console.log('btnRef :',this.btnRef);
     }
     
     onClick(){
@@ -97,7 +101,7 @@ class App extends Component{
         const {counter} = this.state;
         return html`<my-demo>
             <div slot="swc">
-                <button @click=${this.onClick}>slot click</button>
+                <button ref="${this.btnRef}" @click=${this.onClick}>slot click</button>
             </div>
             <div>I am a slot!!!${counter}</div>
         </my-demo>`
