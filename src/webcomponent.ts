@@ -470,6 +470,11 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
 }
 
 export function defineWebComponent(name : string, componentClz : typeof WebComponent) {
+    if(componentClz == null){
+      return function(componentClz1 : typeof WebComponent){
+        customElements.define(name, componentClz)
+      }
+    }
     customElements.define(name, componentClz)
 }
 
