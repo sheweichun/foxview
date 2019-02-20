@@ -13,9 +13,9 @@ foxView用于构建[自定义元素](https://developer.mozilla.org/zh-CN/docs/We
 ## 起步
 
 
-尝试 FoxView 最简单的方法是使用 [JSFiddle 上的 Hello World 例子](https://jsfiddle.net/luodan/ham1qrg9/3/)。
+尝试 FoxView 最简单的方法是使用 [JSFiddle 上的 Hello World 例子](https://jsfiddle.net/luodan/ham1qrg9/6/)。
 
-[安装教程](/guide/installation.html)给出了更多安装 FoxView 的方式
+[安装教程](/guide/install.html)给出了更多安装 FoxView 的方式
 
 
 ## 声明式模板渲染
@@ -130,7 +130,7 @@ FoxView还提供了组件化和定义自定义元素([webComponent](https://deve
 ### 组件化
 
 
-[JSFiddle 上的 计数器组件 例子](https://jsfiddle.net/luodan/zmk6u480/3/)。
+[JSFiddle 上的 计数器组件 例子](https://jsfiddle.net/luodan/zmk6u480/4/)。
 
 定义一个组件很简单：
 
@@ -193,7 +193,7 @@ render(
 
 ### 自定义元素
 
-[JSFiddle 上的 计数器自定义元素 例子](https://jsfiddle.net/luodan/L6fxuk83/15/)。
+[JSFiddle 上的 计数器自定义元素 例子](https://jsfiddle.net/luodan/L6fxuk83/29/)。
 
 
 ``` js
