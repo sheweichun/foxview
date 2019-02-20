@@ -3,7 +3,7 @@ title: 安装
 type: guide
 order: 0
 gz_size: "30.90"
-foxview_version : "0.0.2"
+foxview_version : "0.0.3"
 ---
 
 

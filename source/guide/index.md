@@ -6,7 +6,7 @@ order: 1
 
 ## FoxView
 
-foxView用于构建[自定义元素](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)(webcomponent)和用户界面的声明式框架，在渲染[自定义元素](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)(webcomponent)和用户界面的时候共享同一套渲染引擎技术，统一开发模式
+foxView用于构建[WebComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)(webcomponent)和用户界面的声明式框架，在渲染[WebComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)(webcomponent)和用户界面的时候共享同一套渲染引擎技术，统一开发模式
 
 
 
@@ -120,9 +120,9 @@ render(
 
 
 
-## 组件化应用构建以及自定义元素
+## 组件化应用构建以及WebComponent
 
-FoxView还提供了组件化和定义自定义元素([webComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components))的能力(组件化是我们开发大型应用最基础的能力)
+FoxView还提供了组件化和定义WebComponent([webComponent](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components))的能力(组件化是我们开发大型应用最基础的能力)
 
 
 
@@ -191,9 +191,9 @@ render(
 
 
 
-### 自定义元素
+### WebComponent
 
-[JSFiddle 上的 计数器自定义元素 例子](https://jsfiddle.net/luodan/L6fxuk83/29/)。
+[JSFiddle 上的 计数器WebComponent 例子](https://jsfiddle.net/luodan/L6fxuk83/29/)。
 
 
 ``` js
