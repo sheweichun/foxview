@@ -8,10 +8,12 @@ import filesize from 'rollup-plugin-filesize';
 const FORMAT_MAP = {
     es:{
         suffix:'.es',
-        format:'es'
+        format:'es',
+        input:'esm/index.js'
     },
     umd:{
-        format:'umd'
+        format:'umd',
+        input:'lib/index.js'
     },
 }
 
@@ -35,7 +37,7 @@ function generateConfig(format,isPro){
         )
     }
     return {
-        input: 'lib/index.js',
+        input: item.input,
         output: {
           name:'FoxView',
           file: `dist/foxview${item.suffix || ''}${isPro ? '' : '.dev'}.js`,

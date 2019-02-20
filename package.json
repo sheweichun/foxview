@@ -12,6 +12,7 @@
     "watch": "tsc -w",
     "compile": "rm -rf lib esm && tsc && tsc  -p tsconfig.es.json",
     "build": "npm run compile && rm -rf dist && rollup -c",
+    "clean": "rm -rf lib esm dist",
     "dev": "cd demo && npm run dev"
   },
   "repository": {
