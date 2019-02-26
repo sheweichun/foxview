@@ -1,6 +1,7 @@
 import {shadowRender} from './render';
 import {ITemplateResult,IComponentLifeCycle,ComponentProp, Peon,Constructor} from './type';
 import WMap from './util/map';
+import assign from './util/assign';
 
 export interface ComplexAttributeConverter < Type = any,TypeHint = any > {
 
@@ -295,7 +296,7 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
         // return this.updateComplete;
     }
     private __updateThisProps(){
-      this.__props = Object.assign({},this.props,this._pendProps);
+      this.__props = assign({},this.props,this._pendProps);
       // console.log('__props :',this._pendProps);
       Object.freeze(this.__props);
       
@@ -309,20 +310,20 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
         //       this._instanceProperties = undefined;
         // }
         // const changedProperties = this._changedProperties;
-        let  newState = Object.assign({},this.state || {},this._alternalState || {})
+        let  newState = assign({},this.state || {},this._alternalState || {})
         //@ts-ignore
         const getDerivedStateFromProps = (this.constructor).getDerivedStateFromProps;
         if(getDerivedStateFromProps){
             const result = getDerivedStateFromProps.call(this.constructor,this._pendProps,newState);
             if(result){
-                newState = Object.assign({},newState,result)
+                newState = assign({},newState,result)
             }
         }
         //getDerivedStateFromProps
         if(!this._hasFlag(MOUNTED)){
           this.__updateThisProps();
           // if(this._hasFlag(INNER_STATE_CHANGED)){
-          //   this.state = Object.assign({},this.state || {},this._alternalState)
+          //   this.state = assign({},this.state || {},this._alternalState)
           // }
           this.state = newState;
           this.componentWillMount();
@@ -332,7 +333,7 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
           this.componentDidMount();
         }else{
           // if(this._hasFlag(INNER_STATE_CHANGED)){
-          //   newState = Object.assign({},this.state || {},this._alternalState)
+          //   newState = assign({},this.state || {},this._alternalState)
           // }
           if (this.shouldComponentUpdate(this._pendProps,newState)) {
             const prevProps = this.props;
@@ -467,20 +468,61 @@ export abstract class WebComponent extends HTMLElement implements IComponentLife
     setState(partialState?:Partial<ComponentProp>,callback?:()=>void){
       if(partialState){
         // this._markFlag(INNER_STATE_CHANGED)
-        this._alternalState = Object.assign({},this._alternalState,partialState);
+        this._alternalState = assign({},this._alternalState,partialState);
       }
       this.requestUpdate(undefined,undefined,callback);
     }
 }
 
+
+
+
 export function defineWebComponent(name : string, componentClz : typeof WebComponent) {
-    if(componentClz == null){
-      return function(componentClz1 : typeof WebComponent){
-        customElements.define(name, componentClz)
-      }
-    }
-    customElements.define(name, componentClz)
+  window.customElements && window.customElements.define(name, componentClz)
 }
+
+interface ClassDescriptor {
+  kind: 'class';
+  elements: ClassElement[];
+  finisher?: <T>(clazz: Constructor<T>) => undefined | Constructor<T>;
+}
+
+const legacyCustomElement =
+    (tagName: string, clazz: Constructor<HTMLElement>) => {
+      window.customElements && window.customElements.define(tagName, clazz);
+      // Cast as any because TS doesn't recognize the return type as being a
+      // subtype of the decorated class when clazz is typed as
+      // `Constructor<HTMLElement>` for some reason.
+      // `Constructor<HTMLElement>` is helpful to make sure the decorator is
+      // applied to elements however.
+      // tslint:disable-next-line:no-any
+      return clazz as any;
+    };
+
+const standardCustomElement =
+    (tagName: string, descriptor: ClassDescriptor) => {
+      const {kind, elements} = descriptor;
+      return {
+        kind,
+        elements,
+        // This callback is called once the class is otherwise fully defined
+        finisher(clazz: Constructor<HTMLElement>) {
+          window.customElements && window.customElements.define(tagName, clazz);
+        }
+      };
+    };
+
+/**
+ * Class decorator factory that defines the decorated class as a custom element.
+ *
+ * @param tagName the name of the custom element to define
+ */
+export const customElement = (tagName: string) =>
+    (classOrDescriptor: Constructor<HTMLElement>|ClassDescriptor) =>
+        (typeof classOrDescriptor === 'function') ?
+    legacyCustomElement(
+        tagName, classOrDescriptor as Constructor<HTMLElement>) :
+    standardCustomElement(tagName, classOrDescriptor as ClassDescriptor);
 
 const INVALID_PROPS_NAME = {
   props:true,
@@ -556,6 +598,7 @@ const legacyProperty =
  */
 export function property(options?: PropertyDeclaration) {
   // tslint:disable-next-line:no-any decorator
+  if(INVALID_PROPS_NAME[name]) return;
   return (protoOrDescriptor: Object|ClassElement, name?: PropertyKey): any =>
              (name !== undefined) ?
       legacyProperty(options!, protoOrDescriptor as Object, name) :

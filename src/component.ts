@@ -1,13 +1,14 @@
-import {IComponent,ITemplateResult,ComponentProp,RenderOptions,Peon,ComponentSlotSchema} from './type'
+import {IComponent,ITemplateResult,ComponentProp,RenderOptions,Peon,ComponentSlotSchema,RenderOptionComponents} from './type'
 import {render} from './render';
 import Updater from './updater';
+import assign from './util/assign'
 
 
 let componentId = 1;
 export abstract class Component implements IComponent{
     _mountFlag:boolean = false;
     state:ComponentProp
-    id:string
+    id:string 
     getSnapshotBeforeUpdate?(prevProps:ComponentProp, prevState:ComponentProp):any
     _mount:(node:Element | DocumentFragment)=>void
     _parentPart:Peon
@@ -16,12 +17,31 @@ export abstract class Component implements IComponent{
     props:ComponentProp
     fragment:DocumentFragment
     part:Peon
-    _slots:ComponentSlotSchema;
+    // _slots:ComponentSlotSchema;
     renderOption:RenderOptions
     constructor(props) {
         this.props = props;
-        this.id = `${componentId++}`;
+        this.id = `${componentId++}`; 
     }
+    _initialize(renderOption:RenderOptions,slots:ComponentSlotSchema){
+        const ctor = (this.constructor as typeof Component);
+        let components = {};
+        if(ctor.hasOwnProperty('components')){
+            components = ctor.components
+        }
+        this.renderOption = assign({},renderOption,{
+            components,
+            eventContext:this, 
+            slots
+        })
+        // this.renderOption = {
+        //     ...renderOption,
+        //     components,
+        //     eventContext:this, 
+        //     slots
+        // }
+    }
+    static components?:RenderOptionComponents
     /** 
      * state的最新值取getDerivedStateFromProps的返回值
      * **/
@@ -43,11 +63,13 @@ export abstract class Component implements IComponent{
     private _doRender(){
         //eventContext 和 slots覆盖传入的eventContext和slots
         try{
-            this.part = render(this.render(),this.fragment,{
-                ...this.renderOption,
-                eventContext:this, 
-                slots:this._slots,
-            });
+            // this.part = render(this.render(),this.fragment,{
+            //     ...this.renderOption,
+            //     components:(this.constructor as typeof Component).getComponents(),
+            //     eventContext:this, 
+            //     slots:this._slots,
+            // });
+            this.part = render(this.render(),this.fragment,this.renderOption);
         }catch(e){
             if(this.componentDidCatch){
                 this.componentDidCatch(e);

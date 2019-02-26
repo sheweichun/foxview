@@ -1,5 +1,5 @@
 // import {TemplateResult} from './template-result';
-
+import VMap from './util/map';
 
 // type TemplatePart = {
 //   type: 'node',
@@ -36,7 +36,7 @@ export const markerRegex = new RegExp(`${marker}|${nodeMarker}`);
  */
 export const boundAttributeSuffix = '$tiny$';
 
-const matchCache = new Map<string,RegExpExecArray>();
+const matchCache = new VMap<RegExpExecArray>();
 
 export function matchLastAttributeName(value:string){
   const cached = matchCache.get(value);

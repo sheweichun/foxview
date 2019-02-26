@@ -4,27 +4,31 @@ import {RenderOptions,ITemplateResult} from './type';
 import {NodePart} from './part';
 import {removeNodes,clone} from './dom';
 import templateProcessor from './template-processor';
+import assign from './util/assign';
 
 
 
 
 
-const parts = new WeakMap<Node, NodePart>();
+// const parts = new VMap<Node, NodePart>();
 
 
 export function shadowRender(
     result:ITemplateResult,
     container: Element|DocumentFragment,
     options?:Partial<RenderOptions>){
-    let part = parts.get(container);
+    //@ts-ignore
+    let part = container.$$part;
     if (part === undefined) {
         removeNodes(container,container.firstChild);
-        parts.set(container,part = new NodePart({
+        
+        part = new NodePart(assign({},{
             templateProcessor,
-            templateClone:clone,
-            ...options,
-        }))
+            templateClone:clone
+        },options))
         part.appendInto(container);
+        //@ts-ignore
+        container.$$part = part;
     }
     part.setValue(result)
     part.commit();
@@ -35,8 +39,7 @@ export function shadowRender(
 export function render( result:ITemplateResult,
     container: Element|DocumentFragment,
     options?:Partial<RenderOptions>){
-    return shadowRender(result,container,{
-        ...options,
+    return shadowRender(result,container,assign({},options,{
         notInWebComponent:true
-    })
+    }))
 }

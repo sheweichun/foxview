@@ -10,9 +10,14 @@ class Demo extends Component{
     return html`<div @click=${onClick}>${message}</div>`
   }
 }
-defineComponent('my-demo1',Demo);
+// console.log('defineComponent :',defineComponent);
+// defineComponent('my-demo1',Demo);
 
 render(
   html`<my-demo1></my-demo1>`,
-  document.getElementById('demo1')
+  document.getElementById('demo1'),{
+    components:{
+      'my-demo1':Demo
+    }
+  }
 )

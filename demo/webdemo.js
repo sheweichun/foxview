@@ -1,10 +1,11 @@
 
 
-import {html,svg,defineWebComponent as defineComponent,WebComponent,createRef,property} from 'foxview';
+import {html,svg,defineWebComponent as defineComponent,WebComponent,createRef,property,customElement} from 'foxview';
 
 
 
 
+@customElement('my-btn')
 class MyButton extends WebComponent{
   @property({type:String}) message = "message_test"
   @property({type:Number}) counter = 3
@@ -70,9 +71,9 @@ class MyButton extends WebComponent{
       `;
   }
 }
-defineComponent('my-btn',MyButton)
 
-defineComponent('my-div',class MyDiv extends WebComponent{
+@customElement('my-div')
+class MyDiv extends WebComponent{
     constructor() {
         super();
         setTimeout(()=>{
@@ -98,9 +99,10 @@ defineComponent('my-div',class MyDiv extends WebComponent{
         <div style="background:${this.color};width:100px;height:100px;">${this.content},<span>color:${this.color}</span></div>
         `;
     }
-})
+}
 
-defineComponent('my-clock',class LitClock extends WebComponent {
+@customElement('my-clock')
+class LitClock extends WebComponent {
 
     get date() { return this._date || new Date(); }
     set date(v) { this._date = v; }
@@ -224,8 +226,7 @@ defineComponent('my-clock',class LitClock extends WebComponent {
         </div>
       `;
     }
-  }  
-)
+}  
 console.dir(MyButton);
 console.dir(WebComponent);
 window.addEventListener('load',function(){

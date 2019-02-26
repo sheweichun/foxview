@@ -50,6 +50,7 @@ export interface IComponent{
     id:string
     _firstCommit():void
     _commit(prevProps:ComponentProp, prevState:ComponentProp,snapshot?:any):void
+    _initialize(renderOption:RenderOptions,slots:ComponentSlotSchema):void
     props:ComponentProp
     _pendProps:ComponentProp
     part:Peon
@@ -135,13 +136,17 @@ export interface ComponentPrototype{
     render:()=>string[]
 }
 
+export interface RenderOptionComponents{
+    [key:string]:IComponent
+}
 
 export interface RenderOptions {
     eventContext?: any;
     slots?:ComponentSlotSchema;
     notInWebComponent?:boolean;
     templateProcessor:TemplateProcessor;
-    templateClone:(template:HTMLTemplateElement)=>DocumentFragment
+    templateClone:(template:HTMLTemplateElement)=>DocumentFragment;
+    components?:RenderOptionComponents
 }
 export type IRef = {
     current:Node | null

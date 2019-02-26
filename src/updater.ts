@@ -1,6 +1,7 @@
 
 import {IComponent,ComponentProp} from './type'
 import WMap from './util/map';
+import assign from './util/assign';
 
 type SetStateMapItem = {
     partialState:Partial<ComponentProp>
@@ -26,13 +27,13 @@ const Updater:IUpdater = {
     isInClosingUpdating:false,
     performUpdate:function(item:SetStateMapItem):void{
         const {instance} = item
-        let newState = Object.assign({},instance.state || {},item.partialState);
+        let newState = assign({},instance.state || {},item.partialState);
         //@ts-ignore
         const getDerivedStateFromProps = (instance.constructor).getDerivedStateFromProps;
         if(getDerivedStateFromProps){
             const result = getDerivedStateFromProps.call(instance.constructor,instance._pendProps,newState);
             if(result){
-                newState = Object.assign({},newState,result)
+                newState = assign({},newState,result)
             }
         }
         if(!instance._mountFlag){
@@ -70,7 +71,7 @@ const Updater:IUpdater = {
                  * 此次是为了过滤掉closeBatchUpdating instant._commit导致的无状态变更的二次更新
                  * **/
                 if(item.flushed) return; 
-                item.partialState = Object.assign({},item.partialState,partialState);
+                item.partialState = assign({},item.partialState,partialState);
                 callback && callbackList.push(callback)
             }else{
                 const newItem = {
@@ -103,7 +104,7 @@ const Updater:IUpdater = {
         })
         // Object.keys(setStateMap).forEach()
         // for(let [instance,item] of setStateMap){
-        //     instance.state = Object.assign({},item.partialState,item.partialState);
+        //     instance.state = assign({},item.partialState,item.partialState);
         //     instance._commit()
         //     item.flushed = true;
         // }

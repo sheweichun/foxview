@@ -1,9 +1,9 @@
 
 import {TemplateStringsArray,IRef} from './type';
 import {TemplateResult,SVGTemplateResult} from './template-result'
-export {defineWebComponent,WebComponent,property} from './webcomponent';
+export {defineWebComponent,WebComponent,property,customElement} from './webcomponent';
 export {Component} from './component';
-export {defineComponent} from './component-registry';
+// export {defineComponent} from './component-registry';
 export {shadowRender as render} from './render'
 
 

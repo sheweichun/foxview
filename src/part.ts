@@ -48,8 +48,9 @@ export class ComponentPart implements Peon{
       instance.props = newProps;
       instance._pendProps = newProps;
       instance.fragment = this.fragment;
-      instance.renderOption = this.options;
-      instance._slots = this._slots;
+      instance._initialize(this.options,this._slots);
+      // instance.renderOption = this.options;
+      // instance._slots = this._slots;
       this._comIns = instance;
       // this._updateFlag = true;
     }else{

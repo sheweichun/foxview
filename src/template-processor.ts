@@ -3,9 +3,10 @@ import {Peon,ITemplateResult,ProcessResult, RenderOptions,IComponentConstructor,
 import {PeonType,createPeon} from './peon';
 import {NodePart,ComponentPart} from './part';
 import {removeAttributes} from './dom';
-import {getCom} from './component-registry';
+// import {getCom} from './component-registry';
 import {marker,matchLastAttributeName,boundAttributeSuffix, markerRegex} from './template';
 import {DEFAULT_SLOT_NAME} from './util/constant'
+import VMap from './util/map';
 
 // type PrepareMap = {
 //     [key:number]:Function
@@ -187,8 +188,12 @@ function _prepareComponent(ComponentProto:IComponentConstructor,node:Element,par
 }
 
 function _prepareNode(node:Element,partIndex:number,peons: Array<Peon>,extra:HandlerExtra){
+    const {components} = extra.renderOption
     const {localName} = node;
-    const DefinedComponent = getCom(localName); 
+    let DefinedComponent;
+    if(components){
+        DefinedComponent = components[localName];
+    }
 
     //todo 处理function组件
     if(DefinedComponent){
@@ -259,45 +264,77 @@ export function walkNode(fragment:DocumentFragment,templateResult:ITemplateResul
     }
 }
 
-export type templateCache = {
-    stringsArray: WeakMap<TemplateStringsArray, HTMLTemplateElement>;
-    keyString: Map<string, HTMLTemplateElement>;
-  };
-const templateCaches = new Map<string, templateCache>();
+// export type templateCache = {
+//     stringsArray: WeakMap<TemplateStringsArray, HTMLTemplateElement>;
+//     keyString: Map<string, HTMLTemplateElement>;
+//   };
+// const templateCaches = new Map<string, templateCache>();
 // export type TemplateFactory = (result: ITemplateResult) => HTMLTemplateElement;
 
+// function templateFactory(result: ITemplateResult) {
+//     let templateCache = templateCaches.get(result.type);
+//     if (templateCache === undefined) {
+//       templateCache = {
+//         stringsArray: new WeakMap<TemplateStringsArray, HTMLTemplateElement>(),
+//         keyString: new Map<string, HTMLTemplateElement>()
+//       };
+//       templateCaches.set(result.type, templateCache);
+//     }
+  
+//     let template = templateCache.stringsArray.get(result.strings);
+//     if (template !== undefined) {
+//       return template;
+//     }
+  
+//     // If the TemplateStringsArray is new, generate a key from the strings
+//     // This key is shared between all templates with identical content
+//     const key = result.strings.join(marker);
+  
+//     // Check if we already have a Template for this key
+//     template = templateCache.keyString.get(key);
+//     if (template === undefined) {
+//       // If we have not seen this key before, create a new Template
+//       template = result.getTemplateElement();
+//       // Cache the Template for this key
+//       templateCache.keyString.set(key, template);
+//     }
+  
+//     // Cache all future queries for this TemplateStringsArray
+//     templateCache.stringsArray.set(result.strings, template);
+//     return template;
+// }
+export type templateCache = VMap<HTMLTemplateElement>;
+const templateCaches = new VMap<templateCache>();
 function templateFactory(result: ITemplateResult) {
     let templateCache = templateCaches.get(result.type);
     if (templateCache === undefined) {
-      templateCache = {
-        stringsArray: new WeakMap<TemplateStringsArray, HTMLTemplateElement>(),
-        keyString: new Map<string, HTMLTemplateElement>()
-      };
+      templateCache = new VMap<HTMLTemplateElement>()
       templateCaches.set(result.type, templateCache);
     }
   
-    let template = templateCache.stringsArray.get(result.strings);
-    if (template !== undefined) {
-      return template;
-    }
+    // let template = templateCache.stringsArray.get(result.strings);
+    // if (template !== undefined) {
+    //   return template;
+    // }
   
     // If the TemplateStringsArray is new, generate a key from the strings
     // This key is shared between all templates with identical content
     const key = result.strings.join(marker);
   
     // Check if we already have a Template for this key
-    template = templateCache.keyString.get(key);
+    let template = templateCache.get(key);
     if (template === undefined) {
       // If we have not seen this key before, create a new Template
       template = result.getTemplateElement();
+      templateCache.set(key,template);
       // Cache the Template for this key
-      templateCache.keyString.set(key, template);
+    //   templateCache.keyString.set(key, template);
     }
   
     // Cache all future queries for this TemplateStringsArray
-    templateCache.stringsArray.set(result.strings, template);
+    // templateCache.stringsArray.set(result.strings, template);
     return template;
-  }
+}
 
 
 export default function(templateResult:ITemplateResult,option:RenderOptions):ProcessResult{

@@ -1,15 +1,15 @@
 // import {html,defineWebComponent as defineComponent,WebComponent as Component,render,property} from 'illidan';
 import {html,defineComponent,Component,render} from 'foxview';
-function property(){}
+// function property(){}
 
 import getData from './getData'
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-  else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
+// var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+//   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+//   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+//   else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+//   return c > 3 && r && Object.defineProperty(target, key, r), r;
+// };
 
 
 const Columns = [
@@ -71,19 +71,21 @@ class Query extends Component{
         </td>`
     };
 }
-__decorate([
-  property()
-], Query.prototype, "elapsed", void 0);
-__decorate([
-  property()
-], Query.prototype, "query", void 0);
-__decorate([
-  property()
-], Query.prototype, "key", void 0);
-defineComponent('my-query',Query)
+// __decorate([
+//   property()
+// ], Query.prototype, "elapsed", void 0);
+// __decorate([
+//   property()
+// ], Query.prototype, "query", void 0);
+// __decorate([
+//   property()
+// ], Query.prototype, "key", void 0);
+// defineComponent('my-query',Query)
 
 class Database extends Component{
-      
+    static components = {
+      'my-query':Query
+    }
     sample(queries, time) {
       var topFiveQueries = queries.slice(0, 5);
       while (topFiveQueries.length < 5) {
@@ -136,16 +138,16 @@ class Database extends Component{
     };
 };
 
-__decorate([
-  property()
-], Database.prototype, "key", void 0);
-__decorate([
-  property()
-], Database.prototype, "dbname", void 0);
-__decorate([
-  property()
-], Database.prototype, "samples", void 0);
-defineComponent('my-database',Database)
+// __decorate([
+//   property()
+// ], Database.prototype, "key", void 0);
+// __decorate([
+//   property()
+// ], Database.prototype, "dbname", void 0);
+// __decorate([
+//   property()
+// ], Database.prototype, "samples", void 0);
+// defineComponent('my-database',Database)
 
 
 
@@ -153,40 +155,48 @@ defineComponent('my-database',Database)
 
 
 class Table extends Component{
+  static components = {
+    'my-database':Database
+  }
     constructor(props) {
         super(props);
         this.state = {
             databases : {}
         }
+        // this.getNewState();
+    }
+    getNewState(){
+      var newData = getData(this.props.rows || this.rows);
+      Object.keys(newData.databases).forEach(function(dbname) {
+      var sampleInfo = newData.databases[dbname];
+      if (!this.state.databases[dbname]) {
+          this.state.databases[dbname] = {
+          name: dbname,
+          samples: []
+          }
+      }
+
+      var samples = this.state.databases[dbname].samples;
+      samples.push({
+          time: newData.start_at,
+          queries: sampleInfo.queries
+      });
+      if (samples.length > 5) {
+          samples.splice(0, samples.length - 5);
+      }
+      }.bind(this));
     }
     loadData(){
-        var newData = getData(this.props.rows || this.rows);
-        Object.keys(newData.databases).forEach(function(dbname) {
-        var sampleInfo = newData.databases[dbname];
-        if (!this.state.databases[dbname]) {
-            this.state.databases[dbname] = {
-            name: dbname,
-            samples: []
-            }
-        }
-
-        var samples = this.state.databases[dbname].samples;
-        samples.push({
-            time: newData.start_at,
-            queries: sampleInfo.queries
-        });
-        if (samples.length > 5) {
-            samples.splice(0, samples.length - 5);
-        }
-        }.bind(this));
-
+        this.getNewState();
         this.setState(this.state);
         setTimeout(()=>{
             this.loadData()
         })
     }
     componentDidMount(){
-        this.loadData();
+        // setTimeout(()=>{
+          this.loadData();
+        // },100)
     }
     render(){
         // const {color} = this.props;
@@ -222,11 +232,15 @@ class Table extends Component{
         // </table>`
     }
 }
-__decorate([
-  property()
-], Table.prototype, "rows", void 0);
-defineComponent('my-table',Table)
+// __decorate([
+//   property()
+// ], Table.prototype, "rows", void 0);
+// defineComponent('my-table',Table)
 
 const rows = 100;
 
-render(html`<my-table rows=${rows}></my-table>`,document.getElementById('table'))
+render(html`<my-table rows=${rows}></my-table>`,document.getElementById('table'),{
+  components:{
+    'my-table':Table
+  }
+})
