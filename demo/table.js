@@ -1,5 +1,5 @@
 // import {html,defineWebComponent as defineComponent,WebComponent as Component,render,property} from 'illidan';
-import {html,defineComponent,Component,render} from 'foxview';
+import FoxView,{html,defineComponent,Component,render} from 'foxview';
 // function property(){}
 
 import getData from './getData'
@@ -239,8 +239,16 @@ class Table extends Component{
 
 const rows = 100;
 
-render(html`<my-table rows=${rows}></my-table>`,document.getElementById('table'),{
+new FoxView({
+  el:'#table',
   components:{
     'my-table':Table
-  }
+  },
+  template:html`<my-table rows=${rows}></my-table>`
 })
+
+// render(html`<my-table rows=${rows}></my-table>`,document.getElementById('table'),{
+//   components:{
+//     'my-table':Table
+//   }
+// })

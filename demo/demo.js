@@ -104,6 +104,9 @@ class App extends Component{
                 <button ref="${this.btnRef}" @click=${this.onClick}>slot click</button>
             </div>
             <div>I am a slot!!!${counter}</div>
+            <template >
+            
+            </template>
         </my-demo>`
     }
 }

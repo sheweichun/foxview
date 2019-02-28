@@ -41,6 +41,7 @@ export class TemplateResult implements ITemplateResult{
       }
     }
     html += this.strings[endIndex];
+    // console.log('html :',html);
     return html;
   }
   // getHTML():string{

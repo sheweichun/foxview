@@ -9,7 +9,8 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: '../',
-        hot: true
+        hot: true, 
+        // host:'30.10.61.70'
     },
     resolve:{
         alias:{

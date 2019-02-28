@@ -12,7 +12,7 @@ module.exports = [
             contentBase: './',
             hot: true,
             port:9000, 
-            host:'30.10.61.70'
+            // host:'30.10.61.70'
         },
         resolve:{
             alias:{
