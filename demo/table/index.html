@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>性能测试</title>
+    <style>
+        html,body{
+            width:100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .root{
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        .section{
+            width:50%;
+        }
+        iframe{
+            width: 100%;
+            height: 100%;
+            border:0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="root">
+        <div class="section">
+            <h3>React</h3>
+            <iframe src="./react.html"></iframe>
+        </div>
+        <div class="section">
+            <h3>FoxView</h3>
+            <iframe src="./foxview.html"></iframe>
+        </div>
+        
+    </div>
+</body>
+
+</html>
