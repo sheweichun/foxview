@@ -97,6 +97,7 @@ pre .xml .cdata {
 body.docs #header {
   position: fixed;
   width: 100%;
+  background: #171f26;
   top: 0;
 }
 body.docs #nav {
@@ -771,7 +772,7 @@ body {
     display: block;
   }
   #hero {
-    padding: 40px 40px 30px;
+    padding: 60px 40px 30px;
   }
   #hero .hero-logo {
     float: none;

@@ -1,3 +1,5 @@
-tutorial: 'tutorial'
-demo: 'demo'
+tutorial: 'Tutorial'
+demo: 'Demo'
 framwork_desc: 'A declarative and efficient JavaScript library for building WebComponent and User Interfaces'
+multi_language: 'Support Languages'
+get_started: 'GET STARTED'

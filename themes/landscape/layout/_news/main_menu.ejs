@@ -1,10 +1,11 @@
 
 <li>
-  <a href="<%- url_for("/guide/install.html") %>" class="nav-link"><%=__('tutorial')%></a>
+  <a href="<%- url_for_lang("/guide/install.html") %>" class="nav-link"><%=__('tutorial')%></a>
 </li>
 <li>
-  <a href="<%- url_for("/deo/index.html") %>" class="nav-link"><%=__('demo')%></a>
+  <a href="<%- url_for_lang("/deo/index.html") %>" class="nav-link"><%=__('demo')%></a>
 </li>
+<!-- <%- partial('_news/language_dropdown') %> -->
 <!-- <li>
   <form id="search-form">
     <input type="text" id="search-query-<%- context %>" class="search-query st-default-search-input">
@@ -12,7 +13,7 @@
 </li>
 <%- partial('_news/learn_dropdown') %>
 <li>
-  <a href="<%- url_for("/v2/guide/team.html") %>" class="nav-link team<%- page.path.match(/team\.html/) ? ' current' : '' %>">团队</a>
+  <a href="<%- url_for_lang("/v2/guide/team.html") %>" class="nav-link team<%- page.path.match(/team\.html/) ? ' current' : '' %>">团队</a>
 </li>
 <%- partial('partials/support_vue_dropdown') %>
 <%- partial('partials/language_dropdown') %>

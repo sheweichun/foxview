@@ -173,16 +173,16 @@
       var sidebar = document.querySelector('.sidebar')
       var menuButton = mobileBar.querySelector('.menu-button')
   
-      menuButton.addEventListener('click', function () {
-        sidebar.classList.toggle('open')
-      })
-  
-      document.body.addEventListener('click', function (e) {
-        if (e.target !== menuButton && !sidebar.contains(e.target)) {
-          sidebar.classList.remove('open')
-        }
-      })
-  
+      if(menuButton){
+        menuButton.addEventListener('click', function () {
+          sidebar.classList.toggle('open')
+        })
+        document.body.addEventListener('click', function (e) {
+          if (e.target !== menuButton && !sidebar.contains(e.target)) {
+            sidebar.classList.remove('open')
+          }
+        })
+      }
       // Toggle sidebar on swipe
       var start = {}, end = {}
   
@@ -274,10 +274,11 @@
   
       // build sidebar
       var currentPageAnchor = sidebar.querySelector('.sidebar-link.current')
-      var contentClasses = document.querySelector('.content').classList
+      var contentClasses = (document.querySelector('.content') || {} ).classList
       var isAPIOrStyleGuide = (
-        contentClasses.contains('api') ||
-        contentClasses.contains('style-guide')
+        contentClasses && 
+        (contentClasses.contains('api') ||
+        contentClasses.contains('style-guide'))
       )
       if (currentPageAnchor || isAPIOrStyleGuide) {
         var allHeaders = []
