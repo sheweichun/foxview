@@ -38,16 +38,14 @@ export const boundAttributeSuffix = '$tiny$';
 
 const matchCache = new VMap<RegExpExecArray>();
 
-export function matchLastAttributeName(value:string){
+export function matchLastAttributeName(value: string) {
   const cached = matchCache.get(value);
-  if(cached) return cached;
+  if (cached) return cached;
   const result = lastAttributeNameRegex.exec(value);
-  if(result){
-    matchCache.set(value,result);
+  if (result) {
+    matchCache.set(value, result);
   }
-  return result
+  return result;
 }
 
-
-const lastAttributeNameRegex =
-/([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F \x09\x0a\x0c\x0d"'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
+const lastAttributeNameRegex = /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F \x09\x0a\x0c\x0d"'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
