@@ -6,3 +6,5 @@ dist
 esm/
 source
 build/
+package-lock.json
+yarn.lock
