@@ -1,20 +1,20 @@
-
-
-import {TemplateStringsArray,ITemplateResult} from './type';
-import {matchLastAttributeName,boundAttributeSuffix,marker,nodeMarker} from './template'
-import {reparentNodes} from './dom';
+import { TemplateStringsArray, ITemplateResult } from './type';
+import {
+  matchLastAttributeName,
+  boundAttributeSuffix,
+  marker,
+  nodeMarker
+} from './template';
+import { reparentNodes } from './dom';
 /**
  * The return type of `html`, which holds a Template and the values from
  * interpolated expressions.
  */
-export class TemplateResult implements ITemplateResult{
+export class TemplateResult implements ITemplateResult {
   strings: TemplateStringsArray;
   values: any[];
-  type:string
-  constructor(
-      strings: TemplateStringsArray, 
-      values: any[],
-      type:string) {
+  type: string;
+  constructor(strings: TemplateStringsArray, values: any[], type: string) {
     this.strings = strings;
     this.values = values;
     this.type = type;
@@ -33,11 +33,17 @@ export class TemplateResult implements ITemplateResult{
         // We're starting a new bound attribute.
         // Add the safe attribute suffix, and use unquoted-attribute-safe
         // marker.
-        html += s.substr(0, match.index)+match[1]+match[2]+boundAttributeSuffix+match[3]+marker
+        html +=
+          s.substr(0, match.index) +
+          match[1] +
+          match[2] +
+          boundAttributeSuffix +
+          match[3] +
+          marker;
       } else {
         // We're either in a bound node, or trailing bound attribute.
         // Either way, nodeMarker is safe to use.
-        html += s+nodeMarker;
+        html += s + nodeMarker;
       }
     }
     html += this.strings[endIndex];
