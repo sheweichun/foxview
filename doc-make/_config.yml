@@ -10,7 +10,7 @@ keywords:
 author: 洛丹
 language: [zh-CN,es]
 i18n:
-  type: [page,post]
+  type: [page,post,index]
   generator: [index]
 timezone:
 
