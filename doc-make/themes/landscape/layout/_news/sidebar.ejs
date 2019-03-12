@@ -1,0 +1,29 @@
+<div class="sidebar">
+    <div class="sidebar-inner">
+      <div class="list">
+        <% if (type !== 'search') { %>
+          <h2>
+            <% titles = {
+              api: 'API',
+              examples: '示例',
+              guide: '教程',
+              cookbook: 'Cookbook<sup class="beta">beta</sup>',
+              'style-guide': '风格指南'
+            } %>
+            <%- titles[type] %>
+            <% if (['cookbook', 'style-guide'].indexOf(type) === -1) { %>
+              <select class="version-select">
+                <option value="SELF" selected>0.x</option>
+              </select>
+            <% } %>
+          </h2>
+          <%- partial('_news/toc', { type: type }) %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  
+  <!--
+  <%- partial('partials/platinum_sponsors', { context: 'right' }) %>
+  -->
+  

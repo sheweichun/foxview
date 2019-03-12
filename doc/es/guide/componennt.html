@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <title>组件 — </title>
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/es/guide/componennt.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/es/guide/componennt.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/es/guide/componennt.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/es/guide/componennt.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/es/guide/componennt.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/es/guide/componennt.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/es/guide/componennt.html"> -->
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="组件 — Vue.js">
+    <meta property="og:description" content>
+    <meta property="og:image" content="https:////foxview/doc/es/images/logo.png">
+
+    <!-- <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="组件 — Vue.js">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="https:///images/logo.png"> -->
+
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="/foxview/doc/es/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/foxview/doc/es/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/foxview/doc/es/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/foxview/doc/es/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/foxview/doc/es/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/foxview/doc/es/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/foxview/doc/es/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/foxview/doc/es/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/foxview/doc/es/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/foxview/doc/es/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/foxview/doc/es/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/foxview/doc/es/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/foxview/doc/es/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="/foxview/doc/es/images/logo.png" type="image/png"> -->
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
+
+    <link href="/foxview/doc/es/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <style>
+      /* @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro"), url(/foxview/doc/es/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf);
+      }
+      
+
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Light"), url(/foxview/doc/es/fonts/Source_Sans_Pro/SourceSansPro-Light.ttf);
+        font-weight: 300;
+      }
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Semibold"), url(/foxview/doc/es/fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf);
+        font-weight: 600;
+      }
+      @font-face{
+        font-family: "Roboto Mono";
+        src: local("Roboto Mono"), url(/foxview/doc/es/fonts/Roboto_Mono/RobotoMono-Regular.ttf);
+      }
+      @font-face{
+        font-family: "Dosis";
+        src: local("Dosis Medium"), url(/foxview/doc/es/fonts/Dosis/Dosis-Medium.ttf);
+        font-weight: 500;
+      } */
+      body{
+        font-family: Hiragino, 'Microsoft Yahei', Arial, Helvetica, sans-serif !important;
+        -webkit-font-smoothing: antialiased!important;
+      }
+    </style>
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/foxview/doc/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>
+        window.PAGE_TYPE = "{{type}}"
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar">
+      
+        <svg class="menu-button" t="1550550341179" style="" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2863" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+          <path fill="white" d="M128 298.666667h768a42.666667 42.666667 0 0 0 0-85.333334H128a42.666667 42.666667 0 0 0 0 85.333334z m768 170.666666H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z m0 256H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2864"/>
+        </svg>
+      
+      <a class="logoText" href="/">FoxView</a>
+      <ul id="nav">
+          
+      </ul>
+    </div>
+    <div id="header">
+    
+    <a id="logo" href="/foxview/doc/es/">
+      <!-- <img src="/foxview/doc/es/images/logo.png" alt="vue logo"> -->
+      <span>FoxView</span>
+    </a>
+    
+    <ul id="nav">
+      
+<li>
+  <a href="/foxview/doc/es/guide/install.html" class="nav-link">Tutorial</a>
+</li>
+<li>
+  <a href="/foxview/doc/es/deo/index.html" class="nav-link">Demo</a>
+</li>
+<!-- <li class="nav-dropdown-container learn">
+  <a class="nav-link">Support Languages</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a href="/foxview/doc/" class="nav-link">简体中文</a></li>
+      <li><a href="/foxview/doc/es" class="nav-link">English</a></li>
+    </ul></li>
+  </ul>
+</li>
+ -->
+<!-- <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+
+<li>
+  <a href="/foxview/doc/es/v2/guide/team.html" class="nav-link team">团队</a>
+</li>
+
+
+<li><a href="https://github.com/vuejs/cn.vuejs.org/" target="_blank" class="nav-link contribute">参与翻译</a></li> -->
+
+    </ul>
+  </div>
+  
+     
+      <div id="main" class="fix-sidebar">
+        
+          
+    <div class="sidebar">
+    <div class="sidebar-inner">
+      <div class="list">
+        
+          <h2>
+            
+            教程
+            
+              <select class="version-select">
+                <option value="SELF" selected>0.x</option>
+              </select>
+            
+          </h2>
+          <ul class="menu-root">
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/es/guide/install.html" class="sidebar-link">安装</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/es/guide/index.html" class="sidebar-link">介绍</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/es/guide/syntax.html" class="sidebar-link">模板语法</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/es/guide/componennt.html" class="sidebar-link current">组件</a>
+          </li>
+        
+      </ul>
+      
+        
+      </div>
+    </div>
+  </div>
+  
+  <!--
+  
+  -->
+  
+  
+  <div class="content guide with-sidebar componennt-guide">
+    
+      
+    
+    
+      <h1>组件</h1>
+    
+    
+      <h2 id="组件注册"><a href="#组件注册" class="headerlink" title="组件注册"></a>组件注册</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponennt</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;div&gt;Hello World&lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'my-component'</span>, MyComponennt);</span><br></pre></td></tr></table></figure>
+<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponennt</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;type&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;MyComponent&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;my type is : <span class="subst">$&#123;type&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'my-component'</span>, MyComponennt);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myTemplate = </span><br><span class="line">(type) =&gt; html<span class="string">`&lt;my-component type=<span class="subst">$&#123;type&#125;</span>&gt;&lt;/my-component&gt;`</span></span><br><span class="line"></span><br><span class="line">render(myTemplate(<span class="string">'primary'</span>),<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
+<h2 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h2><h3 id="shouldComponentUpdate-nextProps-nextState-Boolean"><a href="#shouldComponentUpdate-nextProps-nextState-Boolean" class="headerlink" title="shouldComponentUpdate(nextProps,nextState):Boolean"></a>shouldComponentUpdate(nextProps,nextState):Boolean</h3><p>判断组件是否需要需要更新，返回true表示需要更新，返回false表示不需要更新</p>
+<h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount()"></a>componentDidMount()</h3><p>组件第一次完成DOM渲染触发</p>
+<h3 id="getSnapshotBeforeUpdate-prevProps-prevState"><a href="#getSnapshotBeforeUpdate-prevProps-prevState" class="headerlink" title="getSnapshotBeforeUpdate(prevProps,prevState)"></a>getSnapshotBeforeUpdate(prevProps,prevState)</h3><p>在组件对DOM进行更新之前的回调，它的返回值会作为componentDidUpdate中snapshot入参</p>
+<h3 id="componentDidUpdate-prevProps-prevState-snapshot"><a href="#componentDidUpdate-prevProps-prevState-snapshot" class="headerlink" title="componentDidUpdate(prevProps,prevState,snapshot)"></a>componentDidUpdate(prevProps,prevState,snapshot)</h3><p>组件完成DOM更新触发</p>
+<h2 id="state和setState"><a href="#state和setState" class="headerlink" title="state和setState"></a>state和setState</h2><p>state 管理组件内部状态<br>setState对state进行修改，同时触发组件重新渲染</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponennt</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  constuctor(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      count : <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  onAdd()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      count:<span class="keyword">this</span>.state.count</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  onMinus()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      count:<span class="keyword">this</span>.state.count</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;count&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;MyComponent&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;!-- 事件回调默认会绑定this --&gt;</span></span><br><span class="line"><span class="string">      &lt;button @click="<span class="subst">$&#123;<span class="keyword">this</span>.onAdd&#125;</span>"&gt;add&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;button @click="<span class="subst">$&#123;<span class="keyword">this</span>.onMinus&#125;</span>"&gt;minus&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;count is <span class="subst">$&#123;count&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'my-component'</span>, MyComponennt);</span><br><span class="line"></span><br><span class="line">render(html<span class="string">`&lt;my-component &gt;&lt;/my-component&gt;`</span>,<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
+<h2 id="插槽"><a href="#插槽" class="headerlink" title="插槽"></a>插槽</h2><p>插槽即WebComponent中的slot，遵循W3C <a href="https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md" target="_blank" rel="noopener">webComponent的标准</a>,组件通过它来控制内容的分发</p>
+<p>比如我们定义一个button<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;render,html,Component,defineComponent&#125; <span class="keyword">from</span> <span class="string">'foxview'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;div class="btn"&gt;</span></span><br><span class="line"><span class="string">          &lt;slot&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'custom-button'</span>,Button);</span><br></pre></td></tr></table></figure></p>
+<p>然后我们可以像这样渲染</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">render(html<span class="string">`&lt;custom-button&gt;</span></span><br><span class="line"><span class="string">    点击我</span></span><br><span class="line"><span class="string">&lt;/custom-button&gt;`</span>,<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
+
+    
+    
+      <div class="guide-links">
+        
+        
+          <span>← <a href="/foxview/doc/es/guide/syntax.html">模板语法</a></span>
+        
+        
+        
+      </div>
+    
+    <div class="footer">
+        
+      发现错误？想参与编辑？
+      <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/es/guide/componennt.md" target="_blank">
+        在 GitHub 上编辑此页！
+      </a>
+    </div>
+  </div>
+  
+        
+      </div>
+      <script src="/foxview/doc/es/js/smooth-scroll.min.js"></script>
+    
+
+    <script src="/foxview/doc/es/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

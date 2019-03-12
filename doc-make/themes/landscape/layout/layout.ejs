@@ -1,0 +1,130 @@
+<% var isIndex = !!page.__index %>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title><%- page.title ? page.title + ' — ' : '' %></title>
+    <meta charset="utf-8">
+    <meta name="description" content="<%- theme.site_description %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/<%- page.path %>">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/<%- page.path %>">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/<%- page.path %>">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/<%- page.path %>">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/<%- page.path %>">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/<%- page.path %>">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/<%- page.path %>"> -->
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="<%- page.title ? page.title + ' — ' : '' %>Vue.js">
+    <meta property="og:description" content="<%- theme.site_description %>">
+    <meta property="og:image" content="https://<%- theme.root_domain %>/<%- url_for_lang("/images/logo.png") %>">
+
+    <!-- <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="<%- page.title ? page.title + ' — ' : '' %>Vue.js">
+    <meta name="twitter:description" content="<%- theme.site_description %>">
+    <meta name="twitter:image" content="https://<%- theme.root_domain %>/images/logo.png"> -->
+
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="<%- url_for_lang("/images/icons/apple-icon-57x57.png") %>">
+    <link rel="apple-touch-icon" sizes="60x60" href="<%- url_for_lang("/images/icons/apple-icon-60x60.png") %>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<%- url_for_lang("/images/icons/apple-icon-72x72.png") %>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<%- url_for_lang("/images/icons/apple-icon-76x76.png") %>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<%- url_for_lang("/images/icons/apple-icon-114x114.png") %>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<%- url_for_lang("/images/icons/apple-icon-120x120.png") %>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<%- url_for_lang("/images/icons/apple-icon-144x144.png") %>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<%- url_for_lang("/images/icons/apple-icon-152x152.png") %>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%- url_for_lang("/images/icons/apple-icon-180x180.png") %>">
+    <link rel="icon" type="image/png" sizes="192x192"  href="<%- url_for_lang("/images/icons/android-icon-192x192.png") %>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%- url_for_lang("/images/icons/favicon-32x32.png") %>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<%- url_for_lang("/images/icons/favicon-96x96.png") %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%- url_for_lang("/images/icons/favicon-16x16.png") %>">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="<%- url_for_lang("/images/logo.png") %>" type="image/png"> -->
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
+
+    <link href="<%- url_for_lang("/css/font-awesome.css") %>" rel="stylesheet" type="text/css">
+    <style>
+      /* @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro"), url(<%- url_for_lang("fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf")%>);
+      }
+      
+
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Light"), url(<%- url_for_lang("fonts/Source_Sans_Pro/SourceSansPro-Light.ttf")%>);
+        font-weight: 300;
+      }
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Semibold"), url(<%- url_for_lang("fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf")%>);
+        font-weight: 600;
+      }
+      @font-face{
+        font-family: "Roboto Mono";
+        src: local("Roboto Mono"), url(<%- url_for_lang("fonts/Roboto_Mono/RobotoMono-Regular.ttf")%>);
+      }
+      @font-face{
+        font-family: "Dosis";
+        src: local("Dosis Medium"), url(<%- url_for_lang("fonts/Dosis/Dosis-Medium.ttf")%>);
+        font-weight: 500;
+      } */
+      body{
+        font-family: Hiragino, 'Microsoft Yahei', Arial, Helvetica, sans-serif !important;
+        -webkit-font-smoothing: antialiased!important;
+      }
+    </style>
+    <!-- main page styles -->
+    <%- css(isIndex ? 'css/index' : 'css/page') %>
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>
+        window.PAGE_TYPE = "{{type}}"
+    </script>
+  </head>
+  <body class="<%- isIndex ? '' : 'docs' -%>">
+    <div id="mobile-bar" <%- isIndex ? 'class="top"' : '' %>>
+      <% if(!isIndex){%>
+        <svg class="menu-button" t="1550550341179"  style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2863" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+          <path fill="white" d="M128 298.666667h768a42.666667 42.666667 0 0 0 0-85.333334H128a42.666667 42.666667 0 0 0 0 85.333334z m768 170.666666H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z m0 256H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2864"></path>
+        </svg>
+      <% }%>
+      <a class="logoText" href="/">FoxView</a>
+      <ul id="nav">
+          <%- isIndex ? partial('_news/main_menu', { context: 'sidebar' }) : '' %>
+      </ul>
+    </div>
+    <%- partial('_news/header',{isIndex:isIndex}) %>
+    <% if (!isIndex) { %> 
+      <div id="main" class="fix-sidebar">
+        <% if (page.blog_index) { %>
+          <%- partial('_news/blog') %>
+        <% } else { %>
+          <%- body %>
+        <% } %>
+      </div>
+      <script src="<%- url_for_lang("/js/smooth-scroll.min.js") %>"></script>
+    <% } else { %>
+      <%- body %>
+    <% } %>
+
+    <script src="<%- url_for_lang("/js/common.js") %>"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <title>介绍 — </title>
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/es/guide/index.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/es/guide/index.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/es/guide/index.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/es/guide/index.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/es/guide/index.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/es/guide/index.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/es/guide/index.html"> -->
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="介绍 — Vue.js">
+    <meta property="og:description" content>
+    <meta property="og:image" content="https:////foxview/doc/es/images/logo.png">
+
+    <!-- <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="介绍 — Vue.js">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="https:///images/logo.png"> -->
+
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="/foxview/doc/es/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/foxview/doc/es/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/foxview/doc/es/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/foxview/doc/es/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/foxview/doc/es/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/foxview/doc/es/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/foxview/doc/es/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/foxview/doc/es/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/foxview/doc/es/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/foxview/doc/es/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/foxview/doc/es/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/foxview/doc/es/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/foxview/doc/es/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="/foxview/doc/es/images/logo.png" type="image/png"> -->
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
+
+    <link href="/foxview/doc/es/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <style>
+      /* @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro"), url(/foxview/doc/es/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf);
+      }
+      
+
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Light"), url(/foxview/doc/es/fonts/Source_Sans_Pro/SourceSansPro-Light.ttf);
+        font-weight: 300;
+      }
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Semibold"), url(/foxview/doc/es/fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf);
+        font-weight: 600;
+      }
+      @font-face{
+        font-family: "Roboto Mono";
+        src: local("Roboto Mono"), url(/foxview/doc/es/fonts/Roboto_Mono/RobotoMono-Regular.ttf);
+      }
+      @font-face{
+        font-family: "Dosis";
+        src: local("Dosis Medium"), url(/foxview/doc/es/fonts/Dosis/Dosis-Medium.ttf);
+        font-weight: 500;
+      } */
+      body{
+        font-family: Hiragino, 'Microsoft Yahei', Arial, Helvetica, sans-serif !important;
+        -webkit-font-smoothing: antialiased!important;
+      }
+    </style>
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/foxview/doc/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>
+        window.PAGE_TYPE = "{{type}}"
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar">
+      
+        <svg class="menu-button" t="1550550341179" style="" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2863" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+          <path fill="white" d="M128 298.666667h768a42.666667 42.666667 0 0 0 0-85.333334H128a42.666667 42.666667 0 0 0 0 85.333334z m768 170.666666H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z m0 256H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2864"/>
+        </svg>
+      
+      <a class="logoText" href="/">FoxView</a>
+      <ul id="nav">
+          
+      </ul>
+    </div>
+    <div id="header">
+    
+    <a id="logo" href="/foxview/doc/es/">
+      <!-- <img src="/foxview/doc/es/images/logo.png" alt="vue logo"> -->
+      <span>FoxView</span>
+    </a>
+    
+    <ul id="nav">
+      
+<li>
+  <a href="/foxview/doc/es/guide/install.html" class="nav-link">Tutorial</a>
+</li>
+<li>
+  <a href="/foxview/doc/es/deo/index.html" class="nav-link">Demo</a>
+</li>
+<!-- <li class="nav-dropdown-container learn">
+  <a class="nav-link">Support Languages</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a href="/foxview/doc/" class="nav-link">简体中文</a></li>
+      <li><a href="/foxview/doc/es" class="nav-link">English</a></li>
+    </ul></li>
+  </ul>
+</li>
+ -->
+<!-- <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+
+<li>
+  <a href="/foxview/doc/es/v2/guide/team.html" class="nav-link team">团队</a>
+</li>
+
+
+<li><a href="https://github.com/vuejs/cn.vuejs.org/" target="_blank" class="nav-link contribute">参与翻译</a></li> -->
+
+    </ul>
+  </div>
+  
+     
+      <div id="main" class="fix-sidebar">
+        
+          
+    <div class="sidebar">
+    <div class="sidebar-inner">
+      <div class="list">
+        
+          <h2>
+            
+            教程
+            
+              <select class="version-select">
+                <option value="SELF" selected>0.x</option>
+              </select>
+            
+          </h2>
+          <ul class="menu-root">
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/es/guide/install.html" class="sidebar-link">安装</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/es/guide/index.html" class="sidebar-link current">介绍</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/es/guide/syntax.html" class="sidebar-link">模板语法</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/es/guide/componennt.html" class="sidebar-link">组件</a>
+          </li>
+        
+      </ul>
+      
+        
+      </div>
+    </div>
+  </div>
+  
+  <!--
+  
+  -->
+  
+  
+  <div class="content guide with-sidebar index-guide">
+    
+      
+    
+    
+      <h1>介绍</h1>
+    
+    
+      <h2 id="FoxView"><a href="#FoxView" class="headerlink" title="FoxView"></a>FoxView</h2><p>foxView用于构建<a href="https://developer.mozilla.org/zh-CN/docs/Web/Web_Components" target="_blank" rel="noopener">WebComponent</a>(webcomponent)和用户界面的声明式框架，在渲染<a href="https://developer.mozilla.org/zh-CN/docs/Web/Web_Components" target="_blank" rel="noopener">WebComponent</a>(webcomponent)和用户界面的时候共享同一套渲染引擎技术，统一开发模式</p>
+<h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><p>尝试 FoxView 最简单的方法是使用 <a href="https://jsfiddle.net/luodan/ham1qrg9/6/" target="_blank" rel="noopener">JSFiddle 上的 Hello World 例子</a>。</p>
+<p><a href="/guide/install.html">安装教程</a>给出了更多安装 FoxView 的方式</p>
+<h2 id="声明式模板渲染"><a href="#声明式模板渲染" class="headerlink" title="声明式模板渲染"></a>声明式模板渲染</h2><p>Foxview采用模板语法来声明式地将数据渲染：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;render,html&#125; = FoxView</span><br><span class="line"><span class="keyword">const</span> message = <span class="string">"Hello,FoxView"</span></span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  html<span class="string">`&lt;div&gt;<span class="subst">$&#123;message&#125;</span>&lt;/div&gt;`</span>,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="条件与循环"><a href="#条件与循环" class="headerlink" title="条件与循环"></a>条件与循环</h2><p>通过条件判断一个元素是否显示：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-1"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;render,html&#125; = FoxView</span><br><span class="line"><span class="keyword">let</span> show = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderCondition</span>(<span class="params">flag</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span>  flag ? </span><br><span class="line">    html<span class="string">`&lt;span style="color:red;"&gt;您看到我了&lt;/span&gt;`</span>:</span><br><span class="line">    html<span class="string">`&lt;span&gt;你看不到我&lt;/span&gt;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  html<span class="string">`&lt;div&gt;<span class="subst">$&#123;renderCondition(show)&#125;</span>&lt;/div&gt;`</span>,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app-1'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>通过循环来渲染一个项目列表：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-2"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;render,html&#125; = FoxView</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderList</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span>  data.map(<span class="function">(<span class="params">text</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`&lt;li&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;<span class="subst">$&#123;text&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">    &lt;/li&gt;`</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">render(</span><br><span class="line">  html<span class="string">`&lt;ol&gt;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;renderList([</span></span></span><br><span class="line"><span class="string"><span class="subst">      <span class="string">'第一项'</span>,</span></span></span><br><span class="line"><span class="string"><span class="subst">      <span class="string">'第二项'</span>,</span></span></span><br><span class="line"><span class="string"><span class="subst">      <span class="string">'第三项'</span></span></span></span><br><span class="line"><span class="string"><span class="subst">    ])&#125;</span></span></span><br><span class="line"><span class="string">  &lt;/ol&gt;`</span>,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app-2'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="事件响应"><a href="#事件响应" class="headerlink" title="事件响应"></a>事件响应</h2><p>我们的应用需要响应用户的操作，FoxView通过在事件属性前加上@来添加事件监听器</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-3"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;render,html&#125; = FoxView</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clickMe</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'clicked:'</span>,e)</span><br><span class="line">&#125;</span><br><span class="line">render(</span><br><span class="line">  html<span class="string">`&lt;button @click=<span class="subst">$&#123;clickMe&#125;</span>&gt;click me&lt;/button&gt;`</span>,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app-3'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="组件化应用构建以及WebComponent"><a href="#组件化应用构建以及WebComponent" class="headerlink" title="组件化应用构建以及WebComponent"></a>组件化应用构建以及WebComponent</h2><p>FoxView还提供了组件化和定义WebComponent(<a href="https://developer.mozilla.org/zh-CN/docs/Web/Web_Components" target="_blank" rel="noopener">webComponent</a>)的能力(组件化是我们开发大型应用最基础的能力)</p>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><p><a href="https://jsfiddle.net/luodan/zmk6u480/4/" target="_blank" rel="noopener">JSFiddle 上的 计数器组件 例子</a>。</p>
+<p>定义一个组件很简单：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;render,html,Component,defineComponent&#125; = FoxView</span><br><span class="line"><span class="comment">// 定义名为 counter 的计数器组件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      count:props.initValue</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  add()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      count:<span class="keyword">this</span>.state.count + <span class="number">1</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  minus()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      count:<span class="keyword">this</span>.state.count - <span class="number">1</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;button @click=<span class="subst">$&#123;<span class="keyword">this</span>.add&#125;</span>&gt;add&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;button @click=<span class="subst">$&#123;<span class="keyword">this</span>.minus&#125;</span>&gt;minus&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;div&gt;</span></span><br><span class="line"><span class="string">        result:<span class="subst">$&#123;<span class="keyword">this</span>.state.count&#125;</span></span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'counter'</span>, Counter)</span><br></pre></td></tr></table></figure>
+<p>现在你可以用它构建另一个模板：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-4"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加载定义Counter的js内容,此处省略</span></span><br><span class="line"><span class="keyword">const</span> &#123;render,html&#125; = FoxView</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  html<span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;counter initValue="<span class="subst">$&#123;<span class="number">5</span>&#125;</span>"&gt;&lt;/counter&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;`</span>,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app-4'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="WebComponent"><a href="#WebComponent" class="headerlink" title="WebComponent"></a>WebComponent</h3><p><a href="https://jsfiddle.net/luodan/L6fxuk83/29/" target="_blank" rel="noopener">JSFiddle 上的 计数器WebComponent 例子</a>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">  render,</span><br><span class="line">  html,</span><br><span class="line">  WebComponent : Component,</span><br><span class="line">  defineWebComponent : defineComponent,</span><br><span class="line">  property&#125; = FoxView</span><br><span class="line"><span class="comment">// 定义名为 counter 的计数器组件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">  @property initValue</span><br><span class="line">  <span class="keyword">constructor</span>()&#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      count:<span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> getDerivedStateFromProps(props,state)&#123;</span><br><span class="line">  	<span class="keyword">if</span>(state.count == <span class="literal">null</span>)&#123;</span><br><span class="line">    	<span class="keyword">return</span> &#123;</span><br><span class="line">      	count:props.initValue</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  add()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      count:<span class="keyword">this</span>.state.count + <span class="number">1</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  minus()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      count:<span class="keyword">this</span>.state.count - <span class="number">1</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">    	&lt;style&gt;</span></span><br><span class="line"><span class="string">      	button&#123;</span></span><br><span class="line"><span class="string">        	background-color:black;</span></span><br><span class="line"><span class="string">          color:white;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &lt;/style&gt;</span></span><br><span class="line"><span class="string">    	&lt;div&gt;</span></span><br><span class="line"><span class="string">        &lt;button @click=<span class="subst">$&#123;<span class="keyword">this</span>.add&#125;</span>&gt;add&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;button @click=<span class="subst">$&#123;<span class="keyword">this</span>.minus&#125;</span>&gt;minus&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          result:<span class="subst">$&#123;<span class="keyword">this</span>.state.count&#125;</span></span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">defineComponent(<span class="string">'custom-counter'</span>, Counter)</span><br></pre></td></tr></table></figure>
+<p>现在你可以用它构建另一个模板：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-5"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加载定义custom-counter的js内容,此处省略</span></span><br><span class="line"><span class="keyword">const</span> &#123;render,html&#125; = FoxView</span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  html<span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;custom-counter .initValue="<span class="subst">$&#123;<span class="number">5</span>&#125;</span>"&gt;&lt;/custom-counter&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;`</span>,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app-5'</span>)</span><br><span class="line">)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+    
+    
+      <div class="guide-links">
+        
+        
+          <span>← <a href="/foxview/doc/es/guide/install.html">安装</a></span>
+        
+        
+        
+          <span style="float: right;"><a href="/foxview/doc/es/guide/syntax.html">模板语法</a> →</span>
+        
+      </div>
+    
+    <div class="footer">
+        
+      发现错误？想参与编辑？
+      <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/es/guide/index.md" target="_blank">
+        在 GitHub 上编辑此页！
+      </a>
+    </div>
+  </div>
+  
+        
+      </div>
+      <script src="/foxview/doc/es/js/smooth-scroll.min.js"></script>
+    
+
+    <script src="/foxview/doc/es/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

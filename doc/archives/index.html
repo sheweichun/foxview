@@ -1,0 +1,201 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/archives/index.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/archives/index.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/archives/index.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/archives/index.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/archives/index.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/archives/index.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/archives/index.html"> -->
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Vue.js">
+    <meta property="og:description" content>
+    <meta property="og:image" content="https:////foxview/doc/images/logo.png">
+
+    <!-- <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vue.js">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="https:///images/logo.png"> -->
+
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="/foxview/doc/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/foxview/doc/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/foxview/doc/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/foxview/doc/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/foxview/doc/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/foxview/doc/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/foxview/doc/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/foxview/doc/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/foxview/doc/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/foxview/doc/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/foxview/doc/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/foxview/doc/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/foxview/doc/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="/foxview/doc/images/logo.png" type="image/png"> -->
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
+
+    <link href="/foxview/doc/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <style>
+      /* @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro"), url(/foxview/doc/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf);
+      }
+      
+
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Light"), url(/foxview/doc/fonts/Source_Sans_Pro/SourceSansPro-Light.ttf);
+        font-weight: 300;
+      }
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Semibold"), url(/foxview/doc/fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf);
+        font-weight: 600;
+      }
+      @font-face{
+        font-family: "Roboto Mono";
+        src: local("Roboto Mono"), url(/foxview/doc/fonts/Roboto_Mono/RobotoMono-Regular.ttf);
+      }
+      @font-face{
+        font-family: "Dosis";
+        src: local("Dosis Medium"), url(/foxview/doc/fonts/Dosis/Dosis-Medium.ttf);
+        font-weight: 500;
+      } */
+      body{
+        font-family: Hiragino, 'Microsoft Yahei', Arial, Helvetica, sans-serif !important;
+        -webkit-font-smoothing: antialiased!important;
+      }
+    </style>
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/foxview/doc/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>
+        window.PAGE_TYPE = "{{type}}"
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar">
+      
+        <svg class="menu-button" t="1550550341179" style="" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2863" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+          <path fill="white" d="M128 298.666667h768a42.666667 42.666667 0 0 0 0-85.333334H128a42.666667 42.666667 0 0 0 0 85.333334z m768 170.666666H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z m0 256H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2864"/>
+        </svg>
+      
+      <a class="logoText" href="/">FoxView</a>
+      <ul id="nav">
+          
+      </ul>
+    </div>
+    <div id="header">
+    
+    <a id="logo" href="/foxview/doc/">
+      <!-- <img src="/foxview/doc/images/logo.png" alt="vue logo"> -->
+      <span>FoxView</span>
+    </a>
+    
+    <ul id="nav">
+      
+<li>
+  <a href="/foxview/doc/guide/install.html" class="nav-link">教程</a>
+</li>
+<li>
+  <a href="/foxview/doc/deo/index.html" class="nav-link">示例</a>
+</li>
+<!-- <li class="nav-dropdown-container learn">
+  <a class="nav-link">多语言</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a href="/foxview/doc/" class="nav-link">简体中文</a></li>
+      <li><a href="/foxview/doc/es" class="nav-link">English</a></li>
+    </ul></li>
+  </ul>
+</li>
+ -->
+<!-- <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+
+<li>
+  <a href="/foxview/doc/v2/guide/team.html" class="nav-link team">团队</a>
+</li>
+
+
+<li><a href="https://github.com/vuejs/cn.vuejs.org/" target="_blank" class="nav-link contribute">参与翻译</a></li> -->
+
+    </ul>
+  </div>
+  
+     
+      <div id="main" class="fix-sidebar">
+        
+          
+  
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/foxview/doc/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/foxview/doc/2019/03/12/hello-world/" class="archive-article-date">
+  <time datetime="2019-03-12T05:23:58.332Z" itemprop="datePublished">3月 12</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/foxview/doc/2019/03/12/hello-world/">Hello World</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
+
+
+
+        
+      </div>
+      <script src="/foxview/doc/js/smooth-scroll.min.js"></script>
+    
+
+    <script src="/foxview/doc/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

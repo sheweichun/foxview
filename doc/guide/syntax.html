@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <title>模板语法 — </title>
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- <link rel="alternate" hreflang="x-default" href="https://vuejs.org/guide/syntax.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/guide/syntax.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/guide/syntax.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/guide/syntax.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/guide/syntax.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/guide/syntax.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/guide/syntax.html"> -->
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="模板语法 — Vue.js">
+    <meta property="og:description" content>
+    <meta property="og:image" content="https:////foxview/doc/images/logo.png">
+
+    <!-- <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="模板语法 — Vue.js">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="https:///images/logo.png"> -->
+
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="/foxview/doc/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/foxview/doc/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/foxview/doc/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/foxview/doc/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/foxview/doc/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/foxview/doc/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/foxview/doc/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/foxview/doc/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/foxview/doc/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/foxview/doc/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/foxview/doc/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/foxview/doc/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/foxview/doc/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="/foxview/doc/images/logo.png" type="image/png"> -->
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
+
+    <link href="/foxview/doc/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <style>
+      /* @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro"), url(/foxview/doc/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf);
+      }
+      
+
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Light"), url(/foxview/doc/fonts/Source_Sans_Pro/SourceSansPro-Light.ttf);
+        font-weight: 300;
+      }
+      @font-face{
+        font-family: "Source Sans Pro";
+        src: local("Source Sans Pro Semibold"), url(/foxview/doc/fonts/Source_Sans_Pro/SourceSansPro-Semibold.ttf);
+        font-weight: 600;
+      }
+      @font-face{
+        font-family: "Roboto Mono";
+        src: local("Roboto Mono"), url(/foxview/doc/fonts/Roboto_Mono/RobotoMono-Regular.ttf);
+      }
+      @font-face{
+        font-family: "Dosis";
+        src: local("Dosis Medium"), url(/foxview/doc/fonts/Dosis/Dosis-Medium.ttf);
+        font-weight: 500;
+      } */
+      body{
+        font-family: Hiragino, 'Microsoft Yahei', Arial, Helvetica, sans-serif !important;
+        -webkit-font-smoothing: antialiased!important;
+      }
+    </style>
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/foxview/doc/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>
+        window.PAGE_TYPE = "{{type}}"
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar">
+      
+        <svg class="menu-button" t="1550550341179" style="" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2863" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+          <path fill="white" d="M128 298.666667h768a42.666667 42.666667 0 0 0 0-85.333334H128a42.666667 42.666667 0 0 0 0 85.333334z m768 170.666666H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z m0 256H128a42.666667 42.666667 0 0 0 0 85.333334h768a42.666667 42.666667 0 0 0 0-85.333334z" p-id="2864"/>
+        </svg>
+      
+      <a class="logoText" href="/">FoxView</a>
+      <ul id="nav">
+          
+      </ul>
+    </div>
+    <div id="header">
+    
+    <a id="logo" href="/foxview/doc/">
+      <!-- <img src="/foxview/doc/images/logo.png" alt="vue logo"> -->
+      <span>FoxView</span>
+    </a>
+    
+    <ul id="nav">
+      
+<li>
+  <a href="/foxview/doc/guide/install.html" class="nav-link">教程</a>
+</li>
+<li>
+  <a href="/foxview/doc/deo/index.html" class="nav-link">示例</a>
+</li>
+<!-- <li class="nav-dropdown-container learn">
+  <a class="nav-link">多语言</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a href="/foxview/doc/" class="nav-link">简体中文</a></li>
+      <li><a href="/foxview/doc/es" class="nav-link">English</a></li>
+    </ul></li>
+  </ul>
+</li>
+ -->
+<!-- <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+
+<li>
+  <a href="/foxview/doc/v2/guide/team.html" class="nav-link team">团队</a>
+</li>
+
+
+<li><a href="https://github.com/vuejs/cn.vuejs.org/" target="_blank" class="nav-link contribute">参与翻译</a></li> -->
+
+    </ul>
+  </div>
+  
+     
+      <div id="main" class="fix-sidebar">
+        
+          
+    <div class="sidebar">
+    <div class="sidebar-inner">
+      <div class="list">
+        
+          <h2>
+            
+            教程
+            
+              <select class="version-select">
+                <option value="SELF" selected>0.x</option>
+              </select>
+            
+          </h2>
+          <ul class="menu-root">
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/guide/install.html" class="sidebar-link">安装</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/guide/index.html" class="sidebar-link">介绍</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/guide/syntax.html" class="sidebar-link current">模板语法</a>
+          </li>
+        
+          
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          
+          <li>
+            <a href="/foxview/doc/guide/componennt.html" class="sidebar-link">组件</a>
+          </li>
+        
+      </ul>
+      
+        
+      </div>
+    </div>
+  </div>
+  
+  <!--
+  
+  -->
+  
+  
+  <div class="content guide with-sidebar syntax-guide">
+    
+      
+    
+    
+      <h1>模板语法</h1>
+    
+    
+      <h2 id="静态模板渲染"><a href="#静态模板渲染" class="headerlink" title="静态模板渲染"></a>静态模板渲染</h2><p>渲染静态模板是最简单的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;html, render&#125; <span class="keyword">from</span> <span class="string">'foxview'</span>;</span><br><span class="line"><span class="comment">// 声明一个模板</span></span><br><span class="line"><span class="keyword">const</span> myTemplate = html<span class="string">`&lt;div&gt;Hello World&lt;/div&gt;`</span>;</span><br><span class="line"><span class="comment">// 渲染模板</span></span><br><span class="line">render(myTemplate, <span class="built_in">document</span>.body);</span><br></pre></td></tr></table></figure>
+<h2 id="动态模板渲染"><a href="#动态模板渲染" class="headerlink" title="动态模板渲染"></a>动态模板渲染</h2><h3 id="文本绑定"><a href="#文本绑定" class="headerlink" title="文本绑定"></a>文本绑定</h3><p>渲染静态模板是最简单的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;html, render&#125; <span class="keyword">from</span> <span class="string">'foxview'</span>;</span><br><span class="line"><span class="comment">// 声明一个带参模板</span></span><br><span class="line"><span class="keyword">const</span> myTemplate = <span class="function">(<span class="params">name</span>)=&gt;</span>html<span class="string">`&lt;div&gt;Hello <span class="subst">$&#123;name&#125;</span>&lt;/div&gt;`</span>;</span><br><span class="line"><span class="comment">// 渲染模板</span></span><br><span class="line">render(myTemplate(<span class="string">'World'</span>), <span class="built_in">document</span>.body);</span><br><span class="line"><span class="comment">//输出&lt;div&gt;Hello World&lt;/div&gt;</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    render(myTemplate(<span class="string">'FoxView'</span>), <span class="built_in">document</span>.body);</span><br><span class="line">    <span class="comment">//改变成&lt;div&gt;Hello FoxView&lt;/div&gt;</span></span><br><span class="line">&#125;,<span class="number">500</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="attribute绑定"><a href="#attribute绑定" class="headerlink" title="attribute绑定"></a>attribute绑定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;html, render&#125; <span class="keyword">from</span> <span class="string">'foxview'</span>;</span><br><span class="line"><span class="comment">// 动态设置class</span></span><br><span class="line"><span class="keyword">const</span> myTemplate = </span><br><span class="line">(className)=&gt;html<span class="string">`&lt;div class="<span class="subst">$&#123;className&#125;</span>"&gt;Hello World&lt;/div&gt;`</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;html, render&#125; <span class="keyword">from</span> <span class="string">'foxview'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onClick</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'clicked'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 动态设置class</span></span><br><span class="line"><span class="keyword">const</span> myTemplate = </span><br><span class="line">(className)=&gt;html<span class="string">`&lt;button @click="<span class="subst">$&#123;onClick&#125;</span>"&gt;Click Me!&lt;/button&gt;`</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="组合渲染"><a href="#组合渲染" class="headerlink" title="组合渲染"></a>组合渲染</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;html, render&#125; <span class="keyword">from</span> <span class="string">'foxview'</span>;</span><br><span class="line"><span class="keyword">const</span> Left = html<span class="string">`&lt;div&gt;Left&lt;/div&gt;`</span></span><br><span class="line"><span class="keyword">const</span> Middle = html<span class="string">`&lt;div&gt;Middle&lt;/div&gt;`</span></span><br><span class="line"><span class="keyword">const</span> Right = html<span class="string">`&lt;div&gt;Right&lt;/div&gt;`</span></span><br><span class="line">render(html<span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;Left&#125;</span></span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;Midlle&#125;</span></span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;Right&#125;</span></span></span><br><span class="line"><span class="string">&lt;/div&gt;`</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">html<span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;count % <span class="number">2</span> === <span class="number">0</span> ? </span></span></span><br><span class="line"><span class="string"><span class="subst">    html<span class="string">`&lt;span color="red"&gt;偶数&lt;/span&gt;`</span>:</span></span></span><br><span class="line"><span class="string"><span class="subst">    html<span class="string">`&lt;span&gt;奇数&lt;/span&gt;`</span></span></span></span><br><span class="line"><span class="string"><span class="subst">    &#125;</span></span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">html<span class="string">`</span></span><br><span class="line"><span class="string">  &lt;ul&gt;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;items.map((item) =&gt; html<span class="string">`&lt;li&gt;<span class="subst">$&#123;item&#125;</span>&lt;/li&gt;`</span>)&#125;</span></span></span><br><span class="line"><span class="string">  &lt;/ul&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="WebComponent特殊语法"><a href="#WebComponent特殊语法" class="headerlink" title="WebComponent特殊语法"></a>WebComponent特殊语法</h2><p>WebComponent语法在前面介绍的语法上做了部分的拓展</p>
+<h3 id="property绑定"><a href="#property绑定" class="headerlink" title="property绑定"></a>property绑定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myTemplate = <span class="function">(<span class="params">btnType</span>) =&gt;</span> </span><br><span class="line">html<span class="string">`&lt;my-button .type=<span class="subst">$&#123;btnType&#125;</span>&gt;&lt;/my-button&gt;`</span>;</span><br></pre></td></tr></table></figure>
+<p>FoxView会识别 <strong>.[property]</strong> ，给my-button的实例的type赋值为btnType</p>
+<h3 id="boolean绑定"><a href="#boolean绑定" class="headerlink" title="boolean绑定"></a>boolean绑定</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myTemplate = <span class="function">(<span class="params">disable</span>) =&gt;</span> </span><br><span class="line">html<span class="string">`&lt;input !disabled=<span class="subst">$&#123;disable&#125;</span>&gt;&lt;/input&gt;`</span>;</span><br></pre></td></tr></table></figure>
+<p>FoxView会识别 <strong>![property]</strong> ，将值转成布尔值</p>
+
+    
+    
+      <div class="guide-links">
+        
+        
+          <span>← <a href="/foxview/doc/guide/index.html">介绍</a></span>
+        
+        
+        
+          <span style="float: right;"><a href="/foxview/doc/guide/componennt.html">组件</a> →</span>
+        
+      </div>
+    
+    <div class="footer">
+        
+      发现错误？想参与编辑？
+      <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/guide/syntax.md" target="_blank">
+        在 GitHub 上编辑此页！
+      </a>
+    </div>
+  </div>
+  
+        
+      </div>
+      <script src="/foxview/doc/js/smooth-scroll.min.js"></script>
+    
+
+    <script src="/foxview/doc/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>
