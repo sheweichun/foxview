@@ -4,7 +4,7 @@
   "description": "A declarative and efficient JavaScript library for building WebComponent and page",
   "author": "weichun.swc@alibaba-inc.com",
   "scripts": {
-
+    "doc":"cd doc-make && npm run build"
   },
   "repository": {
     "type": "git",
