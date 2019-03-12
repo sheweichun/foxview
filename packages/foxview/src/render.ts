@@ -1,4 +1,4 @@
-import { RenderOptions, ITemplateResult } from './type';
+import { RenderOptions, ITemplateResult ,RenderOptionComponents} from './type';
 import { NodePart } from './part';
 import { removeNodes, clone } from './dom';
 import templateProcessor from './template-processor';
@@ -45,4 +45,31 @@ export function render(
       notInWebComponent: true
     })
   );
+}
+
+type FoxViewOption = {
+  el:Element | string,
+  template:ITemplateResult,
+  components?:RenderOptionComponents
+}
+
+
+export function mount(opt:FoxViewOption){
+  let el = opt.el;
+  if(typeof el === 'string'){
+      el = document.querySelector(el)
+  }else{
+      el = opt.el as Element;
+  }
+  render(opt.template,el,{
+      components:opt.components || {}
+  })
+}
+
+export function unmount(container: Element | DocumentFragment){
+  //@ts-ignore
+  if(container == null || container.$$part == null) return;
+  //@ts-ignore
+  const _part = container.$$part as NodePart
+  _part.destroy();
 }

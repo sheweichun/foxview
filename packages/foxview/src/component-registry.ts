@@ -1,9 +1,7 @@
 import { IComponentConstructor, IComponentFunc } from './type';
+import VMap from './util/map'
 
-const ComponentCenter = new Map<
-  string,
-  IComponentConstructor | IComponentFunc
->();
+const ComponentCenter = new VMap<IComponentConstructor | IComponentFunc>();
 
 export function defineComponent(
   name: string,

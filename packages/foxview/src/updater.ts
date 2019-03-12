@@ -33,8 +33,7 @@ const Updater: IUpdater = {
     const { instance } = item;
     let newState = assign({}, instance.state || {}, item.partialState);
     //@ts-ignore
-    const getDerivedStateFromProps =
-      instance.constructor.getDerivedStateFromProps;
+    const getDerivedStateFromProps = instance.constructor.getDerivedStateFromProps;
     if (getDerivedStateFromProps) {
       const result = getDerivedStateFromProps.call(
         instance.constructor,

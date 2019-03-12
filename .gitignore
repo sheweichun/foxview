@@ -1,10 +1,10 @@
 node_modules
 db.json
 public/
-lib/
+lib
 dist
-esm/
+esm
 source
-build/
+build
 package-lock.json
 yarn.lock

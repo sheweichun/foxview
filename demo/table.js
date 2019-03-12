@@ -1,5 +1,5 @@
 // import {html,defineWebComponent as defineComponent,WebComponent as Component,render,property} from 'illidan';
-import FoxView,{html,defineComponent,Component,render} from 'foxview';
+import {mount,html,defineComponent,Component,render} from 'foxview';
 // function property(){}
 
 import getData from './getData'
@@ -239,7 +239,7 @@ class Table extends Component{
 
 const rows = 100;
 
-new FoxView({
+mount({
   el:'#table',
   components:{
     'my-table':Table

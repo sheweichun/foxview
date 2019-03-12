@@ -14,7 +14,7 @@ module.exports = {
     },
     resolve:{
         alias:{
-            foxview:path.resolve(__dirname,'../lib/index.js')
+            foxview:path.resolve(__dirname,'../packages/foxview/lib/index.js')
         }
     },
     module:{

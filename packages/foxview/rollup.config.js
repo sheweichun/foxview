@@ -41,7 +41,8 @@ function generateConfig(format,isPro){
         output: {
           name:'FoxView',
           file: `dist/foxview${item.suffix || ''}${isPro ? '' : '.dev'}.js`,
-          format: item.format
+          format: item.format,
+          exports:'named'
         },
         plugins: plugins
     }
