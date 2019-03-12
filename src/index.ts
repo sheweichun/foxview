@@ -10,8 +10,8 @@ export const render = shadowRender;
 
 
 
-export function html(strings:TemplateStringsArray,...values:any[]){
-    return new TemplateResult(strings,values,'html')
+export function html(strings: TemplateStringsArray, ...values: any[]) {
+  return new TemplateResult(strings, values, 'html');
 }
 
 export const h = html
@@ -21,10 +21,10 @@ export function svg(strings:TemplateStringsArray,...values:any[]){
 }
 export const s = svg
 
-export function createRef():IRef{
-    return {
-        current:null
-    }
+export function createRef(): IRef {
+  return {
+    current: null
+  };
 }
 
 
