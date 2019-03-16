@@ -12,8 +12,10 @@ export function shadowRender(
   //@ts-ignore
   let part = container.$$part;
   if (part === undefined) {
-    removeNodes(container, container.firstChild);
-
+    // removeNodes(container, container.firstChild);
+    if(options.styleElement){
+      container.appendChild(options.styleElement);
+    }
     part = new NodePart(
       assign(
         {},

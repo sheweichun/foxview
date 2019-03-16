@@ -1,0 +1,12 @@
+
+@import '../../core//minxin';
+
+button{
+    @include box-sizing;
+    &,
+    &:active,
+    &:focus,
+    &:hover {
+        outline: 0; 
+    }
+}

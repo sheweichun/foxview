@@ -153,6 +153,7 @@ export interface RenderOptionComponents {
 
 export interface RenderOptions {
   eventContext?: any;
+  styleElement?:HTMLStyleElement;
   slots?: ComponentSlotSchema;
   notInWebComponent?: boolean;
   templateProcessor: TemplateProcessor;

@@ -162,7 +162,7 @@ class Table extends Component{
         super(props);
         this.state = {
             databases : {},
-            runflag:true
+            runflag:false
         }
         // this.getNewState();
     }

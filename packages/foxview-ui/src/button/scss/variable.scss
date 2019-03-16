@@ -1,0 +1,90 @@
+
+$btn-prefix : '.btn';
+
+$btn-shadow : none;    
+
+$btn-size-s-padding : var(--s-2);
+$btn-size-s-height : var(--s-5);
+$btn-size-s-font : var(--font-size-caption);
+$btn-size-s-border-width : var(--line-1);
+$btn-size-s-corner : var(--corner-1);
+$btn-size-s-icon-margin : var(--s-1);
+$btn-size-s-icon-size : var(--icon-xs);
+$btn-size-s-icon-split-size : var(--icon-xs);
+
+
+$btn-size-m-padding : var(--s-3);
+$btn-size-m-height : var(--s-7);
+$btn-size-m-font : var(--font-size-body-1);
+$btn-size-m-border-width : var(--line-1);
+$btn-size-m-corner : var(--corner-1);
+$btn-size-m-icon-margin : var(--s-1);
+$btn-size-m-icon-size : var(--icon-xs);
+$btn-size-m-icon-split-size : var(--icon-xs);
+
+
+$btn-size-l-padding : var(--s-4);
+$btn-size-l-height : var(--s-10);
+$btn-size-l-font : var(--font-size-subhead);
+$btn-size-l-border-width : var(--line-1);
+$btn-size-l-corner : var(--corner-1);
+$btn-size-l-icon-margin : var(--s-1);
+$btn-size-l-icon-size : var(--icon-s);
+$btn-size-l-icon-split-size : var(--icon-s);
+
+
+
+
+$btn-pure-normal-color: var(--color-text1-4);
+$btn-pure-normal-color-hover: var(--color-text1-4) ;
+$btn-pure-normal-bg: var(--color-white) ;
+$btn-pure-normal-bg-hover: var(--color-fill1-2) ;
+$btn-pure-normal-border-color: var(--color-line1-3) ;
+$btn-pure-normal-border-color-hover: var(--color-line1-4) ;
+$btn-pure-normal-border-style: solid;
+
+
+
+$btn-pure-secondary-color: var(--color-brand1-6);
+$btn-pure-secondary-color-hover: var(--color-white) ;
+$btn-pure-secondary-bg: var(--color-white) ;
+$btn-pure-secondary-bg-hover: var(--color-brand1-9) ;
+$btn-pure-secondary-border-color: var(--color-brand1-6) ;
+$btn-pure-secondary-border-color-hover: var(--color-brand1-9) ;
+$btn-pure-secondary-border-style: solid;
+
+
+$btn-pure-primary-color: var(--color-white);
+$btn-pure-primary-color-hover: var(--color-white) ;
+$btn-pure-primary-bg: var(--color-brand1-6) ;
+$btn-pure-primary-bg-hover: var(--color-brand1-9) ;
+$btn-pure-primary-border-color: var(--color-transparent) ;
+$btn-pure-primary-border-color-hover: var(--color-transparent) ;
+$btn-pure-primary-border-style: solid;
+
+
+//disabled
+$btn-pure-color-disabled: var(--color-text1-1) ;
+$btn-pure-bg-disabled: var(--color-fill1-1); 
+$btn-pure-border-color-disabled: var(--color-line1-1);
+
+//warning
+$btn-warning-border-style: solid ;
+$btn-warning-primary-color: var(--color-white) ;
+$btn-warning-primary-color-hover: var(--color-white) ;
+$btn-warning-primary-border-color: var(--color-error-3) ;
+$btn-warning-primary-border-color-hover: var(--color-error-4) ;
+$btn-warning-primary-bg: var(--color-error-3) ;
+$btn-warning-primary-bg-hover: var(--color-error-4) ;
+$btn-warning-primary-color-disabled: var(--color-text1-1) ;
+$btn-warning-primary-border-color-disabled: var(--color-line1-2) ;
+$btn-warning-primary-bg-disabled: var(--color-fill1-1) ;
+$btn-warning-secondary-color: var(--color-error-3) ;
+$btn-warning-secondary-color-hover: var(--color-white) ;
+$btn-warning-secondary-border-color: var(--color-error-3) ;
+$btn-warning-secondary-border-color-hover: var(--color-error-4) ;
+$btn-warning-secondary-bg: var(--color-white) ;
+$btn-warning-secondary-bg-hover: var(--color-error-4) ;
+$btn-warning-secondary-color-disabled: var(--color-text1-1) ;
+$btn-warning-secondary-border-color-disabled: var(--color-line1-1) ;
+$btn-warning-secondary-bg-disabled: var(--color-fill1-1) ;

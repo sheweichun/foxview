@@ -1,0 +1,40 @@
+@mixin box-sizing {
+    box-sizing: border-box;
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+}
+
+@mixin button-size($padding, $height, $font-size, $border-width) {
+    padding: 0 $padding;
+    height: $height;
+    line-height: calc(#{$height} - 2 * #{$border-width});
+    font-size: $font-size;
+    border-width: $border-width;
+}
+
+
+@mixin button-color($color, $color-hover, $bg-color: transparent, $bg-color-hover: transparent, $border-color: transparent, $border-color-hover: transparent) {
+    background-color: $bg-color;
+    border-color: $border-color;
+
+    &,
+    &:link,
+    &:visited,
+    &.visited {
+        color: $color;
+    }
+
+    &:focus,
+    &:hover,
+    &.hover,
+    &:active,
+    &.active {
+        color: $color-hover;
+        background-color: $bg-color-hover;
+        border-color: $border-color-hover;
+        text-decoration: none;
+    }
+}

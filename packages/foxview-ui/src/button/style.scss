@@ -1,0 +1,176 @@
+
+@import '../core//index.scss';
+@import './scss//variable.scss';
+@import './scss/mixin.scss';
+@import './scss//normalize.scss';
+
+:host{
+    display: inline-block;
+    line-height: 0;
+}
+
+button{
+    // box-shadow: $btn-shadow; 
+    position: relative; 
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    text-transform: none;
+    white-space: nowrap;
+    vertical-align: middle; 
+    user-select: none;  
+    transition: all .3s ease-out;  
+    cursor: pointer; 
+    &:after {
+        text-align: center;
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .5s ease;
+    }
+    // &.hover,
+    // &:hover {
+    //     box-shadow: $btn-shadow-hover;
+    // }
+ 
+    &.small {
+        @include next-button-size(
+            $btn-size-s-padding,
+            $btn-size-s-height,
+            $btn-size-s-font,
+            $btn-size-s-border-width,
+            $btn-size-s-corner,
+            $btn-size-s-icon-margin,
+            $btn-size-s-icon-size,
+            $btn-size-s-icon-split-size
+        );
+    }
+
+    &.medium {
+        @include next-button-size(
+            $btn-size-m-padding,
+            $btn-size-m-height,
+            $btn-size-m-font,
+            $btn-size-m-border-width,
+            $btn-size-m-corner,
+            $btn-size-m-icon-margin,
+            $btn-size-m-icon-size,
+            $btn-size-m-icon-split-size
+        );
+    }
+    &.large {
+        @include next-button-size(
+            $btn-size-l-padding,
+            $btn-size-l-height,
+            $btn-size-l-font,
+            $btn-size-l-border-width,
+            $btn-size-l-corner,
+            $btn-size-l-icon-margin,
+            $btn-size-l-icon-size,
+            $btn-size-l-icon-split-size
+        );
+    }
+
+    &.normal {
+        border-style: $btn-pure-normal-border-style;
+
+        @include button-color(
+            $btn-pure-normal-color,
+            $btn-pure-normal-color-hover,
+            $btn-pure-normal-bg,
+            $btn-pure-normal-bg-hover,
+            $btn-pure-normal-border-color,
+            $btn-pure-normal-border-color-hover
+        );
+    }
+
+    &.secondary {
+        border-style: $btn-pure-secondary-border-style;
+
+        @include button-color(
+            $btn-pure-secondary-color,
+            $btn-pure-secondary-color-hover,
+            $btn-pure-secondary-bg,
+            $btn-pure-secondary-bg-hover,
+            $btn-pure-secondary-border-color,
+            $btn-pure-secondary-border-color-hover
+        );
+    }
+
+    &.primary {
+        border-style: $btn-pure-primary-border-style;
+
+        @include button-color(
+            $btn-pure-primary-color,
+            $btn-pure-primary-color-hover,
+            $btn-pure-primary-bg,
+            $btn-pure-primary-bg-hover,
+            $btn-pure-primary-border-color,
+            $btn-pure-primary-border-color-hover
+        );
+    }
+    &.disabled,
+    &[disabled] {
+        cursor: not-allowed;
+
+        @include button-color(
+            $btn-pure-color-disabled,
+            $btn-pure-color-disabled,
+            $btn-pure-bg-disabled,
+            $btn-pure-bg-disabled,
+            $btn-pure-border-color-disabled,
+            $btn-pure-border-color-disabled 
+        );
+    }
+
+    /* warning */
+    &.warning {
+        border-style: $btn-warning-border-style;
+
+        &.primary {
+            @include button-color(
+                $btn-warning-primary-color,
+                $btn-warning-primary-color-hover,
+                $btn-warning-primary-bg,
+                $btn-warning-primary-bg-hover,
+                $btn-warning-primary-border-color,
+                $btn-warning-primary-border-color-hover
+            );
+            &.disabled,
+            &[disabled] {
+                @include button-color(
+                    $btn-warning-primary-color-disabled,
+                    $btn-warning-primary-color-disabled,
+                    $btn-warning-primary-bg-disabled,
+                    $btn-warning-primary-bg-disabled,
+                    $btn-warning-primary-border-color-disabled,
+                    $btn-warning-primary-border-color-disabled
+                );
+            }
+        }
+
+        &.secondary {
+            @include button-color(
+                $btn-warning-secondary-color,
+                $btn-warning-secondary-color-hover,
+                $btn-warning-secondary-bg,
+                $btn-warning-secondary-bg-hover,
+                $btn-warning-secondary-border-color,
+                $btn-warning-secondary-border-color-hover
+            );
+
+            &.disabled, 
+            &[disabled] {
+                @include button-color( 
+                    $btn-warning-secondary-color-disabled,
+                    $btn-warning-secondary-color-disabled,
+                    $btn-warning-secondary-bg-disabled,
+                    $btn-warning-secondary-bg-disabled,
+                    $btn-warning-secondary-border-color-disabled,
+                    $btn-warning-secondary-border-color-disabled
+                );
+            }
+        }
+    }
+} 
+ 

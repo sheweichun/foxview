@@ -1,18 +1,19 @@
 {
-  "name": "foxview",
+  "name": "foxview-ui",
   "version": "0.0.3",
   "description": "A declarative and efficient JavaScript library for building WebComponent and page",
   "author": "weichun.swc@alibaba-inc.com",
   "main": "lib/index.js",
   "module": "esm/index.js",
   "types": "lib/index.d.ts",
-  "unpkg": "dist/foxview.js",
-  "jsdelivr": "dist/foxview.js",
+  "unpkg": "dist/foxview-ui.js",
+  "jsdelivr": "dist/foxview-ui.js",
   "scripts": {
-    "watch": "tsc -w",
+    "watch": "parallelshell 'tsc -w' 'gulp watch'",
     "compile": "rm -rf lib esm && tsc && tsc  -p tsconfig.es.json",
     "build": "npm run compile && rm -rf dist && rollup -c",
-    "clean": "rm -rf lib esm dist"
+    "clean": "rm -rf lib esm dist",
+    "dev": "cd demo && npm run dev"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,10 @@
   },
   "homepage": "https://github.com/sheweichun/foxview#readme",
   "devDependencies": {
+    "foxview": "^0.0.3",
+    "gulp": "^4.0.0",
+    "gulp-sass": "^4.0.2",
+    "parallelshell": "^3.0.2",
     "rollup": "^1.1.2"
   }
 }

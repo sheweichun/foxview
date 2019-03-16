@@ -9,6 +9,7 @@ import {html,svg,defineWebComponent as defineComponent,WebComponent,createRef,pr
 class MyButton extends WebComponent{
   @property({type:String}) message = "message_test"
   @property({type:Number}) counter = 3
+  @property({type:String}) color = 'red'
   static get properties(){
     return {
       message:{
@@ -51,11 +52,11 @@ class MyButton extends WebComponent{
     return ret;
   }
   render(){
-    const {message,counter} = this.props;
+    const {message,counter,color} = this.props;
       return html`
       <style>
           :host{
-              background:blue;
+              background:${color};
               color:var(--color);
           }
       </style>
@@ -239,6 +240,7 @@ window.addEventListener('load',function(){
       // btn.setAttribute('message','click me!!!');
       btn.setAttribute('message','clickme!!!')
       btn.setAttribute('counter','5')
+      btn.setAttribute('color','yellow')
       // btn.message = 'click me!!!!!!'
       document.getElementById('after').innerHTML = 'change after'
       // document.body.style.setProperty('--color','yellow');

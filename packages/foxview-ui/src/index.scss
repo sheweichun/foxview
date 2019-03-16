@@ -1,0 +1,19 @@
+@import './core/vars/_size.scss';
+@import './core/vars/_corner.scss';
+@import './core/vars/_line.scss';
+@import './core/vars/_font.scss';
+@import './core/vars/_color.scss';
+
+
+:root{
+    @include size();
+    @include corner(); 
+    @include line();
+    @include font(); 
+    @include color();
+    // --s-5: 30px;
+    // --s-2: 10px;
+    // --line-1: 1px;
+    // --font-size-caption: 12px;
+    // --corner-1:2px; 
+}

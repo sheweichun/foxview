@@ -87,12 +87,13 @@ class ContentPeon implements Peon {
     const newValue = injectValue2Strings(this.startIndex, this.strings, values);
     if (newValue !== this._pendingValue) {
       this._shouldUpdate = true;
+      this._pendingValue = newValue;
     }
-    this._pendingValue = injectValue2Strings(
-      this.startIndex,
-      this.strings,
-      values
-    );
+    // this._pendingValue = injectValue2Strings(
+    //   this.startIndex,
+    //   this.strings,
+    //   values
+    // );
   }
   destroy() {}
   commit() {

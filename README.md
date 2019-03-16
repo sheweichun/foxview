@@ -2,7 +2,7 @@
 
 ## Documentation
 
-Full documentation is available at [https://sheweichun.github.io/foxview/](https://sheweichun.github.io/foxview/).
+Full documentation is available at [https://sheweichun.github.io/foxview](https://sheweichun.github.io/foxview).
 
 
 ## Installation

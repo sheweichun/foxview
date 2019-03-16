@@ -9,6 +9,11 @@ import {
 import WMap from './util/map';
 import assign from './util/assign';
 
+
+// const supportsAdoptingStyleSheets =
+//     ('adoptedStyleSheets' in Document.prototype) &&
+//     ('replace' in CSSStyleSheet.prototype);
+
 export interface ComplexAttributeConverter<Type = any, TypeHint = any> {
   /**
    * Function called to convert an attribute value to a property
@@ -47,7 +52,7 @@ export interface PropertyDeclarations {
 type PropertyDeclarationMap = WMap<PropertyDeclaration>;
 
 type AttributeMap = WMap<string>;
-type PropertyValues = WMap<unknown>;
+type PropertyValues = WMap<any>;
 
 const defaultConverter: ComplexAttributeConverter = {
   toAttribute(value: any, type?: any) {
@@ -140,6 +145,7 @@ export abstract class WebComponent extends HTMLElement
       typeof converter === 'function' ? converter : converter.fromAttribute;
     return fromAttribute ? fromAttribute(value, type) : value;
   }
+  static styles?:string
   private static _attributeNameForProperty(
     name: string,
     options: PropertyDeclaration
@@ -276,48 +282,79 @@ export abstract class WebComponent extends HTMLElement
   }
   initialize() {
     this.attachShadow({ mode: 'open' });
+  }
+  private _getStyleElement(){
+    const _styles = (this.constructor as typeof WebComponent).styles
+    if(_styles){
+      const style = document.createElement('style');
+      style.textContent = _styles;
+      return style
+    }
+  }
+  connectedCallback(){
+    
     // this._saveInstanceProperties();
     this.requestUpdate();
   }
   // private _saveInstanceProperties() {
-  //     for (const [p] of (this.constructor as typeof WebComponent)._classProperties) {
+  //     const ctor = this.constructor as typeof WebComponent;
+  //     const classProperties:PropertyDeclarationMap = ctor._classProperties;
+  //     if(classProperties){
+  //       classProperties._each((p,val)=>{
   //         if (this.hasOwnProperty(p)) {
   //             const value = this[p as keyof this];
+  //             console.log('value :',value);
   //             delete this[p as keyof this];
   //             if (!this._instanceProperties) {
-  //                 this._instanceProperties = new Map();
+  //                 this._instanceProperties = new WMap();
   //             }
   //             this._instanceProperties.set(p, value);
   //         }
+  //       })
   //     }
+
+  //     // for (const [p] of (this.constructor as typeof WebComponent)._classProperties) {
+  //     //     if (this.hasOwnProperty(p)) {
+  //     //         const value = this[p as keyof this];
+  //     //         delete this[p as keyof this];
+  //     //         if (!this._instanceProperties) {
+  //     //             this._instanceProperties = new Map();
+  //     //         }
+  //     //         this._instanceProperties.set(p, value);
+  //     //     }
+  //     // }
   // }
   requestUpdate(name?: string, oldValue?: any, callback?: () => void) {
     let shouldRequestUpdate = true;
     // if we have a property key, perform property update steps.
     // if (name !== undefined && !this._changedProperties.has(name)) {
-    if (name !== undefined && !this._pendProps.hasOwnProperty(name)) {
-      const ctor = this.constructor as typeof WebComponent;
-      const options =
-        ctor._classProperties.get(name) || defaultPropertyDeclaration;
-      if (
-        (options.hasChanged || notEqual)(this[name as keyof this], oldValue)
-      ) {
-        // track old value when changing.
-        this._pendProps[name] = this[name];
-        // this._changedProperties.set(name, oldValue);
-        // add to reflecting properties set
+    if (name !== undefined) {
+      if(!this._pendProps.hasOwnProperty(name)){
+        const ctor = this.constructor as typeof WebComponent;
+        const options =
+          ctor._classProperties.get(name) || defaultPropertyDeclaration;
         if (
-          options.reflect === true &&
-          !this._hasFlag(STATE_IS_REFLECTING_TO_PROPERTY)
+          (options.hasChanged || notEqual)(this[name as keyof this], oldValue)
         ) {
-          if (this._reflectingProperties === undefined) {
-            this._reflectingProperties = new WMap();
+          // track old value when changing.
+          this._pendProps[name] = this[name];
+          // this._changedProperties.set(name, oldValue);
+          // add to reflecting properties set
+          if (
+            options.reflect === true &&
+            !this._hasFlag(STATE_IS_REFLECTING_TO_PROPERTY)
+          ) {
+            if (this._reflectingProperties === undefined) {
+              this._reflectingProperties = new WMap();
+            }
+            this._reflectingProperties.set(name, options);
           }
-          this._reflectingProperties.set(name, options);
+          // abort the request if the property should not be considered changed.
+        } else {
+          shouldRequestUpdate = false;
         }
-        // abort the request if the property should not be considered changed.
-      } else {
-        shouldRequestUpdate = false;
+      }else{
+        this._pendProps[name] = this[name];  //新值需要同步到props中
       }
     }
     if (!this._hasFlag(STATE_IN_UPDATING) && shouldRequestUpdate) {
@@ -336,10 +373,10 @@ export abstract class WebComponent extends HTMLElement
   protected performUpdate(): void | Promise<unknown> {
     // if (this._instanceProperties) {
     //     //@ts-ignore
-    //     for (const [p, v] of this._instanceProperties!) {
-    //         (this as any)[p] = v;
-    //       }
-    //       this._instanceProperties = undefined;
+    //     this._instanceProperties._each((p,v)=>{
+    //       (this as any)[p] = v;
+    //     })
+    //     this._instanceProperties = undefined;
     // }
     // const changedProperties = this._changedProperties;
     let newState = assign({}, this.state || {}, this._alternalState || {});
@@ -433,6 +470,7 @@ export abstract class WebComponent extends HTMLElement
         this._reflectingProperties = undefined;
       }
       this.__part = shadowRender(this.render(), this.shadowRoot, {
+        styleElement:this._getStyleElement(),
         eventContext: this
       });
     } catch (e) {
@@ -470,6 +508,7 @@ export abstract class WebComponent extends HTMLElement
   private _attributeToProperty(name: string, value: string) {
     // Use tracking info to avoid deserializing attribute value if it was
     // just set from a property setter.
+    
     if (this._hasFlag(STATE_IS_REFLECTING_TO_ATTRIBUTE)) {
       return;
     }
@@ -482,6 +521,7 @@ export abstract class WebComponent extends HTMLElement
     // mark state reflecting
     // this._updateState = this._updateState | STATE_IS_REFLECTING_TO_PROPERTY;
     this._markFlag(STATE_IS_REFLECTING_TO_PROPERTY);
+    // debugger;
     this[propName as keyof this] = ctor._propertyValueFromAttribute(
       value,
       options
