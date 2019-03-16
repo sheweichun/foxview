@@ -1,0 +1,340 @@
+
+@import '../core/_variable.scss';
+@import '../core/_minxin.scss';
+
+$icon-content-smile: "\\e65f" ;
+
+/// icon-content-cry
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-cry: "\\e65d" ;
+
+/// icon-content-success
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-success: "\\e60a" ;
+
+/// icon-content-warning
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-warning: "\\e60b" ;
+
+/// icon-content-prompt
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-prompt: "\\e60c" ;
+
+/// icon-content-error
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-error: "\\e60d" ;
+
+/// icon-content-help
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-help: "\\e673" ;
+
+/// icon-content-clock
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-clock: "\\e621" ;
+
+/// icon-content-success-filling
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-success-filling: "\\e63a" ;
+
+/// icon-content-delete-filling
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-delete-filling: "\\e623" ;
+
+/// icon-content-favorites-filling
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-favorites-filling: "\\e60e" ;
+
+/// icon-content-add
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-add: "\\e655" ;
+
+/// icon-content-minus
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-minus: "\\e601" ;
+
+/// icon-content-arrow-up
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-arrow-up: "\\e625" ;
+
+/// icon-content-arrow-down
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-arrow-down: "\\e63d" ;
+
+/// icon-content-arrow-left
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-arrow-left: "\\e61d" ;
+
+/// icon-content-arrow-right
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-arrow-right: "\\e619" ;
+
+/// icon-content-arrow-double-left
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-arrow-double-left: "\\e659" ;
+
+/// icon-content-arrow-double-right
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-arrow-double-right: "\\e65e" ;
+
+/// icon-content-switch
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-switch: "\\e6b3" ;
+
+/// icon-content-sorting
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-sorting: "\\e634" ;
+
+/// icon-content-descending
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-descending: "\\e61f" ;
+
+/// icon-content-ascending
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-ascending: "\\e61e" ;
+
+/// icon-content-select
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-select: "\\e632" ;
+
+/// icon-content-semi-select
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-semi-select: "\\e633" ;
+
+/// icon-content-loading
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-loading: "\\e646" ;
+
+/// icon-content-search
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-search: "\\e656" ;
+
+/// icon-content-close
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-close: "\\e626" ;
+
+/// icon-content-ellipsis
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-ellipsis: "\\e654" ;
+
+/// icon-content-picture
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-picture: "\\e631" ;
+
+/// icon-content-calendar
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-calendar: "\\e607" ;
+
+/// icon-content-ashbin
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-ashbin: "\\e639" ;
+
+/// icon-content-upload
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-upload: "\\e7ee" ;
+
+/// icon-content-download
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-download: "\\e628" ;
+
+/// icon-content-set
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-set: "\\e683" ;
+
+/// icon-content-edit
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-edit: "\\e63b" ;
+
+/// icon-content-refresh
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-refresh: "\\e677" ;
+
+/// icon-content-filter
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-filter: "\\e627" ;
+
+/// icon-content-attachment
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-attachment: "\\e665" ; 
+
+/// icon-content-account
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-account: "\\e608" ;
+
+/// icon-content-email
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-email: "\\e605" ;
+
+/// icon-content-atm
+/// @group type
+/// @export type
+/// @unconfigurable
+$icon-content-atm: "\\e606" ;    
+
+
+:host{
+    display: inline-block;
+    font-size: 0;
+}
+i{ 
+    font-family: $icon-font-family;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+   
+    &:before {
+        display: inline-block; 
+        vertical-align: middle;
+        text-align: center; 
+    }
+    &.smile:before { content: $icon-content-smile; }
+    &.cry:before { content: $icon-content-cry; }
+    &.success:before { content: $icon-content-success; }
+    &.warning:before { content: $icon-content-warning; } 
+    &.prompt:before { content: $icon-content-prompt; }
+    &.error:before { content: $icon-content-error; }
+    &.help:before { content: $icon-content-help; }
+    &.clock:before { content: $icon-content-clock; }
+    &.success-filling:before { content: $icon-content-success-filling; }
+    &.delete-filling:before { content: $icon-content-delete-filling; }
+    &.favorites-filling:before { content: $icon-content-favorites-filling; }
+    &.add:before { content: $icon-content-add; }
+    &.minus:before { content: $icon-content-minus; }
+    &.arrow-up:before { content: $icon-content-arrow-up; }
+    &.arrow-down:before { content: $icon-content-arrow-down; }
+    &.arrow-left:before { content: $icon-content-arrow-left; }
+    &.arrow-right:before { content: $icon-content-arrow-right; }
+    &.arrow-double-left:before { content: $icon-content-arrow-double-left; }
+    &.arrow-double-right:before { content: $icon-content-arrow-double-right; }
+    &.switch:before { content: $icon-content-switch; }
+    &.sorting:before { content: $icon-content-sorting; }
+    &.descending:before { content: $icon-content-descending; }
+    &.ascending:before { content: $icon-content-ascending; }
+    &.select:before { content: $icon-content-select; }
+    &.semi-select:before { content: $icon-content-semi-select; }
+    &.search:before { content: $icon-content-search; }
+    &.close:before { content: $icon-content-close; }
+    &.ellipsis:before { content: $icon-content-ellipsis; }
+    &.picture:before { content: $icon-content-picture; }
+    &.calendar:before { content: $icon-content-calendar; }
+    &.ashbin:before { content: $icon-content-ashbin; }
+    &.upload:before { content: $icon-content-upload; }
+    &.download:before { content: $icon-content-download; }
+    &.set:before { content: $icon-content-set; }
+    &.edit:before { content: $icon-content-edit; }
+    &.refresh:before { content: $icon-content-refresh; }
+    &.filter:before { content: $icon-content-filter; }
+    &.attachment:before { content: $icon-content-attachment; }
+    &.account:before { content: $icon-content-account; }
+    &.email:before { content: $icon-content-email; }
+    &.atm1:before { content: #{$icon-content-atm}; }
+    &.loading:before {
+        content: $icon-content-loading;
+        animation: loadingCircle 1s infinite linear;
+    }
+    &.xxs {
+        @include icon-size(var(--icon-xxs));
+    }
+    &.xs {
+        @include icon-size(var(--icon-xs));
+    }
+    &.small {
+        @include icon-size(var(--icon-s));
+    }
+    &.medium {
+        @include icon-size(var(--icon-m));
+    }
+    &.large {
+        @include icon-size(var(--icon-l));
+    }
+    &.xl {
+        @include icon-size(var(--icon-xl));
+    }
+    &.xxl {
+        @include icon-size(var(--icon-xxl));
+    }
+    &.inherit {
+        @include icon-size(inherit);
+    }
+}

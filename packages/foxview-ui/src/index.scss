@@ -3,10 +3,28 @@
 @import './core/vars/_line.scss';
 @import './core/vars/_font.scss';
 @import './core/vars/_color.scss';
+@import './core/vars/_icon.scss'; 
 
+@import './core/_variable.scss';
+
+
+// $icon-prefix: #{$css-prefix}icon !default;
+
+
+
+@font-face {
+    font-family: $icon-font-family;
+    src: url('#{$icon-font-path}.eot');
+    src:
+        url('#{$icon-font-path}.eot?#iefix') format('embedded-opentype'),
+        url('#{$icon-font-path}.woff') format('woff'),
+        url('#{$icon-font-path}.ttf') format('truetype'),
+        url('#{$icon-font-path}.svg#NextIcon') format('svg');
+} 
 
 :root{
     @include size();
+    @include icon();
     @include corner(); 
     @include line();
     @include font(); 

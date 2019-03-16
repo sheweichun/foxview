@@ -8,14 +8,13 @@ class Button extends WebComponent{
     @property({type:String}) type = 'normal'
     @property({type:String}) size = 'medium'
     @property({type:Boolean}) warning = false
-    @property({type:Boolean}) disabled = false
+    @property({type:Boolean}) disabled = false 
     static styles = s
     render(){
         const {rtl,type,size,warning,disabled} = this.props;
         // const {rtl,type,size,warning,disabled} = this;
         return html`  
         <button class="${type} ${size} ${warning ? 'warning':''}" ?disabled=${disabled} dir="${rtl ? 'rtl' : undefined}" role="button">
-            <span class="luodan">before test121</span>
             <slot></slot>
         </button>
         `

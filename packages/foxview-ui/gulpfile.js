@@ -15,8 +15,13 @@ function wrap(){
         }
         file.path = replaceExt(file.path, '.ts');
         const str = file.contents.toString();
+        // const contents = file.contents;
         // file.contents = new Buffer(`exports.default = "${str.replace(/[\r\n]/g,'')}"`);
         file.contents = new Buffer(`export default \`${str}\``);
+        // const before = new Buffer("export default `");
+        // const after = new Buffer("`");
+        // const totalLen = before.length + contents.length + after.length;
+        // file.contents = Buffer.concat([before,contents,after],totalLen);
         cb(null, file); 
     });
 }

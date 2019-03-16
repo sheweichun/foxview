@@ -1,0 +1,28 @@
+@mixin icon() {
+    
+
+// ------------------- 图标尺寸 ---------------------- //
+
+
+--icon-xxs: var(--s-2);
+
+
+--icon-xs: var(--s-3);
+
+--icon-s: var(--s-4);
+
+
+--icon-m: var(--s-5);
+
+
+--icon-l: var(--s-6);
+
+
+--icon-xl: var(--s-8);
+
+--icon-xxl: var(--s-12);
+
+--icon-xxxl: var(--s-16);
+
+
+}
