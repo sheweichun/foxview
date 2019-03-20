@@ -4,8 +4,8 @@
 @import './core/vars/_font.scss';
 @import './core/vars/_color.scss';
 @import './core/vars/_icon.scss'; 
-
-@import './core/_variable.scss';
+@import './core/vars/_shadow.scss';
+@import './core/_variable.scss'; 
 
 
 // $icon-prefix: #{$css-prefix}icon !default;
@@ -29,6 +29,7 @@
     @include line();
     @include font(); 
     @include color();
+    @include shadow();
     // --s-5: 30px;
     // --s-2: 10px;
     // --line-1: 1px;

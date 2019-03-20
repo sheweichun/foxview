@@ -24,6 +24,7 @@ export type ComponentSlotSchema = {
 
 export interface IComponentLifeCycle {
   componentDidMount(): void;
+  initState?(props:ComponentProp):ComponentProp;
   componentDidUpdate(
     prevProps: ComponentProp,
     prevState: ComponentProp,
@@ -48,6 +49,7 @@ export interface IComponentLifeCycle {
 export interface IComponent {
   id: string;
   _firstCommit(): void;
+  initState?(props:ComponentProp):ComponentProp;
   _commit(
     prevProps: ComponentProp,
     prevState: ComponentProp,
@@ -136,7 +138,7 @@ export interface TemplateStringsArray extends ReadonlyArray<string> {
 }
 
 export interface ITemplateResult {
-  strings: TemplateStringsArray;
+  strings: string[];
   values: any[];
   type: string;
   getHTML: () => string;

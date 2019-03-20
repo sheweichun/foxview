@@ -4,14 +4,14 @@ import  {defineWebComponent,WebComponent,html,property} from 'foxview';
 import s from './style';  
 
 class Button extends WebComponent{
-    @property({type:Boolean}) rtl = false
-    @property({type:String}) type = 'normal'
-    @property({type:String}) size = 'medium'
-    @property({type:Boolean}) warning = false
-    @property({type:Boolean}) disabled = false 
+    @property({type:Boolean}) rtl:boolean
+    @property({type:String}) type:string
+    @property({type:String}) size:string
+    @property({type:Boolean}) warning:boolean
+    @property({type:Boolean}) disabled:boolean
     static styles = s
     render(){
-        const {rtl,type,size,warning,disabled} = this.props;
+        const {rtl,type='normal',size="medium",warning,disabled} = this.props;
         // const {rtl,type,size,warning,disabled} = this;
         return html`  
         <button class="${type} ${size} ${warning ? 'warning':''}" ?disabled=${disabled} dir="${rtl ? 'rtl' : undefined}" role="button">

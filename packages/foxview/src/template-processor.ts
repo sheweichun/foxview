@@ -87,6 +87,9 @@ function _prepareNodeContent(
 ) {
   const { renderOption } = extra;
   const nodeValue = node.nodeValue!;
+  // if(node.tagName === 'TEMPLATE'){
+  //   console.log('node :',node,nodeValue);
+  // }
   if (nodeValue && nodeValue.indexOf(marker) >= 0) {
     const strings = nodeValue.split(markerRegex);
     peons.push(
@@ -158,10 +161,11 @@ function forEach_node_attribute(
         const attributeValue = node.getAttribute(attributeLookupName)!;
         const strings = attributeValue.split(markerRegex);
         attributesToRemove.push(attributeLookupName);
-        const prefix = name[0];
+        const prefixName = name === 'value' ? '.value' : name;
+        const prefix = prefixName[0];
         const target = AttributeMap[prefix] || DefaultAttributeTarget;
         // console.log(name,partIndex,templateResult.values);
-        hasMarker(name, target, partIndex, strings);
+        hasMarker(prefixName, target, partIndex, strings);
         partIndex += strings.length - 1;
       } else {
         noMarker && noMarker(curAttribute);
@@ -323,6 +327,12 @@ export function walkNode(
   let nodesToRemove: Node[] = [];
   while (walker.nextNode()) {
     const node = walker.currentNode as Element;
+    if(node.tagName === 'TEMPLATE'){ //解析template
+        const walkTemplaResult = walkNode((node as HTMLTemplateElement).content,templateResult,partIndex,option);
+        partIndex = walkTemplaResult.partIndex;
+        peons.push(...walkTemplaResult.peons);
+        continue;
+    }
     const handle = _prepareMap[node.nodeType];
     if (handle) {
       const result: HandleResult = handle(node, partIndex, peons, {

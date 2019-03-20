@@ -208,6 +208,7 @@ class EventPeon implements Peon {
 
 class BooleanAttributePeon extends AttributePeon {
   single: boolean;
+  // isInput:boolean;
   constructor(option: PeonConstruct) {
     super(option);
     if (
@@ -219,22 +220,29 @@ class BooleanAttributePeon extends AttributePeon {
         'Boolean attributes can only contain a single expression'
       );
     }
+    // this.isInput = this.node.tagName === 'INPUT'
   }
   setValue(values: any[]) {
     let newValue: any = values[this.startIndex];
-    if (newValue !== this._pendingValue) {
+    
+    let oldValue = this.node[this.name];
+    if (newValue !== oldValue) {
       this._shouldUpdate = true;
     }
     this._pendingValue = newValue;
   }
   commit() {
     if (!this._shouldUpdate) return;
-    const value = this._pendingValue;
+    const value = !!this._pendingValue;
     if (value) {
       this.node.setAttribute(this.name, '');
     } else {
       this.node.removeAttribute(this.name);
     }
+    // if(this.isInput){
+    //   this.node[this.name] = value;
+    // }
+    this.node[this.name] = value;
     this._shouldUpdate = false;
   }
 }
@@ -249,19 +257,21 @@ class PropertyPeon extends AttributePeon {
       this.strings[1] === '';
   }
   setValue(values: any[]) {
+    // console.log('values :',values);
     let newValue: any;
     if (this.single) {
       newValue = values[this.startIndex];
     } else {
       newValue = injectValue2Strings(this.startIndex, this.strings, values);
     }
-    if (newValue !== this._pendingValue) {
+    if (newValue !== this.node[this.name]) {
       this._shouldUpdate = true;
     }
     this._pendingValue = newValue;
   }
   commit() {
     if (!this._shouldUpdate) return;
+    // console.log(this.node,this.name,this._pendingValue);
     this.node[this.name] = this._pendingValue;
     this._shouldUpdate = false;
   }

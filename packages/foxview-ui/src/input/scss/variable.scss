@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+////
+/// @module input: 输入框
+/// @tag input
+/// @category component
+/// @family data-entry
+/// @varPrefix $input-
+/// @classPrefix {prefix}-input
+/// @order {"statement/normal":10,"statement/normal/addon":100,"statement/normal/feedback":101,"statement/normal/maxlen":102,"statement/normal/clear":103,"statement/hover":11,"statement/hover/clear":110,"statement/focus":12,"statement/disabled":13,"statement/error":14,"size/bounding":10,"size/bounding/addon":100,"size/label":11,"size/maxlen":12}
+////
+
+$input-prefix: '.input';
+
+// 公共
+// --------------------------------------------------
+
+/// text
+/// @namespace statement/normal
+$input-text-color: var(--color-text1-4 );
+
+/// border
+/// @namespace statement/normal
+$input-border-color: var(--color-line1-3 );
+
+/// label
+/// @namespace statement/normal
+$input-label-color: var(--color-text1-3 );
+
+/// border
+/// @namespace statement/hover
+$input-hover-border-color: var(--color-line1-4 );
+
+/// background
+/// @namespace statement/hover
+$input-hover-bg-color: var(--color-white );
+
+/// border
+/// @namespace statement/focus
+$input-focus-border-color: var(--color-brand1-6 );
+
+/// background
+/// @namespace statement/focus
+$input-focus-bg-color: var(--color-white );
+
+/// border
+/// @namespace size/bounding
+$input-border-width: var(--line-1 );
+
+/// background
+/// @namespace statement/normal
+$input-bg-color: var(--color-white );
+
+/// placeholder
+/// @namespace statement/normal
+$input-placeholder-color: var(--color-text1-2 );
+
+/// text
+/// @namespace statement/disabled
+$input-disabled-color: var(--color-text1-1 );
+
+/// border
+/// @namespace statement/disabled
+$input-disabled-border-color: var(--color-line1-1 );
+
+/// background
+/// @namespace statement/disabled
+$input-disabled-bg-color: var(--color-fill1-1 );
+
+// 多行
+// --------------------------------------------------
+
+/// padding(l,r)
+/// @namespace size/bounding
+$input-multiple-padding-lr: var(--s-2 );
+
+/// padding(t,b)
+/// @namespace size/bounding
+$input-multiple-padding-tb: var(--s-1 );
+
+/// text
+/// @namespace size/bounding
+$input-multiple-font-size: var(--font-size-body-1 );
+
+/// corner
+/// @namespace size/bounding
+$input-multiple-corner: var(--corner-1 );
+
+// addon
+// --------------------------------------------------
+
+/// background
+/// @namespace statement/normal/addon
+$input-addon-bg-color: var(--color-fill1-2 );
+
+/// text
+/// @namespace statement/normal/addon
+$input-addon-text-color: var(--color-text1-2 );
+
+/// padding(l,r)
+/// @namespace size/bounding/addon
+$input-addon-padding: var(--s-2 );
+
+// large
+// --------------------------------------------------
+
+/// padding
+/// @namespace size/bounding
+$input-l-padding: var(--s-3 );
+
+/// padding(l)
+/// @namespace size/label
+$input-l-label-padding-left: var(--s-3 );
+
+/// padding(r)
+/// @namespace size/label
+$input-l-icon-padding-right: var(--s-2 );
+
+// medium
+// --------------------------------------------------
+
+/// padding
+/// @namespace size/bounding
+$input-m-padding: var(--s-2 );
+
+/// padding(l)
+/// @namespace size/label
+$input-m-label-padding-left: var(--s-2 );
+
+/// padding(r)
+/// @namespace size/label
+$input-m-icon-padding-right: var(--s-2 );
+
+// small
+// --------------------------------------------------
+
+/// padding
+/// @namespace size/bounding
+$input-s-padding: var(--s-1 );
+
+/// padding(l)
+/// @namespace size/label
+$input-s-label-padding-left: var(--s-2 );
+
+/// padding(r)
+/// @namespace size/label
+$input-s-icon-padding-right: var(--s-1 );
+
+// feedback
+// --------------------------------------------------
+
+/// success
+/// @namespace statement/normal/feedback
+$input-feedback-success-color: var(--color-success-3 );
+
+/// loading
+/// @namespace statement/normal/feedback
+$input-feedback-loading-color: var(--color-notice-3 );
+
+/// border
+/// @namespace statement/error
+$input-feedback-error-border-color: var(--color-error-3 );
+
+// maxlen
+// --------------------------------------------------
+
+/// error
+/// @namespace statement/normal/maxlen
+$input-maxlen-error-color: var(--color-error-3 );
+
+/// text
+/// @namespace statement/normal/maxlen
+$input-maxlen-color: var(--color-text1-2 );
+
+/// text
+/// @namespace size/maxlen
+$input-maxlen-font-size: var(--font-size-caption );
+
+// hint
+// --------------------------------------------------
+
+/// background
+/// @namespace statement/normal/clear
+$input-hint-color: var(--color-text1-2 );
+
+/// background
+/// @namespace statement/hover/clear
+$input-hint-hover-color: var(--color-text1-3 );
+
+
+
+
+$form-element-small-height: var(--s-5 );
+
+/// height
+/// @semantic 中号组件高度
+$form-element-medium-height: var(--s-7 );
+
+/// height
+/// @semantic 大号组件高度
+$form-element-large-height: var(--s-10 );
+
+/// text
+/// @semantic 小号组件字体
+$form-element-small-font-size: var(--font-size-caption );
+
+/// text
+/// @semantic 中号组件字体
+$form-element-medium-font-size: var(--font-size-body-1 );
+
+/// text
+/// @semantic 大号组件字体
+$form-element-large-font-size: var(--font-size-subhead );
+
+/// icon
+/// @semantic 小号组件 icon
+$form-element-small-icon-size: var(--icon-xs );
+
+/// icon
+/// @semantic 中号组件 icon
+$form-element-medium-icon-size: var(--icon-xs );
+
+/// icon
+/// @semantic 大号组件 icon
+$form-element-large-icon-size: var(--icon-s );
+
+/// corner
+/// @semantic 小号组件圆角
+$form-element-small-corner: var(--corner-1 );
+
+/// corner
+/// @semantic 中号组件圆角
+$form-element-medium-corner: var(--corner-1 );
+
+/// corner
+/// @semantic 大号组件圆角
+$form-element-large-corner: var(--corner-1 );

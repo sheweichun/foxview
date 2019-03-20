@@ -1,4 +1,4 @@
-import { TemplateStringsArray, ITemplateResult } from './type';
+import { ITemplateResult } from './type';
 import {
   matchLastAttributeName,
   boundAttributeSuffix,
@@ -11,10 +11,10 @@ import { reparentNodes } from './dom';
  * interpolated expressions.
  */
 export class TemplateResult implements ITemplateResult {
-  strings: TemplateStringsArray;
+  strings: string[];
   values: any[];
   type: string;
-  constructor(strings: TemplateStringsArray, values: any[], type: string) {
+  constructor(strings: string[], values: any[], type: string) {
     this.strings = strings;
     this.values = values;
     this.type = type;

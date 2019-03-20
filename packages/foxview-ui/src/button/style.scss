@@ -1,8 +1,9 @@
 
-@import '../core//index.scss';
-@import './scss//variable.scss';
+@import '../core/index.scss';
+@import './scss/variable.scss';
 @import './scss/mixin.scss';
-@import './scss//normalize.scss';
+@import './scss/normalize.scss';
+@import '../core/_base.scss'; 
 
 :host{
     display: inline-block;
@@ -163,7 +164,7 @@ button{
             &[disabled] {
                 @include button-color( 
                     $btn-warning-secondary-color-disabled,
-                    $btn-warning-secondary-color-disabled,
+                    $btn-warning-secondary-color-disabled, 
                     $btn-warning-secondary-bg-disabled,
                     $btn-warning-secondary-bg-disabled,
                     $btn-warning-secondary-border-color-disabled,

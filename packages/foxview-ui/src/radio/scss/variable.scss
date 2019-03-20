@@ -1,0 +1,188 @@
+////
+/// @module radio: 单选框
+/// @tag radio
+/// @category component
+/// @family data-entry
+/// @varPrefix $radio-
+/// @classPrefix {prefix}-radio
+/// @order {"size/bounding":10,"size/icon":11,"size/label":12,"statement/normal":10,"statement/normal/bounding":100,"statement/normal/label":101,"statement/hover":11,"statement/hover/bounding":110,"statement/hover/label":111,"statement/checked":12,"statement/checked/bounding":120,"statement/checked/icon":121,"statement/checked/label":122,"statement/disabled":13,"statement/disabled/bounding":130,"statement/disabled/icon":131,"statement/disabled/label":132,"statement/checked hover":14,"statement/checked hover/bounding":140,"statement/checked hover/icon":141,"statement/checked disabled":15,"statement/checked disabled/bounding":150,"statement/checked disabled/label":151}
+////
+
+@charset "UTF-8";
+
+// radio variables
+// --------------------------------------------------
+
+$radio-prefix : '.radio';
+
+// Radio:Size
+// --------------------------------------------------
+
+/// width
+/// @namespace size/bounding
+$radio-width: var(--s-4 );
+/// border
+/// @namespace size/bounding
+$radio-circle-border-width: var(--line-1 );
+/// text
+/// @namespace size/icon
+$radio-circle-size: var(--s-1 );
+/// margin (l)
+/// @namespace size/label
+$radio-font-margin-left: var(--s-1 );
+/// text
+/// @namespace size/label
+$radio-font-size: var(--font-size-body-1 );
+
+// Radio:Statement
+// --------------------------------------------------
+
+/// shadow
+/// @namespace statement/normal/bounding
+$radio-shadow: var(--shadow-zero );
+/// corner
+/// @namespace statement/normal/bounding
+$radio-radius-size: var(--corner-circle );
+
+/// background
+/// @namespace statement/normal/bounding
+$radio-bg-color: var(--color-white );
+/// background
+/// @namespace statement/hover/bounding
+$radio-hovered-bg-color: var(--color-brand1-1 );
+/// background
+/// @namespace statement/checked/bounding
+$radio-checked-bg-color: var(--color-brand1-6 );
+/// background
+/// @namespace statement/disabled/bounding
+$radio-disabled-bg-color: var(--color-fill1-1 );
+/// background
+/// @namespace statement/checked hover/bounding
+$radio-checked-hovered-bg-color: var(--color-brand1-9 );
+
+/// border
+/// @namespace statement/normal/bounding
+$radio-border-color: var(--color-line1-3 );
+/// border
+/// @namespace statement/hover/bounding
+$radio-hovered-border-color: var(--color-brand1-6 );
+/// border
+/// @namespace statement/checked/bounding
+$radio-checked-border-color: var(--color-brand1-6 );
+/// border
+/// @namespace statement/disabled/bounding
+$radio-disabled-border-color: var(--color-line1-1 );
+/// border
+/// @namespace statement/checked hover/bounding
+$radio-checked-hovered-border-color: var(--color-transparent );
+
+/// text
+/// @namespace statement/checked/icon
+$radio-checked-circle-color: var(--color-white );
+/// text
+/// @namespace statement/disabled/icon
+$radio-disabled-circle-color: var(--color-text1-1 );
+/// text
+/// @namespace statement/checked hover/icon
+$radio-checked-hovered-circle-color: var(--color-white );
+
+/// text
+/// @namespace statement/normal/label
+$radio-normal-font-color: var(--color-text1-4 );
+/// text
+/// @namespace statement/disabled/label
+$radio-normal-font-color-disabled: var(--color-text1-1 );
+
+// RadioButton:Size
+// --------------------------------------------------
+
+/// height
+/// @namespace size/bounding
+$radio-button-height-large: var(--s-10 );
+/// height
+/// @namespace size/bounding
+$radio-button-height-medium: var(--s-7 );
+/// height
+/// @namespace size/bounding
+$radio-button-height-small: var(--s-5 );
+
+/// padding (l, r)
+/// @namespace size/bounding
+$radio-button-padding-large: var(--s-2 );
+/// padding (l, r)
+/// @namespace size/bounding
+$radio-button-padding-medium: var(--s-2 );
+/// padding (l, r)
+/// @namespace size/bounding
+$radio-button-padding-small: var(--s-2 );
+
+/// corner
+/// @namespace size/bounding
+$radio-button-corner-large: var(--corner-1 );
+/// corner
+/// @namespace size/bounding
+$radio-button-corner-medium: var(--corner-1 );
+/// corner
+/// @namespace size/bounding
+$radio-button-corner-small: var(--corner-1 );
+
+/// text
+/// @namespace size/bounding
+$radio-button-font-size-large: var(--font-size-subhead );
+/// text
+/// @namespace size/bounding
+$radio-button-font-size-medium: var(--font-size-body-1 );
+/// text
+/// @namespace size/bounding
+$radio-button-font-size-small: var(--font-size-caption );
+
+// RadioButton:Statement
+// --------------------------------------------------
+
+/// background
+/// @namespace statement/normal/bounding
+$radio-button-bg-color: var(--color-white );
+/// background
+/// @namespace statement/hover/bounding
+$radio-button-bg-color-hovered: var(--color-fill1-2 );
+/// background
+/// @namespace statement/checked/bounding
+$radio-button-bg-color-checked: var(--color-white );
+/// background
+/// @namespace statement/disabled/bounding
+$radio-button-bg-color-disabled: var(--color-fill1-1 );
+/// background
+/// @namespace statement/checked disabled/bounding
+$radio-button-bg-color-checked-disabled: var(--color-fill1-2 );
+
+/// border
+/// @namespace statement/normal/bounding
+$radio-button-border-color: var(--color-line1-3 );
+/// border
+/// @namespace statement/hover/bounding
+$radio-button-border-color-hovered: var(--color-line1-4 );
+/// border
+/// @namespace statement/checked/bounding
+$radio-button-border-color-checked: var(--color-brand1-6 );
+/// border
+/// @namespace statement/disabled/bounding
+$radio-button-border-color-disabled: var(--color-line1-1 );
+/// border
+/// @namespace statement/checked disabled/bounding
+$radio-button-border-color-checked-disabled: var(--color-line1-1 );
+
+/// text
+/// @namespace statement/normal/label
+$radio-button-font-color: var(--color-text1-4 );
+/// text
+/// @namespace statement/hover/label
+$radio-button-font-color-hovered: var(--color-text1-4 );
+/// text
+/// @namespace statement/checked/label
+$radio-button-font-color-checked: var(--color-brand1-6 );
+/// text
+/// @namespace statement/disabled/label
+$radio-button-font-color-disabled: var(--color-text1-1 );
+/// text
+/// @namespace statement/checked disabled/label
+$radio-button-font-color-checked-disabled: var(--color-text1-1 );

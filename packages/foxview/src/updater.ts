@@ -32,6 +32,17 @@ const Updater: IUpdater = {
   performUpdate: function(item: SetStateMapItem): void {
     const { instance } = item;
     let newState = assign({}, instance.state || {}, item.partialState);
+    if (!instance._mountFlag) {
+      // instance.componentWillMount();
+      /**
+       * 如果在componentWillUnmount调用了setState,此处会更新state,但不会触发二次渲染  (注:已取消componentWillMount)
+       * 即便在componentWillMount中setState,此处item.partialState拿到也是最新的partialState
+       * **/
+      // instance.props = instance._pendProps;
+      instance.state = instance.initState ? assign({},instance.state,instance.initState(instance.props)) : newState;
+      instance._firstCommit();
+      return;
+    }
     //@ts-ignore
     const getDerivedStateFromProps = instance.constructor.getDerivedStateFromProps;
     if (getDerivedStateFromProps) {
@@ -43,16 +54,6 @@ const Updater: IUpdater = {
       if (result) {
         newState = assign({}, newState, result);
       }
-    }
-    if (!instance._mountFlag) {
-      // instance.componentWillMount();
-      /**
-       * 如果在componentWillUnmount调用了setState,此处会更新state,但不会触发二次渲染  (注:已取消componentWillMount)
-       * 即便在componentWillMount中setState,此处item.partialState拿到也是最新的partialState
-       * **/
-      instance.state = newState;
-      instance._firstCommit();
-      return;
     }
     if (instance.shouldComponentUpdate(instance._pendProps, newState)) {
       const prevProps = instance.props;

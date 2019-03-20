@@ -63,8 +63,9 @@ export function mount(opt:FoxViewOption){
   }else{
       el = opt.el as Element;
   }
-  render(opt.template,el,{
-      components:opt.components || {}
+  render(opt.template,el,{ 
+      components:opt.components || {},
+      eventContext:opt
   })
 }
 

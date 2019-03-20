@@ -92,7 +92,7 @@ button {
     border-color: var(--color-line1-3); }
     button.normal, button.normal:link, button.normal:visited, button.normal.visited {
       color: var(--color-text1-4); }
-    button.normal:focus, button.normal:hover, button.normal.hover, button.normal:active, button.normal.active {
+    button.normal:hover, button.normal.hover, button.normal:active, button.normal.active {
       color: var(--color-text1-4);
       background-color: var(--color-fill1-2);
       border-color: var(--color-line1-4);
@@ -103,7 +103,7 @@ button {
     border-color: var(--color-brand1-6); }
     button.secondary, button.secondary:link, button.secondary:visited, button.secondary.visited {
       color: var(--color-brand1-6); }
-    button.secondary:focus, button.secondary:hover, button.secondary.hover, button.secondary:active, button.secondary.active {
+    button.secondary:hover, button.secondary.hover, button.secondary:active, button.secondary.active {
       color: var(--color-white);
       background-color: var(--color-brand1-9);
       border-color: var(--color-brand1-9);
@@ -114,7 +114,7 @@ button {
     border-color: var(--color-transparent); }
     button.primary, button.primary:link, button.primary:visited, button.primary.visited {
       color: var(--color-white); }
-    button.primary:focus, button.primary:hover, button.primary.hover, button.primary:active, button.primary.active {
+    button.primary:hover, button.primary.hover, button.primary:active, button.primary.active {
       color: var(--color-white);
       background-color: var(--color-brand1-9);
       border-color: var(--color-transparent);
@@ -125,7 +125,7 @@ button {
     border-color: var(--color-line1-1); }
     button.disabled, button.disabled:link, button.disabled:visited, button.disabled.visited, button[disabled], button[disabled]:link, button[disabled]:visited, button[disabled].visited {
       color: var(--color-text1-1); }
-    button.disabled:focus, button.disabled:hover, button.disabled.hover, button.disabled:active, button.disabled.active, button[disabled]:focus, button[disabled]:hover, button[disabled].hover, button[disabled]:active, button[disabled].active {
+    button.disabled:hover, button.disabled.hover, button.disabled:active, button.disabled.active, button[disabled]:hover, button[disabled].hover, button[disabled]:active, button[disabled].active {
       color: var(--color-text1-1);
       background-color: var(--color-fill1-1);
       border-color: var(--color-line1-1);
@@ -137,7 +137,7 @@ button {
       border-color: var(--color-error-3); }
       button.warning.primary, button.warning.primary:link, button.warning.primary:visited, button.warning.primary.visited {
         color: var(--color-white); }
-      button.warning.primary:focus, button.warning.primary:hover, button.warning.primary.hover, button.warning.primary:active, button.warning.primary.active {
+      button.warning.primary:hover, button.warning.primary.hover, button.warning.primary:active, button.warning.primary.active {
         color: var(--color-white);
         background-color: var(--color-error-4);
         border-color: var(--color-error-4);
@@ -147,7 +147,7 @@ button {
         border-color: var(--color-line1-2); }
         button.warning.primary.disabled, button.warning.primary.disabled:link, button.warning.primary.disabled:visited, button.warning.primary.disabled.visited, button.warning.primary[disabled], button.warning.primary[disabled]:link, button.warning.primary[disabled]:visited, button.warning.primary[disabled].visited {
           color: var(--color-text1-1); }
-        button.warning.primary.disabled:focus, button.warning.primary.disabled:hover, button.warning.primary.disabled.hover, button.warning.primary.disabled:active, button.warning.primary.disabled.active, button.warning.primary[disabled]:focus, button.warning.primary[disabled]:hover, button.warning.primary[disabled].hover, button.warning.primary[disabled]:active, button.warning.primary[disabled].active {
+        button.warning.primary.disabled:hover, button.warning.primary.disabled.hover, button.warning.primary.disabled:active, button.warning.primary.disabled.active, button.warning.primary[disabled]:hover, button.warning.primary[disabled].hover, button.warning.primary[disabled]:active, button.warning.primary[disabled].active {
           color: var(--color-text1-1);
           background-color: var(--color-fill1-1);
           border-color: var(--color-line1-2);
@@ -157,7 +157,7 @@ button {
       border-color: var(--color-error-3); }
       button.warning.secondary, button.warning.secondary:link, button.warning.secondary:visited, button.warning.secondary.visited {
         color: var(--color-error-3); }
-      button.warning.secondary:focus, button.warning.secondary:hover, button.warning.secondary.hover, button.warning.secondary:active, button.warning.secondary.active {
+      button.warning.secondary:hover, button.warning.secondary.hover, button.warning.secondary:active, button.warning.secondary.active {
         color: var(--color-white);
         background-color: var(--color-error-4);
         border-color: var(--color-error-4);
@@ -167,7 +167,7 @@ button {
         border-color: var(--color-line1-1); }
         button.warning.secondary.disabled, button.warning.secondary.disabled:link, button.warning.secondary.disabled:visited, button.warning.secondary.disabled.visited, button.warning.secondary[disabled], button.warning.secondary[disabled]:link, button.warning.secondary[disabled]:visited, button.warning.secondary[disabled].visited {
           color: var(--color-text1-1); }
-        button.warning.secondary.disabled:focus, button.warning.secondary.disabled:hover, button.warning.secondary.disabled.hover, button.warning.secondary.disabled:active, button.warning.secondary.disabled.active, button.warning.secondary[disabled]:focus, button.warning.secondary[disabled]:hover, button.warning.secondary[disabled].hover, button.warning.secondary[disabled]:active, button.warning.secondary[disabled].active {
+        button.warning.secondary.disabled:hover, button.warning.secondary.disabled.hover, button.warning.secondary.disabled:active, button.warning.secondary.disabled.active, button.warning.secondary[disabled]:hover, button.warning.secondary[disabled].hover, button.warning.secondary[disabled]:active, button.warning.secondary[disabled].active {
           color: var(--color-text1-1);
           background-color: var(--color-fill1-1);
           border-color: var(--color-line1-1);

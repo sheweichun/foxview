@@ -1,5 +1,5 @@
 
-import {TemplateStringsArray,IRef, ITemplateResult} from './type';
+import {IRef,TemplateStringsArray} from './type';
 import {TemplateResult,SVGTemplateResult} from './template-result'
 export {defineWebComponent,WebComponent,property,customElement} from './webcomponent';
 export {Component} from './component';
@@ -10,17 +10,49 @@ export {shadowRender as render,mount,unmount} from './render';
 
 // export const render = shadowRender;
 
-export function html(strings: TemplateStringsArray, ...values: any[]) {
-  return new TemplateResult(strings, values, 'html');
+export function html(strings: TemplateStringsArray | string[], ...values: any[]) {
+  return new TemplateResult(strings as string[], values, 'html');
 }
-
 export const h = html
 
-export function svg(strings:TemplateStringsArray,...values:any[]){
-    return new SVGTemplateResult(strings,values,'svg');
+function dynamicTagParse(strings: TemplateStringsArray | string[],values: any[]){
+  const firstStr = strings[0];
+  let newTemplate = strings,newValues = values;
+  if(firstStr === '<'){
+    const tagTemplate = `${firstStr}${values[0]}${strings[1]}`;
+    newTemplate = [tagTemplate,...strings.slice(2)];
+    newValues = values.slice(1);
+  }
+  const lastStr = newTemplate[newTemplate.length - 1];
+  if(lastStr === '>'){
+    const startIndex = newTemplate.length - 2;
+    const tagTemplate = `${newTemplate[startIndex]}${newValues[newValues.length - 1]}${lastStr}`;
+    newTemplate = [...newTemplate.slice(0,startIndex),tagTemplate];
+    newValues = newValues.slice(0,newValues.length - 1);
+  }
+  
+  return [newTemplate as string[],newValues]
+}
+
+export function dhtml(strings:TemplateStringsArray | string[],...values:any[]){
+  const [nstrings,nvalues] = dynamicTagParse(strings,values)
+  return new TemplateResult(nstrings,nvalues, 'html');
+}
+export const dh = dhtml
+
+export function svg(strings:TemplateStringsArray | string[],...values:any[]){
+  return new SVGTemplateResult(strings as string[],values,'svg');
 }
 export const s = svg
 
+export function dsvg(strings:TemplateStringsArray | string[],...values:any[]){
+  const [nstrings,nvalues] = dynamicTagParse(strings,values)
+  return new SVGTemplateResult(nstrings,nvalues, 'svg');
+}
+export const ds = dsvg
+
+
+export type Ref = IRef;
 export function createRef(): IRef {
   return {
     current: null

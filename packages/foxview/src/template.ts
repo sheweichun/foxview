@@ -35,6 +35,7 @@ export const markerRegex = new RegExp(`${marker}|${nodeMarker}`);
  * Suffix appended to all bound attribute names.
  */
 export const boundAttributeSuffix = '$tiny$';
+export const boundAttributeSuffixReg = /\$tiny\$/;
 
 const matchCache = new VMap<RegExpExecArray>();
 

@@ -1,5 +1,8 @@
 import { shadowRender } from './render';
 import {
+  boundAttributeSuffixReg
+} from './template';
+import {
   ITemplateResult,
   IComponentLifeCycle,
   ComponentProp,
@@ -8,6 +11,7 @@ import {
 } from './type';
 import WMap from './util/map';
 import assign from './util/assign';
+
 
 
 // const supportsAdoptingStyleSheets =
@@ -224,6 +228,10 @@ export abstract class WebComponent extends HTMLElement
   private _stateFlags: UpdateState = 0;
   private _alternalState: ComponentProp;
   private __part: Peon;
+  initState?(props:ComponentProp):ComponentProp;
+  // initState(props:ComponentProp):ComponentProp{
+  //   return {}
+  // }
   componentDidCatch?(e: Error): void;
   state?: ComponentProp;
   __props: ComponentProp = {};
@@ -246,25 +254,43 @@ export abstract class WebComponent extends HTMLElement
       }
     }
     this._classProperties.set(name as string, options);
-    if (options.noAccessor || this.prototype.hasOwnProperty(name)) {
+    if (this.prototype.hasOwnProperty(name)) {
       return;
     }
-    if (!options.noAccessor) {
-      const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
-      Object.defineProperty(this.prototype, name, {
-        get() {
-          return this[key];
-        },
-        set(value: any) {
-          // this._pendProps[name] = value;
-          const oldValue = this[key];
-          this[key] = value;
+    // if (!options.noAccessor) {
+    //   const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
+    //   Object.defineProperty(this.prototype, name, {
+    //     get() {
+    //       return this[key];
+    //     },
+    //     set(value: any) {
+    //       // this._pendProps[name] = value;
+    //       const oldValue = this[key];
+    //       this[key] = value;
+    //       this.requestUpdate(name, oldValue);
+    //     },
+    //     configurable: true,
+    //     enumerable: true
+    //   });
+    // }
+    const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
+    Object.defineProperty(this.prototype, name, {
+      get() {
+        return this[key];
+      },
+      set(value: any) {
+        // this._pendProps[name] = value;
+        const oldValue = this[key];
+        this[key] = value;
+        if(!options.noAccessor){
           this.requestUpdate(name, oldValue);
-        },
-        configurable: true,
-        enumerable: true
-      });
-    }
+        }else{
+          this.__props[name] = value;
+        }
+      },
+      configurable: true,
+      enumerable: true
+    });
   }
   constructor() {
     super();
@@ -282,6 +308,20 @@ export abstract class WebComponent extends HTMLElement
   }
   initialize() {
     this.attachShadow({ mode: 'open' });
+    // const names = this.getAttributeNames();
+    // const initProps = names.reduce((ret,name)=>{
+    //   const mapName = name.replace(boundAttributeSuffixReg,'');
+    //   const ctor = (this.constructor as typeof WebComponent);
+    //   const propName = ctor._attributeToPropertyMap.get(mapName);
+    //   if (propName !== undefined) {
+    //     const options =
+    //         ctor._classProperties!.get(propName) || defaultPropertyDeclaration;
+    //     console.log('name :',name,this.getAttribute(name));
+    //     ret[propName] = ctor._propertyValueFromAttribute(this.getAttribute(name), options) as any
+    //   }
+    //   return ret;
+    // },{})
+    // this.__props = Object.freeze(initProps);
   }
   private _getStyleElement(){
     const _styles = (this.constructor as typeof WebComponent).styles
@@ -292,7 +332,6 @@ export abstract class WebComponent extends HTMLElement
     }
   }
   connectedCallback(){
-    
     // this._saveInstanceProperties();
     this.requestUpdate();
   }
@@ -380,25 +419,13 @@ export abstract class WebComponent extends HTMLElement
     // }
     // const changedProperties = this._changedProperties;
     let newState = assign({}, this.state || {}, this._alternalState || {});
-    //@ts-ignore
-    const getDerivedStateFromProps = this.constructor.getDerivedStateFromProps;
-    if (getDerivedStateFromProps) {
-      const result = getDerivedStateFromProps.call(
-        this.constructor,
-        this._pendProps,
-        newState
-      );
-      if (result) {
-        newState = assign({}, newState, result);
-      }
-    }
     //getDerivedStateFromProps
     if (!this._hasFlag(MOUNTED)) {
       this.__updateThisProps();
       // if(this._hasFlag(INNER_STATE_CHANGED)){
       //   this.state = assign({},this.state || {},this._alternalState)
       // }
-      this.state = newState;
+      this.state = this.initState ? assign({},this.state,this.initState(this.props)) : newState;
       this.componentWillMount();
       this.update();
       // this._mountFlag = true;
@@ -408,6 +435,18 @@ export abstract class WebComponent extends HTMLElement
       // if(this._hasFlag(INNER_STATE_CHANGED)){
       //   newState = assign({},this.state || {},this._alternalState)
       // }
+       //@ts-ignore
+      const getDerivedStateFromProps = this.constructor.getDerivedStateFromProps;
+      if (getDerivedStateFromProps) {
+        const result = getDerivedStateFromProps.call(
+          this.constructor,
+          this._pendProps,
+          newState
+        );
+        if (result) {
+          newState = assign({}, newState, result);
+        }
+      }
       if (this.shouldComponentUpdate(this._pendProps, newState)) {
         const prevProps = this.props;
         const prevState = this.state;
@@ -428,7 +467,7 @@ export abstract class WebComponent extends HTMLElement
   }
   private _markUpdated() {
     // this._changedProperties = new WMap();
-    this._pendProps = {};
+    this._pendProps = assign({},this.__props);
     this._clearFlag(STATE_IN_UPDATING);
     // this._clearFlag(INNER_STATE_CHANGED)
     this._alternalState = null;

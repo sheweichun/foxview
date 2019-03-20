@@ -274,19 +274,17 @@ export class NodePart implements Peon {
 
       // If no existing part, create a new one
       if (itemPart === undefined) {
-        itemPart = new NodePart(this.options);
-        itemParts[partIndex] = itemPart;
-        if (partIndex === 0) {
-          itemPart.appendIntoPart(this);
-        } else {
-          itemPart.insertAfterPart(itemParts[partIndex - 1]);
+        if(item != null){
+          itemPart = new NodePart(this.options);
+          itemParts[partIndex] = itemPart;
+          if (partIndex === 0) {
+            itemPart.appendIntoPart(this);
+          } else {
+            itemPart.insertAfterPart(itemParts[partIndex - 1]);
+          }
         }
       }
-      // if(itemPart.startNode.parentNode == null){
-
-      //   console.log(itemPart.startNode.parentNode,flag);
-      // }
-      itemPart.setValue(item);
+      itemPart && itemPart.setValue(item);
       partIndex++;
     }
     this.value = itemParts;
